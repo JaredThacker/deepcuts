@@ -43,10 +43,10 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                     Artist:{" "}
                     {artists.map((eachArtist) => eachArtist.name).join(", ")}
                 </div>
-                <div>Genre: {genres.toString()}</div>
+                <div>Genre: {genres[0]}</div>
 
                 {styles?.length > 0 ? (
-                    <div>Style: {styles.toString()}</div>
+                    <div>Style: {styles[0]}</div>
                 ) : (
                     <div></div>
                 )}
