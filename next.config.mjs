@@ -5,9 +5,9 @@ const nextConfig = {
             {
                 protocol: "https",
                 hostname: "i.discogs.com",
-            }
-        ]
-    }
+            },
+        ],
+    },
 };
 
 export default nextConfig;

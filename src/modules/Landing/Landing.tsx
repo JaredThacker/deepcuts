@@ -1,6 +1,11 @@
+"use client";
+
 import React from "react";
+import { useRouter } from "next/navigation";
 
 export const Landing = () => {
+    const router = useRouter();
+
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content text-center">
@@ -14,7 +19,12 @@ export const Landing = () => {
                         where to start? Don't worry because deepcuts has got you
                         now!
                     </p>
-                    <button className="btn btn-primary">Let's Go!</button>
+                    <button
+                        className="btn btn-primary"
+                        onClick={() => router.push("/dashboard")}
+                    >
+                        Let's Go!
+                    </button>
                 </div>
             </div>
         </div>
