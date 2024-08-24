@@ -1,12 +1,10 @@
 # <ins>**_deepcuts_**</ins> : ~~a discogs random generator~~
 
-```
 This website will add functionality i feel was always missing from Discogs, a randomizer!
 Looking for the next obscure album or private press?
 Or maybe just trying to find that next record to play?
 Don't know where to start?
 Don't worry because deepcuts has got you now!
-```
 
 This randomizer works off all releases, not the master release!
 So even if a release does not have a master release, it will still populate!
