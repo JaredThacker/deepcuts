@@ -16,8 +16,8 @@ export const Landing = () => {
                         missing from discogs......a randomizer of sorts! Looking
                         for the next obscure album or private press? Or maybe
                         just trying to find that next record to play? Don't know
-                        where to start? Don't worry because deepcuts has got you
-                        now!
+                        where to start? Don't worry because deepcuts. has got
+                        you now!
                     </p>
                     <button
                         className="btn btn-primary"
