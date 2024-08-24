@@ -6,5 +6,5 @@ Looking for the next obscure album or private press?
 Or maybe just trying to find that next record to play?
 Don't know where to start?
 Don't feel like pressing through all the recommended albums to find something?
-Don't worry because deepcuts has got you!
+Don't worry because deepcuts has got you now!
 ```
