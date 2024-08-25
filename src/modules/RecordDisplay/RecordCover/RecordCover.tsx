@@ -3,7 +3,6 @@ import React from "react";
 
 type RecordCoverProperties = {
     image?: Image;
-
     /**
      * Custom hard-coded source
      */
@@ -11,11 +10,14 @@ type RecordCoverProperties = {
 };
 
 export const RecordCover = (props: RecordCoverProperties) => (
-    <img
-        alt="Default Record Image"
-        className="h-40 w-40"
-        height={300}
-        width={300}
-        src={props.src === undefined ? props.image?.uri : props.src}
-    />
+    <picture>
+        <img
+            alt="Default Record Image"
+            id="RecordCover"
+            className="h-50 w-50"
+            height={300}
+            width={300}
+            src={props.src === undefined ? props.image?.uri : props.src}
+        />
+    </picture>
 );
