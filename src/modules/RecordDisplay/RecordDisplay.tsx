@@ -23,7 +23,7 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                             src={
                                 images.length > 0
                                     ? undefined
-                                    : "https://community.mp3tag.de/uploads/default/original/2X/a/acf3edeb055e7b77114f9e393d1edeeda37e50c9.png"
+                                    : "https://wingandaprayer.live/wp-content/uploads/2018/07/no-image-available.jpg?w=640"
                             }
                         />
                     </a>
@@ -55,7 +55,11 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                     <div>Artist: {artists[0].name}</div>
                 )}
 
-                <div>Genre: {genres[0]}</div>
+                {genres.length > 0 ? (
+                    <div>Genre: {genres[0]}</div>
+                ) : (
+                    <div></div>
+                )}
 
                 {styles?.length > 0 ? (
                     <div>Style: {styles[0]}</div>

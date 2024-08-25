@@ -6,3 +6,8 @@ body {
     overflow-x: hidden;
     overflow-y: hidden;
 }
+
+#RecordCover {
+    max-width: 300px !important;
+    max-height: 300px !important;
+}
