@@ -38,11 +38,23 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                     <div>Release: {title}</div>
                 )}
 
-                <div>Label: {labels[0].name}</div>
-                <div>
-                    Artist:{" "}
-                    {artists.map((eachArtist) => eachArtist.name).join(", ")}
-                </div>
+                {labels.length > 0 ? (
+                    <div>Label: {labels[0].name}</div>
+                ) : (
+                    <div></div>
+                )}
+
+                {artists.length > 1 ? (
+                    <div>
+                        Artists:{" "}
+                        {artists
+                            .map((eachArtist) => eachArtist.name)
+                            .join(", ")}
+                    </div>
+                ) : (
+                    <div>Artist: {artists[0].name}</div>
+                )}
+
                 <div>Genre: {genres[0]}</div>
 
                 {styles?.length > 0 ? (
