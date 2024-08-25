@@ -12,12 +12,11 @@ export const Landing = () => {
                 <div className="max-w-md">
                     <h1 className="text-5xl font-bold">Welcome</h1>
                     <p className="py-6 text-lg">
-                        This website will add functionality i feel was always
+                        This website will add functionality I feel was always
                         missing from discogs......a randomizer of sorts! Looking
-                        for the next obscure album or private press? Or maybe
-                        just trying to find that next record to play? Don't know
-                        where to start? Don't worry because deepcuts. has got
-                        you now!
+                        for the next obscure album or gem to uncover? Or maybe
+                        just trying to find that next record to play? Don't even
+                        know where to start? Introducing deepcuts.
                     </p>
                     <button
                         className="btn btn-primary"
