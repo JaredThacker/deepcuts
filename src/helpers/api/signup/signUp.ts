@@ -1,4 +1,3 @@
-import { emailChecker } from "@/common/regex/emailChecker";
 import { SignUpFormValues } from "@/modules/Modal/SignUpModal";
 import { SignUpPayload } from "@/types/api/dto/SignUpPayload";
 import { UserInfo } from "@/types/api/UserInfo";
@@ -6,7 +5,7 @@ import { UserInfo } from "@/types/api/UserInfo";
 export const signUp = async (request: SignUpFormValues): Promise<UserInfo> => {
     const { username: name, password, email } = request;
     const signUpRequest = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/user`,
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/user/signup`,
         {
             body: JSON.stringify({
                 name,
