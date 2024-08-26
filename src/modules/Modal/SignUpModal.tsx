@@ -26,8 +26,6 @@ const defaultSignUpFormValues: SignUpFormValues = {
     username: "",
 };
 
-// <LoginModal show={boolean value} />
-
 export const SignUpModal = (props: SignUpModalProperties) => {
     const { formState, getValues, register, reset, resetField, watch } =
         useForm<SignUpFormValues>({
