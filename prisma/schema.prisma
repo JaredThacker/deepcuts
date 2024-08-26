@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model favorite {
+  id       Int      @id @default(autoincrement())
+  userid   Int      @default(autoincrement())
+  recordid BigInt?
+  notes    String?  @db.VarChar(250)
+  userinfo userinfo @relation(fields: [userid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model history {
+  id            Int             @id @default(autoincrement())
+  userid        Int             @default(autoincrement())
+  favorite      Boolean?
+  title         String?         @db.VarChar(100)
+  genre         String?         @db.VarChar(100)
+  createdat     DateTime        @db.Timestamptz(6)
+  updatedat     DateTime        @db.Timestamptz(6)
+  userinfo      userinfo        @relation(fields: [userid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  historyrecord historyrecord[]
+}
+
+model historyrecord {
+  id        Int     @id @default(autoincrement())
+  historyid Int     @default(autoincrement())
+  recordid  BigInt?
+  history   history @relation(fields: [historyid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model userinfo {
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(100)
+  email    String     @unique @db.VarChar(250)
+  password String     @db.VarChar(250)
+  favorite favorite[]
+  history  history[]
+}

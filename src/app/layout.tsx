@@ -18,7 +18,6 @@ export default function RootLayout({
     return (
         <html data-theme="dark" lang="en">
             <body className={`${quicksand.className} h-screen w-screen`}>
-                <Navbar />
                 {children}
             </body>
         </html>
