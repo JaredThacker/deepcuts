@@ -38,11 +38,7 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                     <div>Release: {title}</div>
                 )}
 
-                {labels.length > 0 ? (
-                    <div>Label: {labels[0].name}</div>
-                ) : (
-                    <div></div>
-                )}
+                {labels.length > 0 && <div>Label: {labels[0].name}</div>}
 
                 {artists.length > 1 ? (
                     <div>
@@ -55,17 +51,9 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                     <div>Artist: {artists[0].name}</div>
                 )}
 
-                {genres.length > 0 ? (
-                    <div>Genre: {genres[0]}</div>
-                ) : (
-                    <div></div>
-                )}
+                {genres.length > 0 && <div>Genre: {genres[0]}</div>}
 
-                {styles?.length > 0 ? (
-                    <div>Style: {styles[0]}</div>
-                ) : (
-                    <div></div>
-                )}
+                {styles?.length > 0 && <div>Style: {styles[0]}</div>}
             </div>
         </div>
     );
