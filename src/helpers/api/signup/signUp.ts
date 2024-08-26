@@ -1,3 +1,4 @@
+import { emailChecker } from "@/common/regex/emailChecker";
 import { SignUpFormValues } from "@/modules/Modal/SignUpModal";
 import { SignUpPayload } from "@/types/api/dto/SignUpPayload";
 import { UserInfo } from "@/types/api/UserInfo";

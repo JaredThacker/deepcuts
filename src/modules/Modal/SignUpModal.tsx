@@ -1,4 +1,5 @@
 import { Ids } from "@/common/constants/Ids";
+import { emailChecker } from "@/common/regex/emailChecker";
 import { signUp } from "@/helpers/api/signup/signUp";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -89,6 +90,8 @@ export const SignUpModal = (props: SignUpModalProperties) => {
         }
     }, [passwordIsDirty]);
 
+    console.log(errors);
+
     return (
         <dialog
             id={Ids.MODAL.SIGN_UP}
@@ -134,7 +137,15 @@ export const SignUpModal = (props: SignUpModalProperties) => {
                             autoComplete="off"
                             className="grow"
                             placeholder="Email"
-                            {...register("email", { required: true })}
+                            {...register("email", {
+                                required: true,
+                                validate: {
+                                    isEmailValid: (emailValue) =>
+                                        emailChecker.test(emailValue)
+                                            ? true
+                                            : "Email is invalid",
+                                },
+                            })}
                         />
                         <MdOutlineAlternateEmail />
                     </label>
