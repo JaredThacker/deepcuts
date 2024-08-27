@@ -3,11 +3,14 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { SignUpModal } from "../Modal/SignUpModal";
+import { LoginModal } from "../Modal/LoginModal";
 
 export const Landing = () => {
     const router = useRouter();
     const [showSignUpModal, setShowSignUpModal] =
         React.useState<boolean>(false);
+
+    const [showLoginModal, setShowLoginModal] = React.useState<boolean>(false);
 
     return (
         <>
@@ -21,7 +24,12 @@ export const Landing = () => {
                             }
                         </p>
                         <div className="flex flex-row justify-center gap-4">
-                            <button className="btn btn-primary btn-outline w-1/2">
+                            <button
+                                className="btn btn-primary btn-outline w-1/2"
+                                onClick={() => {
+                                    setShowLoginModal(true);
+                                }}
+                            >
                                 {"Login"}
                             </button>
                             <button
@@ -37,6 +45,7 @@ export const Landing = () => {
                 </div>
             </div>
             <SignUpModal onHide={setShowSignUpModal} show={showSignUpModal} />
+            <LoginModal onHide={setShowLoginModal} show={showLoginModal} />
         </>
     );
 };
