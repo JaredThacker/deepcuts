@@ -68,6 +68,8 @@ export const SignUpModal = (props: SignUpModalProperties) => {
             if (signUpForm !== null) {
                 (signUpForm as HTMLFormElement).submit();
             }
+        } else if (key === Key.Escape) {
+            event.preventDefault();
         }
     };
 
