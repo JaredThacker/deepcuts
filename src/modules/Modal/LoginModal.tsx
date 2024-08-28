@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { FaKey, FaUser } from "react-icons/fa";
 import { login } from "@/helpers/api/login/login";
 import { Key } from "ts-key-enum";
+import { useRouter } from "next/navigation";
 
 type LoginModalProperties = {
     onHide: Function;
@@ -31,6 +32,8 @@ export const LoginModal = (props: LoginModalProperties) => {
 
     const { dirtyFields, errors, isValid } = formState;
 
+    const router = useRouter();
+
     const onHide = () => {
         if (props.onHide) {
             props.onHide(false);
@@ -47,6 +50,7 @@ export const LoginModal = (props: LoginModalProperties) => {
     const onClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
         if (isValid) {
             await onLogin();
+            router.push("/dashboard");
         } else {
             event.preventDefault();
         }
