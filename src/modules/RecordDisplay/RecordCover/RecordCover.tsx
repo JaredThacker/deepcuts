@@ -4,9 +4,6 @@ import React from "react";
 
 type RecordCoverProperties = {
     image?: Image;
-    /**
-     * Custom hard-coded source
-     */
     src?: string;
 };
 
