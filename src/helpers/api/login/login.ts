@@ -11,7 +11,7 @@ export const login = async (request: LoginFormValues): Promise<UserInfo> => {
                 email,
                 password,
             } as LoginPayload),
-            method: "GET",
+            method: "POST",
         },
     );
 
