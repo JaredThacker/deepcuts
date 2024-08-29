@@ -26,4 +26,4 @@ const login = async (request: NextRequest): Promise<NextResponse<UserInfo>> => {
     return NextResponse.json({} as UserInfo, { status: 400 });
 };
 
-export { login as GET };
+export { login as POST };
