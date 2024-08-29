@@ -30,10 +30,6 @@ const signUp = async (
     const isPayloadValid = isSignUpPayloadValid(payload);
 
     /**
-     * TODO: Make sure user is unique when created, don't want duplicate users, can possibly implement check in front-end, do it in the backend too
-     */
-
-    /**
      * If payload is valid, make user
      */
     if (isPayloadValid) {
