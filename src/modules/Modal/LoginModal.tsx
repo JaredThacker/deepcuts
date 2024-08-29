@@ -45,14 +45,25 @@ export const LoginModal = (props: LoginModalProperties) => {
 
     const onLogin = async () => {
         const values = getValues();
-        const didLogin = await toast.promise(login(values), {
-            error: "Failed to login",
-            pending: "Logging in...",
-            success: "Login success!",
-        });
+        const loadingToast = toast.loading("Logging in...");
+
+        const didLogin = await login(values);
 
         if (didLogin) {
+            toast.update(loadingToast, {
+                autoClose: 2000,
+                isLoading: false,
+                render: "Logged in successfully!",
+                type: "success",
+            });
             router.push("/dashboard");
+        } else {
+            toast.update(loadingToast, {
+                autoClose: 2000,
+                isLoading: false,
+                render: "Failed to login.",
+                type: "error",
+            });
         }
         onHide();
     };
