@@ -6,6 +6,7 @@ import { login } from "@/helpers/api/login/login";
 import { Key } from "ts-key-enum";
 import { useRouter } from "next/navigation";
 import { emailChecker } from "@/common/regex/emailChecker";
+import { toast } from "react-toastify";
 
 type LoginModalProperties = {
     onHide: Function;
@@ -31,9 +32,9 @@ export const LoginModal = (props: LoginModalProperties) => {
             reValidateMode: "onChange",
         });
 
-    const { dirtyFields, errors, isValid } = formState;
-
     const router = useRouter();
+
+    const { dirtyFields, errors, isValid } = formState;
 
     const onHide = () => {
         if (props.onHide) {
@@ -44,8 +45,15 @@ export const LoginModal = (props: LoginModalProperties) => {
 
     const onLogin = async () => {
         const values = getValues();
-        await login(values);
-        router.push("/dashboard");
+        const didLogin = await toast.promise(login(values), {
+            error: "Failed to login",
+            pending: "Logging in...",
+            success: "Login success!",
+        });
+
+        if (didLogin) {
+            router.push("/dashboard");
+        }
         onHide();
     };
 

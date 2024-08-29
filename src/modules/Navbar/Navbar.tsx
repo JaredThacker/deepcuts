@@ -1,9 +1,18 @@
+import Image from "next/image";
 import React from "react";
 
 export const Navbar = () => {
     return (
-        <div className="navbar">
-            <div className="flex-1">
+        <div className="navbar p-3">
+            <Image
+                alt="deepcuts logo"
+                className="animate-twSpin animate-infinite animate-duration-[1760ms]"
+                height="50"
+                src="/icon.png"
+                title="Spinning deepcuts logo"
+                width="50"
+            />
+            <div className="flex-1 ml-2">
                 <a className="btn btn-ghost text-xl" href="/">
                     {"deepcuts."}
                 </a>

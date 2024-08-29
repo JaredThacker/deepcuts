@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Quicksand } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/modules/Navbar/Navbar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const quicksand = Quicksand({ subsets: ["latin"] });
 
@@ -17,8 +18,23 @@ export default function RootLayout({
 }>) {
     return (
         <html data-theme="dark" lang="en">
+            <head>
+                <link rel="icon" href="/icon.ico" sizes="any" />
+            </head>
             <body className={`${quicksand.className} h-screen w-screen`}>
                 {children}
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
             </body>
         </html>
     );
