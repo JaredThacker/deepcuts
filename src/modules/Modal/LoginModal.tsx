@@ -5,6 +5,7 @@ import { FaKey, FaUser } from "react-icons/fa";
 import { login } from "@/helpers/api/login/login";
 import { Key } from "ts-key-enum";
 import { useRouter } from "next/navigation";
+import { emailChecker } from "@/common/regex/emailChecker";
 
 type LoginModalProperties = {
     onHide: Function;
@@ -44,13 +45,13 @@ export const LoginModal = (props: LoginModalProperties) => {
     const onLogin = async () => {
         const values = getValues();
         await login(values);
+        router.push("/dashboard");
         onHide();
     };
 
     const onClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
         if (isValid) {
             await onLogin();
-            router.push("/dashboard");
         } else {
             event.preventDefault();
         }
@@ -111,6 +112,12 @@ export const LoginModal = (props: LoginModalProperties) => {
                                 required: {
                                     value: true,
                                     message: "Email is required",
+                                },
+                                validate: {
+                                    isEmailValid: (emailValue) =>
+                                        emailChecker.test(emailValue)
+                                            ? true
+                                            : "Email is invalid",
                                 },
                             })}
                         />
