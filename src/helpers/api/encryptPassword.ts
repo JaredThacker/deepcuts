@@ -5,14 +5,10 @@ type EncryptionResult = {
     hash: string;
     salt: string;
 };
-
-const alphabet =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+{}[]:\"'<>,./?\\~`";
-
 /**
  *
  * @param password
- * @returns
+ * @returns encrypted password
  */
 export const encryptPassword = (password: string): EncryptionResult => {
     const salt = normalizeBytes(randomBytes(16).toString("utf-8"));
