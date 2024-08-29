@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { FaKey, FaUser } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { Key } from "ts-key-enum";
+import { toast } from "react-toastify";
 
 type SignUpModalProperties = {
     onHide: Function;
@@ -48,7 +49,25 @@ export const SignUpModal = (props: SignUpModalProperties) => {
 
     const onSignUp = async () => {
         const values = getValues();
-        await signUp(values);
+        const loadingToast = toast.loading("Signing up...");
+
+        const didSignUp = await signUp(values);
+
+        if (didSignUp) {
+            toast.update(loadingToast, {
+                autoClose: 2000,
+                isLoading: false,
+                render: "Sign up successfully!",
+                type: "success",
+            });
+        } else {
+            toast.update(loadingToast, {
+                autoClose: 2000,
+                isLoading: false,
+                render: "Sign up failed.",
+                type: "error",
+            });
+        }
         onHide();
     };
 
