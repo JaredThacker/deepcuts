@@ -10,7 +10,7 @@ const config: Config = withAnimations({
     ],
 
     daisyui: {
-        themes: ["dim", "dark", "synthwave", "night", "sunset", "forest"],
+        themes: ["dark", "synthwave", "night", "forest", "black", "dracula"],
     },
 
     theme: {
