@@ -11,8 +11,6 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
     const { images, title, artists, genres, uri, styles, year, labels } =
         record;
 
-    console.log(record);
-
     return (
         <div className="card shadow-xl">
             <figure>
