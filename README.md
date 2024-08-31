@@ -23,6 +23,20 @@ Introducing **_deepcuts._**
 > -   improved UI and optimized performance ,
 > -   and hopefully many more before eventual deployment !
 
-Built utilizing Next.js, Prisma ORM, and a PostgreSQL DB.
+## How It Looks..... (so far)
+
+1. Landing page is a screen where you can either create an account, or login with an existing one. (Still need to implement sessions fully)
+
+> ![Landing Page](public\deepcuts_login.gif)
+
+2. After logging in, it will automatically redirect you to the dashboard
+
+> ![Dashboard](public\deepcuts_dashboard.gif)
+
+3. Now just press the randomize button until you find something that piques your interest! Also, upon pressing the artwork, it will redirect you to discogs official page for that release!
+
+> ![Randomize](public\deepcuts_randomize.gif)
+
+Built utilizing Next.js, Prisma ORM, and PostgreSQL.
 
 Thank you for joining me on this journey (:
