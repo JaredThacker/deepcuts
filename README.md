@@ -14,10 +14,8 @@ Introducing **_deepcuts._**
 
 > -   filters ,
 > -   a favorites/bookmark/history feature ,
-> -   a tested user login/signup ,
+> -   sessions ,
 > -   user profile screens ,
-> -   a hashing function for passwords and added security ,
-> -   maybe a confirmation email upon sign up for verification ,
 > -   more randomizers based on MRIs/Artists/Labels ,
 > -   maybe Discogs account integration to be able to add to wantlist directly from here ,
 > -   improved UI and optimized performance ,
