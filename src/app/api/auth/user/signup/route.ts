@@ -52,8 +52,6 @@ const signUp = async (
         const encryptedPasswordInfo = encryptPassword(payload.password);
         const { hash, salt } = encryptedPasswordInfo;
 
-        console.log(hash, salt);
-
         /**
          * Creates the user, `data` represents the data we are giving the row, like `INSERT INTO blah VALUES (....data)`
          */
