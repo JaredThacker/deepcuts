@@ -17,7 +17,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html data-theme="night" lang="en">
+        <html data-theme="dark" lang="en">
             <head>
                 <link rel="icon" href="/icon.ico" sizes="any" />
             </head>
