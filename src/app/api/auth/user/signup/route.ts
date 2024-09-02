@@ -1,3 +1,4 @@
+import { creationTimestamps } from "@/common/constants/timestamps";
 import { encryptPassword } from "@/helpers/api/encryptPassword";
 import { isSignUpPayloadValid } from "@/helpers/api/signup/isSignUpPayloadValid";
 import prisma from "@/lib/prismaClient";
@@ -60,6 +61,7 @@ const signUp = async (
                 ...payload,
                 password: hash,
                 password_salt: salt,
+                ...creationTimestamps(),
             },
         });
 

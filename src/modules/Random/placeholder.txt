@@ -1,0 +1,21 @@
+
+
+    const [record, setRecord] = React.useState<DiscogsRecord>();
+
+    const getRecord = async () => {
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/record`,
+        );
+        const parsedResponse = await response.json();
+        const parsedRecord = parsedResponse as DiscogsRecord;
+        setRecord(parsedRecord);
+    };
+
+
+            {record !== undefined && <RecordDisplay record={record} />}
+            <button
+                className="btn btn-active btn-neutral w-fit focus:animate-headShake"
+                onClick={getRecord}
+            >
+                {"Randomize!"}
+            </button>

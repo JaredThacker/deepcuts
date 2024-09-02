@@ -21,7 +21,9 @@ export default function RootLayout({
             <head>
                 <link rel="icon" href="/icon.ico" sizes="any" />
             </head>
-            <body className={`${quicksand.className} h-screen w-screen`}>
+            <body
+                className={`${quicksand.className} h-screen w-screen flex flex-col`}
+            >
                 {children}
                 <ToastContainer
                     position="top-right"
