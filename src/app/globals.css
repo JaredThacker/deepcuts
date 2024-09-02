@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-}
-
 #RecordCover {
     max-width: 300px !important;
     max-height: 300px !important;

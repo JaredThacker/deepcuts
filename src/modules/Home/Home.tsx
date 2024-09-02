@@ -6,10 +6,20 @@ export const Home = () => {
     return (
         <div className="grow flex flex-row p-4 gap-4">
             <div className="h-full border grow border-gray-500 rounded">
-                {"Random History"}
+                <div className="h-fit w-11/12 m-8 flex flex-col items-center border grow border-blue-200 rounded">
+                    Record of the Day
+                </div>
+                <div className="h-fit w-11/12 m-8 flex flex-col items-center border grow border-gray-200 rounded">
+                    Favorites
+                </div>
+                <div className="h-fit w-11/12 m-8 flex flex-col items-center border grow border-gray-300 rounded">
+                    Number of randomizes
+                </div>
             </div>
             <div className="h-full border grow border-green-500 rounded">
-                {"There"}
+                <div className="h-1/2 w-11/12 m-8 flex flex-col items-center border grow border-green-400 rounded">
+                    History Elements
+                </div>
             </div>
         </div>
     );
