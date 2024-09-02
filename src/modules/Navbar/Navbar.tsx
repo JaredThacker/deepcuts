@@ -3,7 +3,7 @@ import React from "react";
 
 export const Navbar = () => {
     return (
-        <div className="navbar p-3">
+        <div className="navbar p-3 w-screen">
             <Image
                 alt="deepcuts logo"
                 className="animate-twSpin animate-infinite animate-duration-[1760ms]"
