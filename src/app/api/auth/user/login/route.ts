@@ -4,6 +4,10 @@ import { UserInfo } from "@/types/api/UserInfo";
 import { LoginPayload } from "@/types/api/dto/LoginPayload";
 import { isLoginPayloadValid } from "@/helpers/api/login/isLoginPayloadValid";
 import { validatePassword } from "@/helpers/api/validatePassword";
+import { cookies } from "next/headers";
+import { headers } from "@/common/constants/headers";
+import { createJwt } from "@/helpers/api/session/createJwt";
+import { encryptProfileInfo } from "@/helpers/api/session/encryptProfileInfo";
 
 /**
  * Attempts to "log" the user in, just does credentials check
@@ -54,6 +58,11 @@ const login = async (request: NextRequest): Promise<NextResponse<UserInfo>> => {
             );
 
             if (isPasswordValid) {
+                const session = encryptProfileInfo(payload.email);
+                const { token, expiration } = createJwt(session);
+
+                cookies().set(headers.SESSION, token, { maxAge: expiration });
+
                 /**
                  * If passwords match, return user data
                  */
