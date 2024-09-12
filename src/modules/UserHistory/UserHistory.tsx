@@ -12,7 +12,10 @@ export const UserHistory = ({ history }: HistoryProperties): JSX.Element => (
         <span className="text-lg font-bold">{`${dayjs(
             history.created_at,
         ).format("YYYY-MM-DD hh:mm")}`}</span>
-        <div className="flex flex-row gap-2">
+        <div
+            className="flex flex-row gap-2 flex-wrap"
+            style={{ maxWidth: "70%" }}
+        >
             {history.historyrecord.map((eachHistoryRecord) => (
                 <UserHistoryRecord
                     key={`history_record_${eachHistoryRecord.id}`}
