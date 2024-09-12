@@ -6,7 +6,6 @@ import { SignUpModal } from "../Modal/SignUpModal";
 import { LoginModal } from "../Modal/LoginModal";
 
 export const Landing = () => {
-    const router = useRouter();
     const [showSignUpModal, setShowSignUpModal] =
         React.useState<boolean>(false);
 

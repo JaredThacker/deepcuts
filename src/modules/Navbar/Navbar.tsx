@@ -1,7 +1,20 @@
+"use client";
+
+import { logout } from "@/helpers/api/logout/logout";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export const Navbar = () => {
+    const router = useRouter();
+
+    const onLogoutClick = async () => {
+        const didLogoutSuccessfully = await logout();
+        if (didLogoutSuccessfully) {
+            router.push("/");
+        }
+    };
+
     return (
         <div className="navbar p-3 w-screen">
             <Image
@@ -41,7 +54,9 @@ export const Navbar = () => {
                             </a>
                         </li>
                         <li>
-                            <a href="/">Logout</a>
+                            <button onClick={onLogoutClick} type="button">
+                                Logout
+                            </button>
                         </li>
                     </ul>
                 </div>

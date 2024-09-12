@@ -1,5 +1,8 @@
 export type HistoryRecord = {
     id: number;
-    historyId: number;
-    recordId: number;
+    historyid: number;
+    image_uri: string;
+    recordid: number;
+    created_at: Date;
+    updated_at: Date;
 };

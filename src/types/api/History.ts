@@ -1,9 +1,6 @@
 export type History = {
     id: number;
-    userId: number;
-    favorite: boolean;
-    title: string;
-    genre: string;
-    createdat: Date;
-    updatedat: Date;
+    userid: number;
+    created_at: Date;
+    updated_at: Date;
 };

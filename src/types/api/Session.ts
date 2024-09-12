@@ -1,3 +1,6 @@
+import { UserInfo } from "./UserInfo";
+
 export type Session = {
-    data: string;
+    data: Pick<UserInfo, "id">;
+    historyId: number;
 };

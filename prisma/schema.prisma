@@ -20,9 +20,6 @@ model favorite {
 model history {
   id            Int             @id @default(autoincrement())
   userid        Int             @default(autoincrement())
-  favorite      Boolean?
-  title         String?         @db.VarChar(100)
-  genre         String?         @db.VarChar(100)
   created_at    DateTime        @db.Timestamptz(6)
   updated_at    DateTime        @db.Timestamptz(6)
   userinfo      userinfo        @relation(fields: [userid], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -32,9 +29,10 @@ model history {
 model historyrecord {
   id         Int      @id @default(autoincrement())
   historyid  Int      @default(autoincrement())
-  recordid   BigInt?
+  recordid   Int?
   created_at DateTime @db.Timestamptz(6)
   updated_at DateTime @db.Timestamptz(6)
+  image_uri  String?
   history    history  @relation(fields: [historyid], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 

@@ -7,7 +7,7 @@ import { validatePassword } from "@/helpers/api/validatePassword";
 import { cookies } from "next/headers";
 import { headers } from "@/common/constants/headers";
 import { createJwt } from "@/helpers/api/session/createJwt";
-import { encryptProfileInfo } from "@/helpers/api/session/encryptProfileInfo";
+import { creationTimestamps } from "@/common/constants/timestamps";
 
 /**
  * Attempts to "log" the user in, just does credentials check
@@ -58,8 +58,16 @@ const login = async (request: NextRequest): Promise<NextResponse<UserInfo>> => {
             );
 
             if (isPasswordValid) {
-                const session = encryptProfileInfo(payload.email);
-                const { token, expiration } = createJwt(session);
+                const history = await prisma.history.create({
+                    data: { userid: foundUser.id, ...creationTimestamps() },
+                });
+
+                const { token, expiration } = createJwt(
+                    {
+                        id: foundUser.id,
+                    },
+                    history.id,
+                );
 
                 cookies().set(headers.SESSION, token, { maxAge: expiration });
 

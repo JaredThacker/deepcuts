@@ -3,6 +3,7 @@ import { Quicksand } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { QueryProvider } from "@/providers/QueryProvider";
 
 const quicksand = Quicksand({ subsets: ["latin"] });
 
@@ -24,7 +25,7 @@ export default function RootLayout({
             <body
                 className={`${quicksand.className} h-screen w-screen flex flex-col`}
             >
-                {children}
+                <QueryProvider>{children}</QueryProvider>
                 <ToastContainer
                     position="top-right"
                     autoClose={5000}
