@@ -1,6 +1,6 @@
 import { Navbar } from "@/modules/Navbar/Navbar";
 
-export default function DashboardLayout({
+export default function RandomLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
