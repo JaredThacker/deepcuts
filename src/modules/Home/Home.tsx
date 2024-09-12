@@ -31,7 +31,7 @@ export const Home = () => {
                     <span className="flex flex-col items-center mt-1">
                         Atoms For Peace - Amok (2013){" "}
                         <span>Genre: Electronic, Rock</span>
-                        <span>
+                        <span className="mb-1">
                             Style: IDM, Indie Rock, Glitch, Experimental
                         </span>
                     </span>
