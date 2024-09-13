@@ -97,7 +97,7 @@ export const Home = () => {
                 </div>
             </div>
             <div className="h-full border grow border-green-500 rounded w-1/3">
-                <div className="h-fit w-11/12 m-8 flex flex-col items-center border grow font-semibold border-green-400 rounded">
+                <div className="h-fit w-11/12 m-8 flex flex-col items-center border grow font-semibold max-h-[797px] overflow-y-scroll border-green-400 rounded">
                     {"History"}
                     {history.map((eachHistory) => (
                         <UserHistory
