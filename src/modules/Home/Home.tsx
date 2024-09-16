@@ -46,8 +46,8 @@ export const Home = () => {
 
     return (
         <div className="grow flex flex-row p-4 gap-4 animate-fadeIn">
-            <div className="h-full border grow border-gray-500 rounded">
-                <div className="h-fit w-11/12 m-8 flex flex-col items-center border grow border-blue-200 rounded">
+            <div className="h-full grow rounded flex flex-col justify-start gap-4">
+                <div className="border border-blue-200 rounded flex flex-col items-center gap-3">
                     <span className="flex flex-col items-center font-bold mb-1">
                         {"Record of the Week"}
                     </span>
@@ -75,7 +75,7 @@ export const Home = () => {
                     </span>
                 </div>
 
-                <div className="h-fit w-11/12 m-8 flex flex-col items-center border grow border-gray-300 rounded">
+                <div className="border border-gray-300 rounded text-center">
                     <div className="stats shadow">
                         <div className="stat font-semibold">
                             <div className="stat-title">Total Randomizes</div>
@@ -85,9 +85,9 @@ export const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div className="h-fit w-11/12 m-8 flex flex-col items-center grow">
+                <div className="flex flex-col items-center grow">
                     <button
-                        className="btn btn-primary btn-ghost btn-outline btn-block h-56 text-2xl hover:outline"
+                        className="btn btn-primary btn-ghost btn-outline btn-block text-2xl hover:outline h-full"
                         onClick={() => {
                             router.push("/random");
                         }}
@@ -96,9 +96,9 @@ export const Home = () => {
                     </button>
                 </div>
             </div>
-            <div className="h-full border grow border-green-500 rounded w-1/3">
-                <div className="h-fit w-11/12 m-8 flex flex-col items-center border grow font-semibold max-h-[797px] overflow-y-scroll border-green-400 rounded">
-                    {"History"}
+            <div className="h-full rounded w-2/3">
+                <div className="text-center font-bold text-lg">{"History"}</div>
+                <div className="font-semibold max-h-[51rem] overflow-y-auto overflow-x-auto">
                     {history.map((eachHistory) => (
                         <UserHistory
                             key={eachHistory.id}
@@ -106,9 +106,6 @@ export const Home = () => {
                         />
                     ))}
                 </div>
-                {/* <div className="h-fit w-11/12 m-8 flex flex-col items-center border grow border-green-200 rounded">
-                    Favorites
-                </div> */}
             </div>
         </div>
     );
