@@ -47,8 +47,8 @@ export const Home = () => {
     return (
         <div className="grow flex flex-row p-4 gap-4 animate-fadeIn">
             <div className="h-full grow rounded flex flex-col justify-start gap-4">
-                <div className="border border-blue-200 rounded flex flex-col items-center gap-3">
-                    <span className="flex flex-col items-center font-bold mb-1">
+                <div className="flex flex-col items-center gap-2">
+                    <span className="flex flex-col items-center font-bold">
                         {"Record of the Week"}
                     </span>
 
@@ -75,7 +75,7 @@ export const Home = () => {
                     </span>
                 </div>
 
-                <div className="border border-gray-300 rounded text-center">
+                <div className="border border-primary border-dotted rounded text-center">
                     <div className="stats shadow">
                         <div className="stat font-semibold">
                             <div className="stat-title">Total Randomizes</div>
@@ -97,7 +97,9 @@ export const Home = () => {
                 </div>
             </div>
             <div className="h-full rounded w-2/3">
-                <div className="text-center font-bold text-lg">{"History"}</div>
+                <div className="text-center font-bold text-lg underline">
+                    {"History"}
+                </div>
                 <div className="font-semibold max-h-[51rem] overflow-y-auto overflow-x-auto">
                     {history.map((eachHistory) => (
                         <UserHistory

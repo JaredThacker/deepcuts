@@ -8,7 +8,7 @@ type HistoryProperties = {
 };
 
 export const UserHistory = ({ history }: HistoryProperties): JSX.Element => (
-    <div className="flex flex-row items-center justify-between w-full p-4 gap-5 border border-gray-100">
+    <div className="flex flex-row items-center justify-between w-full p-4 gap-5 border border-accent border-dotted">
         <span className="text-lg font-bold">{`${dayjs(
             history.created_at,
         ).format("YYYY-MM-DD hh:mm")}`}</span>
