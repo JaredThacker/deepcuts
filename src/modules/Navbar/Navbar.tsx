@@ -2,6 +2,7 @@
 
 import { logout } from "@/helpers/api/logout/logout";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -26,9 +27,9 @@ export const Navbar = () => {
                 width="50"
             />
             <div className="flex-1 ml-2">
-                <a className="btn btn-ghost text-xl" href="/">
+                <Link className="btn btn-ghost text-xl" href="/">
                     {"deepcuts."}
-                </a>
+                </Link>
             </div>
             <div className="flex-none gap-2">
                 <div className="dropdown dropdown-end">
@@ -49,9 +50,9 @@ export const Navbar = () => {
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
                     >
                         <li>
-                            <a className="justify-between" href="/dashboard">
+                            <Link className="justify-between" href="/dashboard">
                                 Dashboard
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <button onClick={onLogoutClick} type="button">
