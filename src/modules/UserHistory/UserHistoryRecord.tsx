@@ -14,7 +14,7 @@ export const UserHistoryRecord = ({
         target="_blank"
     >
         <Image
-            className="hover:outline outline-gray-400 rounded-full h-14 w-14 hover:cursor-pointer transition-all"
+            className="hover:outline outline-primary rounded-full h-14 w-14 hover:cursor-pointer transition-all hover:animate-twSpin hover:animate-infinite hover:animate-duration-[1760ms]"
             alt=""
             height={150}
             width={150}

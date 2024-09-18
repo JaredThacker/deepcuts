@@ -64,7 +64,7 @@ export const Home = () => {
     return (
         <div className="grow flex flex-row p-4 gap-4 animate-fadeIn">
             <div className="h-full grow rounded flex flex-col justify-start gap-4">
-                <div className="flex flex-col items-center gap-2">
+                <div className="flex flex-col items-center gap-2 border border-dotted border-primary">
                     <span className="flex flex-col items-center font-bold">
                         {"Record of the Week"}
                     </span>
