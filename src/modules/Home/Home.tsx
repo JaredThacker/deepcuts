@@ -45,26 +45,11 @@ export const Home = () => {
     });
 
     const tabOnClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-        /**
-         * `event` is an object, we know it has a `target` key, and that key is the HTML element that WE clicked.
-         * When we have access to that HTML element, we can access its `dataset`, which allows us to access the enum value of the element
-         */
         const { target } = event;
-
         if (target !== null) {
             const castedTarget = target as HTMLAnchorElement;
-
-            /**
-             * The `dataset` is basically a dictionary of `string` KEYS and `string` values, it's a StringMap.
-             * Within that StringMap, each KEY is the name after `data-`, and the value is the value we give in the HTML code.
-             * The reason we can access many DIFFERENT dataset values, is because the `target` is different for each click.
-             */
             const { tabvalue: tabEnumValue } = castedTarget.dataset;
             if (tabEnumValue !== undefined) {
-                /**
-                 * Since the type of enums is a number, and the dataset stores everything as strings (since its a StringMap)
-                 * We need to parse the dataset value.
-                 */
                 setTabActive(Number.parseInt(tabEnumValue));
             }
         }
