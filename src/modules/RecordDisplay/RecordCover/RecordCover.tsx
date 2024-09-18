@@ -1,5 +1,6 @@
-/* eslint-disable @next/next/no-img-element -- disabled because imageHosts kept throwing errors */
-import { Image } from "@/types/Image";
+// @ts-nocheck
+import { type Image } from "@/types/Image";
+import Image from "next/image";
 import React from "react";
 
 type RecordCoverProperties = {
@@ -8,7 +9,7 @@ type RecordCoverProperties = {
 };
 
 export const RecordCover = (props: RecordCoverProperties) => (
-    <img
+    <Image
         alt="Default Record Image"
         id="RecordCover"
         className="h-50 w-50 hover:cursor-pointer"

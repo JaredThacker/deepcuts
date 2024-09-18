@@ -19,6 +19,7 @@ export const UserHistoryRecord = ({
             height={150}
             width={150}
             src={historyRecord.image_uri}
+            loading="lazy"
         />
     </a>
 );
