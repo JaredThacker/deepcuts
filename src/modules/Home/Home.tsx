@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { UserHistory } from "../UserHistory/UserHistory";
 import { HistoryWithRecord } from "@/types/api/dto/HistoryWithRecord";
@@ -9,7 +9,14 @@ import { HistoryRecordCount } from "@/types/api/dto/HistoryRecordCount";
 import ms from "ms";
 import Image from "next/image";
 
+enum Tabs {
+    History,
+    Favorites,
+    Stats,
+}
+
 export const Home = () => {
+    const [tabActive, setTabActive] = useState<Tabs>(Tabs.History);
     const router = useRouter();
     const { data: history } = useQuery({
         queryKey: ["historyData"],
@@ -36,6 +43,32 @@ export const Home = () => {
         },
         refetchInterval: ms("1m"),
     });
+
+    const tabOnClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        /**
+         * `event` is an object, we know it has a `target` key, and that key is the HTML element that WE clicked.
+         * When we have access to that HTML element, we can access its `dataset`, which allows us to access the enum value of the element
+         */
+        const { target } = event;
+
+        if (target !== null) {
+            const castedTarget = target as HTMLAnchorElement;
+
+            /**
+             * The `dataset` is basically a dictionary of `string` KEYS and `string` values, it's a StringMap.
+             * Within that StringMap, each KEY is the name after `data-`, and the value is the value we give in the HTML code.
+             * The reason we can access many DIFFERENT dataset values, is because the `target` is different for each click.
+             */
+            const { tabvalue: tabEnumValue } = castedTarget.dataset;
+            if (tabEnumValue !== undefined) {
+                /**
+                 * Since the type of enums is a number, and the dataset stores everything as strings (since its a StringMap)
+                 * We need to parse the dataset value.
+                 */
+                setTabActive(Number.parseInt(tabEnumValue));
+            }
+        }
+    };
 
     if (history === undefined || historyRecordCount === undefined) {
         return <span />;
@@ -96,15 +129,56 @@ export const Home = () => {
                     </button>
                 </div>
             </div>
-            <div className="h-full rounded w-2/3">
-                <div className="text-center font-bold text-lg">{"History"}</div>
+            <div className="h-full rounded w-2/3 flex flex-col">
+                <div
+                    className="flex flex-row tabs tabs-bordered w-full"
+                    role="tablist"
+                >
+                    <a
+                        className={`tab grow hover:cursor-pointer hover:text-blue-200 hover:font-bold transition-all hover:tracking-wider duration-500 ${
+                            tabActive === Tabs.History
+                                ? "tab-active font-bold"
+                                : ""
+                        }`}
+                        data-tabvalue={Tabs.History}
+                        role="tab"
+                        onClick={tabOnClick}
+                    >
+                        {"History"}
+                    </a>
+                    <a
+                        className={`tab grow hover:cursor-pointer hover:text-blue-200 hover:font-bold transition-all hover:tracking-wider duration-500 ${
+                            tabActive === Tabs.Favorites
+                                ? "tab-active font-bold"
+                                : ""
+                        }`}
+                        data-tabvalue={Tabs.Favorites}
+                        role="tab"
+                        onClick={tabOnClick}
+                    >
+                        {"Favorites"}
+                    </a>
+                    <a
+                        className={`tab grow hover:cursor-pointer hover:text-blue-200 hover:font-bold transition-all hover:tracking-wider duration-500 ${
+                            tabActive === Tabs.Stats
+                                ? "tab-active font-bold"
+                                : ""
+                        }`}
+                        data-tabvalue={Tabs.Stats}
+                        role="tab"
+                        onClick={tabOnClick}
+                    >
+                        {"Stats"}
+                    </a>
+                </div>
                 <div className="font-semibold max-h-[51rem] overflow-y-auto overflow-x-auto">
-                    {history.map((eachHistory) => (
-                        <UserHistory
-                            key={eachHistory.id}
-                            history={eachHistory}
-                        />
-                    ))}
+                    {tabActive === Tabs.History &&
+                        history.map((eachHistory) => (
+                            <UserHistory
+                                key={eachHistory.id}
+                                history={eachHistory}
+                            />
+                        ))}
                 </div>
             </div>
         </div>
