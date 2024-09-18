@@ -27,7 +27,10 @@ export const Navbar = () => {
                 width="50"
             />
             <div className="flex-1 ml-2">
-                <Link className="btn btn-ghost text-xl" href="/">
+                <Link
+                    className="btn btn-ghost text-xl hover:cursor-pointer hover:outline outline-primary hover:text-primary transition-all"
+                    href="/dashboard"
+                >
                     {"deepcuts."}
                 </Link>
             </div>
@@ -38,7 +41,7 @@ export const Navbar = () => {
                         role="button"
                         className="btn btn-ghost btn-circle avatar"
                     >
-                        <div className="w-10 rounded-full">
+                        <div className="w-10 rounded-full hover:outline outline-primary transition-all">
                             <img
                                 alt="Tailwind CSS Navbar component"
                                 src="https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg"

@@ -1,4 +1,5 @@
 import { HistoryRecord } from "@/types/api/HistoryRecord";
+import Image from "next/image";
 
 type UserHistoryRecordProperties = {
     historyRecord: HistoryRecord;
@@ -12,8 +13,9 @@ export const UserHistoryRecord = ({
         rel="noreferrer"
         target="_blank"
     >
-        <img
-            className="hover:outline rounded-full h-14 w-14 hover:cursor-pointer"
+        <Image
+            className="hover:outline outline-gray-400 rounded-full h-14 w-14 hover:cursor-pointer transition-all"
+            alt=""
             height={150}
             width={150}
             src={historyRecord.image_uri}

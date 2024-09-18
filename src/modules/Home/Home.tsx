@@ -2,13 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import React from "react";
-import { RecordDisplay } from "../RecordDisplay/RecordDisplay";
 import { useQuery } from "react-query";
-import { History } from "@/types/api/History";
 import { UserHistory } from "../UserHistory/UserHistory";
 import { HistoryWithRecord } from "@/types/api/dto/HistoryWithRecord";
 import { HistoryRecordCount } from "@/types/api/dto/HistoryRecordCount";
 import ms from "ms";
+import Image from "next/image";
 
 export const Home = () => {
     const router = useRouter();
@@ -58,12 +57,13 @@ export const Home = () => {
                             rel="noreferrer"
                             target="_blank"
                         >
-                            <img
+                            <Image
                                 src="https://i.discogs.com/mcIh1A6HEAVQ0pCwZ1mnLqxREjgwikqQijZafZMZ5uI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQzMTIy/NzMtMTM2MTUyOTY1/OS0zMzUzLmpwZWc.jpeg"
                                 width={300}
                                 height={300}
-                                className="hover:outline outline-primary hover:cursor-pointer"
-                            ></img>
+                                alt="Amok Album Cover"
+                                className="hover:outline outline-primary transition-all hover:cursor-pointer"
+                            />
                         </a>
                     </div>
                     <span className="flex flex-col items-center mt-1">
@@ -87,7 +87,7 @@ export const Home = () => {
                 </div>
                 <div className="flex flex-col items-center grow">
                     <button
-                        className="btn btn-primary btn-ghost btn-outline btn-block text-2xl hover:outline h-full"
+                        className="btn btn-primary btn-ghost btn-outline btn-block text-2xl hover:outline transition-all duration-500 h-full"
                         onClick={() => {
                             router.push("/random");
                         }}
@@ -97,9 +97,7 @@ export const Home = () => {
                 </div>
             </div>
             <div className="h-full rounded w-2/3">
-                <div className="text-center font-bold text-lg underline">
-                    {"History"}
-                </div>
+                <div className="text-center font-bold text-lg">{"History"}</div>
                 <div className="font-semibold max-h-[51rem] overflow-y-auto overflow-x-auto">
                     {history.map((eachHistory) => (
                         <UserHistory
