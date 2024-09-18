@@ -1,6 +1,7 @@
 import React from "react";
 import { DiscogsRecord } from "../../types/DiscogsRecord";
 import { RecordCover } from "./RecordCover/RecordCover";
+import { placeholderImageSrc } from "@/common/constants/placeholderImageSrc";
 
 type RecordDisplayProperties = {
     record: DiscogsRecord;
@@ -21,7 +22,7 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                             src={
                                 images.length > 0
                                     ? undefined
-                                    : "https://wingandaprayer.live/wp-content/uploads/2018/07/no-image-available.jpg?w=640"
+                                    : placeholderImageSrc
                             }
                         />
                     </a>
