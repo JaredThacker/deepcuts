@@ -17,6 +17,7 @@ const getHistory = async (
             },
         },
         where: { userid: id },
+        orderBy: { created_at: "desc" },
     });
 
     const filteredHistory = foundHistory.filter(
