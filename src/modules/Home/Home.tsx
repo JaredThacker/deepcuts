@@ -116,7 +116,7 @@ export const Home = () => {
             </div>
             <div className="h-full rounded w-2/3 flex flex-col">
                 <div
-                    className="flex flex-row tabs tabs-bordered w-full"
+                    className="flex flex-row tabs tabs-boxed w-full"
                     role="tablist"
                 >
                     <a
