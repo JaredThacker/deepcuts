@@ -13,7 +13,7 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
         record;
 
     return (
-        <div className="card shadow-xl">
+        <div className="card shadow-xl animate-fadeIn">
             <figure>
                 {
                     <a href={uri} target="_blank">

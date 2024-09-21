@@ -62,8 +62,8 @@ export const Home = () => {
     const { count } = historyRecordCount;
 
     return (
-        <div className="grow flex flex-row p-4 gap-4 animate-fadeIn">
-            <div className="h-full grow rounded flex flex-col justify-start gap-4">
+        <div className="grow flex flex-row p-4 gap-4 animate-fadeIn overflow-hidden">
+            <div className="h-full grow rounded flex flex-col justify-start gap-4 animate-fadeInLeft animate-duration-[2000ms]">
                 <div className="flex flex-col items-center gap-2 border border-dotted border-primary">
                     <span className="flex flex-col items-center font-bold">
                         {"Record of the Week"}
@@ -114,7 +114,7 @@ export const Home = () => {
                     </button>
                 </div>
             </div>
-            <div className="h-full rounded w-2/3 flex flex-col">
+            <div className="h-full rounded w-2/3 flex flex-col animate-fadeInRight animate-duration-[2000ms]">
                 <div
                     className="flex flex-row tabs tabs-boxed w-full"
                     role="tablist"

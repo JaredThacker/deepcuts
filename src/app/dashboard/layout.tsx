@@ -7,7 +7,10 @@ export default function DashboardLayout({
 }>) {
     return (
         <>
-            <Navbar />
+            <div className="animate-fadeInDown animate-duration-[2000ms]">
+                <Navbar />
+            </div>
+
             {children}
         </>
     );
