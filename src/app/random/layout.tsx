@@ -7,7 +7,9 @@ export default function RandomLayout({
 }>) {
     return (
         <>
-            <Navbar />
+            <div className="z-[1]">
+                <Navbar />
+            </div>
             {children}
         </>
     );
