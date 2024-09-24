@@ -2,12 +2,13 @@
 
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { UserHistory } from "../UserHistory/UserHistory";
 import { HistoryWithRecord } from "@/types/api/dto/HistoryWithRecord";
 import { HistoryRecordCount } from "@/types/api/dto/HistoryRecordCount";
 import ms from "ms";
 import Image from "next/image";
+import { Favorites } from "../Favorites/Favorites";
 
 enum Tabs {
     History,
@@ -18,29 +19,12 @@ enum Tabs {
 export const Home = () => {
     const [tabActive, setTabActive] = useState<Tabs>(Tabs.History);
     const router = useRouter();
-    const { data: history } = useQuery({
-        queryKey: ["historyData"],
-        queryFn: async () => {
-            const historyData = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/history`,
-            );
-            const historyJson = await historyData.json();
-            return historyJson as HistoryWithRecord[];
-        },
+    const { data: history } = useQuery<HistoryWithRecord[]>({
+        queryKey: ["history"],
     });
 
-    const { data: historyRecordCount } = useQuery({
-        queryKey: ["historyRecordCount"],
-        queryFn: async () => {
-            const historyRecordCount = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/history/record/count`,
-            );
-
-            const historyRecordCountJson =
-                (await historyRecordCount.json()) as HistoryRecordCount;
-
-            return historyRecordCountJson;
-        },
+    const { data: historyRecordCount } = useQuery<HistoryRecordCount>({
+        queryKey: ["history/record/count"],
         refetchInterval: ms("1m"),
     });
 
@@ -164,6 +148,7 @@ export const Home = () => {
                                 history={eachHistory}
                             />
                         ))}
+                    {tabActive === Tabs.Favorites && <Favorites />}
                 </div>
             </div>
         </div>
