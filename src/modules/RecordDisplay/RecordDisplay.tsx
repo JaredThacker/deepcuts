@@ -41,7 +41,7 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
     }, [favoriteId, favoriteRecord, id, unfavoriteRecord]);
 
     return (
-        <div className="card shadow-xl animate-fadeIn">
+        <div className="card shadow-xl animate-fadeIn" key={record.id}>
             <figure>
                 {
                     <a href={uri} target="_blank">
@@ -82,9 +82,8 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
 
                 {styles?.length > 0 && <div>Style: {styles[0]}</div>}
             </div>
-            <div className="card-actions justify-end p-2">
+            <div className="card-actions absolute bottom-0 right-0 justify-end p-2">
                 <button
-                    key={record.id}
                     className={`btn-circle btn-sm btn-secondary ${
                         favoriteId ? "" : "btn-outline"
                     } btn`}
