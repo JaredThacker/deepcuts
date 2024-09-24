@@ -10,7 +10,7 @@ datasource db {
 model favorite {
   id         Int      @id @default(autoincrement())
   userid     Int      @default(autoincrement())
-  recordid   BigInt?
+  recordid   Int?
   notes      String?  @db.VarChar(250)
   created_at DateTime @db.Timestamptz(6)
   updated_at DateTime @db.Timestamptz(6)
