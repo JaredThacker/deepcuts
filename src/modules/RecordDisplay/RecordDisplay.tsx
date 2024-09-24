@@ -3,7 +3,7 @@ import { DiscogsRecord } from "../../types/DiscogsRecord";
 import { RecordCover } from "./RecordCover/RecordCover";
 import { placeholderImageSrc } from "@/common/constants/placeholderImageSrc";
 import { FaHeart } from "react-icons/fa6";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useFavoriteRecord } from "./useFavoriteRecord";
 import { useRemoveFavorite } from "./useRemoveFavorite";
 
@@ -15,6 +15,7 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
     const { record } = props;
     const { id, images, title, artists, genres, uri, styles, year, labels } =
         record;
+
     const queryClient = useQueryClient();
     const [favoriteId, setFavorited] = React.useState<number>();
 
@@ -83,6 +84,7 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
             </div>
             <div className="card-actions justify-end p-2">
                 <button
+                    key={record.id}
                     className={`btn-circle btn-sm btn-secondary ${
                         favoriteId ? "" : "btn-outline"
                     } btn`}
