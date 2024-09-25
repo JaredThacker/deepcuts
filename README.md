@@ -40,7 +40,7 @@ Introducing **_deepcuts._**
 
 > ![Randomize](public/Randomize.gif)
 
-6. At any point you can click on the Album Artwork to be redirected to the official Discogs' page for that release. Once you find a record that piques your interest or you wish to save for late, you can click the heart icon to add it to your favorites!
+6. At any point you can click on the album artwork to be redirected to the official Discogs' page for that release. Once you find a record that piques your interest or you wish to save for later, you can click the heart icon to add it to your favorites!
 
 > ![Favorite](public/Favorite.gif)
 
