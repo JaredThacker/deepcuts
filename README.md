@@ -13,27 +13,28 @@ Introducing **_deepcuts._**
 #### Future implentations include.......
 
 > -   filters ,
-> -   a favorites/bookmark/history feature ,
-> -   sessions ,
-> -   user profile screens ,
-> -   more randomizers based on MRIs/Artists/Labels ,
-> -   maybe Discogs account integration to be able to add to wantlist directly from here ,
+> -   more randomizers based on MRIs/Artists/Labels/Genres/Styles,
 > -   improved UI and optimized performance ,
+> -   maybe Discogs account integration to be able to add to wantlist directly from here ,
 > -   and hopefully many more before eventual deployment !
 
 ## How It Looks..... (so far)
 
-1. Landing page is a screen where you can either create an account, or login with an existing one. (Still need to implement sessions fully)
+1. Landing page is a screen where you can either create an account, or login with an existing one.
 
-> ![Landing Page](https://raw.githubusercontent.com/JaredThacker/deepcuts/main/public/deepcuts_login.gif)
+> ![Landing Page](public\Landing.gif)
 
-2. After logging in, it will automatically redirect you to the dashboard
+2. After logging in, it will automatically redirect you to the dashboard!
 
-> ![Dashboard](https://raw.githubusercontent.com/JaredThacker/deepcuts/main/public/deepcuts_dashboard.gif)
+> ![Dashboard](public\toDashboard.gif)
 
-3. Now just press the randomize button until you find something that piques your interest! Also, upon pressing the artwork, it will redirect you to discogs official page for that release!
+3. Here on the left you will find my recommended Record of the Month, the total randomizes across all users, and the button to take you to the randomize page! On the right we have your personal History, Favorites, and Stats!
 
-> ![Randomize](https://raw.githubusercontent.com/JaredThacker/deepcuts/main/public/deepcuts_randomize.gif)
+> ![Dashboard2](public\Dashboard.gif)
+
+4. Clicking on the Discover Some New Gems button takes you to the page where the magic happens!
+
+> ![HistoryRecord](public\DiscoverSomeNewGems.gif)
 
 Built utilizing Next.js, Prisma ORM, and PostgreSQL.
 

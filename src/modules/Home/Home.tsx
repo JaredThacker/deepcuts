@@ -50,7 +50,7 @@ export const Home = () => {
             <div className="h-full grow rounded flex flex-col justify-start gap-4 animate-fadeInLeft animate-duration-[2000ms]">
                 <div className="flex flex-col items-center gap-2 border border-dotted border-primary">
                     <span className="flex flex-col items-center font-bold">
-                        {"Record of the Week"}
+                        {"Record of the Month"}
                     </span>
 
                     <div>
