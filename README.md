@@ -22,19 +22,19 @@ Introducing **_deepcuts._**
 
 1. Landing page is a screen where you can either create an account, or login with an existing one.
 
-> ![Landing Page](public\Landing.gif)
+> ![Landing Page](public/Landing.gif)
 
 2. After logging in, it will automatically redirect you to the dashboard!
 
-> ![Dashboard](public\toDashboard.gif)
+> ![Dashboard](public/toDashboard.gif)
 
 3. Here on the left you will find my recommended Record of the Month, the total randomizes across all users, and the button to take you to the randomize page! On the right we have your personal History, Favorites, and Stats!
 
-> ![Dashboard2](public\Dashboard.gif)
+> ![Dashboard2](public/Dashboard.gif)
 
 4. Clicking on the Discover Some New Gems button takes you to the page where the magic happens!
 
-> ![HistoryRecord](public\DiscoverSomeNewGems.gif)
+> ![HistoryRecord](public/DiscoverSomeNewGems.gif)
 
 5. On this page, clicking on the Randomize! button will grab a random release from Discogs' catalog of over 31 million!
 
