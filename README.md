@@ -36,6 +36,14 @@ Introducing **_deepcuts._**
 
 > ![HistoryRecord](public\DiscoverSomeNewGems.gif)
 
-Built utilizing Next.js, Prisma ORM, and PostgreSQL.
+5. On this page, clicking on the Randomize! button will grab a random release from Discogs' catalog of over 31 million!
+
+> ![Randomize](public/Randomize.gif)
+
+6. At any point you can click on the Album Artwork to be redirected to the official Discogs' page for that release. Once you find a record that piques your interest or you wish to save for late, you can click the heart icon to add it to your favorites!
+
+> ![Favorite](public/Favorite.gif)
+
+Built utilizing Next.js, Prisma ORM, and PostgreSQL!
 
 Thank you for joining me on this journey (:
