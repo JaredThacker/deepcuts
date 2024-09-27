@@ -36,7 +36,7 @@ Introducing **_deepcuts._**
 
 > ![HistoryRecord](public/DiscoverSomeNewGems.gif)
 
-5. On this page, clicking on the Randomize! button will grab a random release from Discogs' catalog of over 31 million!
+5. On this page, clicking on the Randomize! button will grab a random release from Discogs' catalog of over 31 million! Each release is then saved in your History!
 
 > ![Randomize](public/Randomize.gif)
 
