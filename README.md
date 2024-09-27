@@ -36,11 +36,11 @@ Introducing **_deepcuts._**
 
 > ![HistoryRecord](public/DiscoverSomeNewGems.gif)
 
-5. On this page, clicking on the Randomize! button will grab a random release from Discogs' catalog of over 31 million! Each release is then saved in your History!
+5. On this page, clicking on the Randomize button will grab a random release from Discogs' catalog of over 31 million! On each click, the release is subsequently saved in your History!
 
 > ![Randomize](public/Randomize.gif)
 
-6. At any point you can click on the album artwork to be redirected to the official Discogs' page for that release. Once you find a record that piques your interest or you wish to save for later, you can click the heart icon to add it to your favorites!
+6. At any point during your search, you can click on the album artwork to be redirected to the official Discogs' page for that release (in a new tab). Once you find a record that piques your interest or you wish to save for later, you can click the heart icon to add it to your favorites!
 
 > ![Favorite](public/Favorite.gif)
 
