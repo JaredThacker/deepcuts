@@ -27,12 +27,16 @@ const addFavorite = async (
     } = getSession();
 
     const body = await request.json();
-    const { recordId } = body as { recordId: number };
+    const { recordId, image_uri } = body as {
+        recordId: number;
+        image_uri: string;
+    };
 
     const addedRecord = await prisma.favorite.create({
         data: {
             userid: id,
             recordid: recordId,
+            image_uri: image_uri,
             ...creationTimestamps(),
         },
     });

@@ -14,6 +14,7 @@ model favorite {
   notes      String?  @db.VarChar(250)
   created_at DateTime @db.Timestamptz(6)
   updated_at DateTime @db.Timestamptz(6)
+  image_uri  String?
   userinfo   userinfo @relation(fields: [userid], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
