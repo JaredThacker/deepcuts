@@ -8,19 +8,22 @@ type FavoriteProperties = {
 };
 
 export const Favorites = () => {
-    const { data: favoritesData } = useQuery({ queryKey: ["favorites"] });
+    const { data: favoritesData } = useQuery<Favorite[]>({
+        queryKey: ["favorites"],
+    });
 
     if (favoritesData === undefined) {
         return <span />;
     }
 
     return (
-        // <div className="flex flex-row gap-2 flex-wrap">
-        //     <FavoriteRecord
-        //         key={`favorite_record_${favorite.recordid}`}
-        //         favoriteRecord={favorite}
-        //     />
-        // </div>
-        <div>{JSON.stringify(favoritesData)}</div>
+        <div className="flex flex-row gap-2 flex-wrap pt-2 pl-2 pb-2">
+            {favoritesData.map((eachFavorite) => (
+                <FavoriteRecord
+                    key={eachFavorite.recordid}
+                    favoriteRecord={eachFavorite}
+                />
+            ))}
+        </div>
     );
 };

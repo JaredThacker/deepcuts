@@ -8,14 +8,16 @@ type UseFavoriteRecordHookParameters = {
 
 type UseFavoriteRecordFunctionParameters = {
     recordId: number;
+    image_uri: string;
 };
 
 const favoriteRecord = async ({
     recordId,
+    image_uri,
 }: UseFavoriteRecordFunctionParameters) => {
     const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/favorites`,
-        { body: JSON.stringify({ recordId }), method: "POST" },
+        { body: JSON.stringify({ recordId, image_uri }), method: "POST" },
     );
 
     const parsedResponse = await response.json();

@@ -32,13 +32,20 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                 setFavorited(undefined);
             }
         } else {
-            const addedRecord = await favoriteRecord({ recordId: id });
+            const addedRecord = await favoriteRecord({
+                recordId: id,
+                image_uri: images[0].uri,
+            });
 
             if (addedRecord !== null) {
                 setFavorited(addedRecord.id);
             }
         }
-    }, [favoriteId, favoriteRecord, id, unfavoriteRecord]);
+    }, [favoriteId, favoriteRecord, id, images, unfavoriteRecord]);
+
+    React.useEffect(() => {
+        setFavorited(undefined);
+    }, [record]);
 
     return (
         <div className="card shadow-xl animate-fadeIn" key={record.id}>
