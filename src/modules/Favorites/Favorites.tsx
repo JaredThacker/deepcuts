@@ -3,10 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { Favorite } from "@/types/api/Favorite";
 import { FavoriteRecord } from "./FavoriteRecord";
 
-type FavoriteProperties = {
-    favorite: Favorite;
-};
-
 export const Favorites = () => {
     const { data: favoritesData } = useQuery<Favorite[]>({
         queryKey: ["favorites"],
