@@ -13,7 +13,6 @@ import { Favorites } from "../Favorites/Favorites";
 enum Tabs {
     History,
     Favorites,
-    Stats,
 }
 
 export const Home = () => {
@@ -52,7 +51,6 @@ export const Home = () => {
                     <span className="flex flex-col items-center font-bold">
                         {"Record of the Month"}
                     </span>
-
                     <div>
                         <a
                             href="https://www.discogs.com/release/4312273-Atoms-For-Peace-Amok"
@@ -76,7 +74,6 @@ export const Home = () => {
                         </span>
                     </span>
                 </div>
-
                 <div className="border border-primary border-dotted rounded text-center">
                     <div className="stats shadow">
                         <div className="stat font-semibold">
@@ -126,18 +123,6 @@ export const Home = () => {
                         onClick={tabOnClick}
                     >
                         {"Favorites"}
-                    </a>
-                    <a
-                        className={`tab grow hover:cursor-pointer hover:text-blue-200 hover:font-bold transition-all hover:tracking-wider duration-500 ${
-                            tabActive === Tabs.Stats
-                                ? "tab-active font-bold"
-                                : ""
-                        }`}
-                        data-tabvalue={Tabs.Stats}
-                        role="tab"
-                        onClick={tabOnClick}
-                    >
-                        {"Stats"}
                     </a>
                 </div>
                 <div className="font-semibold max-h-[51rem] overflow-y-auto overflow-x-auto">
