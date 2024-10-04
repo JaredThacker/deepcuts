@@ -10,7 +10,7 @@ export const FavoriteRecord = ({
     favoriteRecord,
 }: UserFavoriteProperties): JSX.Element => (
     <Image
-        className="hover:outline outline-gray-400 rounded-full h-28 w-28 hover:cursor-pointer transition-all hover:animate-twSpin hover:animate-infinite hover:animate-duration-[1760ms]"
+        className="hover:outline outline-gray-400 rounded-full h-32 w-32 hover:cursor-pointer transition-all hover:animate-twSpin hover:animate-infinite hover:animate-duration-[1760ms]"
         alt=""
         height={400}
         width={400}
