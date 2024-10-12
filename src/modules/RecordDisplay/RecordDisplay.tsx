@@ -48,7 +48,10 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
     }, [record]);
 
     return (
-        <div className="card shadow-xl animate-fadeIn" key={record.id}>
+        <div
+            className="card shadow-xl animate-fadeIn w-[400px] h-[500px]"
+            key={record.id}
+        >
             <figure>
                 {
                     <a href={uri} target="_blank">
