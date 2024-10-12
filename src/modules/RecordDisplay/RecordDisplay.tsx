@@ -88,15 +88,25 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                     <div>Artist: {artists[0].name}</div>
                 )}
 
-                {genres.length > 0 && genres.length > 1 ? (
+                {genres.length > 1 ? (
                     <div>
                         Genre: {genres.map((eachGenre) => eachGenre).join(", ")}
                     </div>
-                ) : (
+                ) : genres.length > 0 ? (
                     <div>Genre: {genres[0]}</div>
+                ) : (
+                    <></>
                 )}
 
-                {styles?.length > 0 && <div>Style: {styles[0]}</div>}
+                {styles.length > 1 ? (
+                    <div>
+                        Style: {styles.map((eachStyle) => eachStyle).join(", ")}
+                    </div>
+                ) : styles.length > 0 ? (
+                    <div>Style: {styles[0]}</div>
+                ) : (
+                    <></>
+                )}
             </div>
             <div className="card-actions absolute bottom-0 right-0 justify-end p-2">
                 <button
