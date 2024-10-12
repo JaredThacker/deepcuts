@@ -88,7 +88,13 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                     <div>Artist: {artists[0].name}</div>
                 )}
 
-                {genres.length > 0 && <div>Genre: {genres[0]}</div>}
+                {genres.length > 0 && genres.length > 1 ? (
+                    <div>
+                        Genre: {genres.map((eachGenre) => eachGenre).join(", ")}
+                    </div>
+                ) : (
+                    <div>Genre: {genres[0]}</div>
+                )}
 
                 {styles?.length > 0 && <div>Style: {styles[0]}</div>}
             </div>
