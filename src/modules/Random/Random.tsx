@@ -20,7 +20,7 @@ export const Random = () => {
         <div className="h-full flex flex-col justify-center items-center animate-fadeIn animate-duration-[3000ms]">
             {record !== undefined && <RecordDisplay record={record} />}
             <button
-                className="btn btn-active btn-neutral w-fit focus:animate-headShake hover:outline transition-all"
+                className="btn btn-active btn-neutral w-fit mt-1 focus:animate-headShake hover:outline transition-all"
                 onClick={getRecord}
             >
                 {"Randomize!"}

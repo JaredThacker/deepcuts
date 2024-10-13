@@ -12,9 +12,9 @@ export const RecordCover = (props: RecordCoverProperties) => (
     <Image
         alt="Default Record Image"
         id="RecordCover"
-        className="h-50 w-50 hover:cursor-pointer"
-        height={300}
-        width={300}
+        className="h-[400px] w-[400px] hover:cursor-pointer hover:outline mt-3 mb-3 hover:outline-primary"
+        height={400}
+        width={400}
         src={
             props.src === undefined
                 ? props.image?.uri ?? placeholderImageSrc
