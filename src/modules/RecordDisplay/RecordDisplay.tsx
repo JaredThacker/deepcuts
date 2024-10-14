@@ -19,11 +19,30 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
     const queryClient = useQueryClient();
     const [favoriteId, setFavorited] = React.useState<number>();
 
+    /***
+     * Calls useFavoriteRecord with the `queryClient`, the usage is specified in the hook documentation, but importantly I am DESTRUCTURING the `mutateAsync` function,
+     * and since I know it returns a value with a key that is exactly called `mutateAsync`, I can destructure it, and ALSO RENAME THE DESTRUCTURED VALUE to `favoriteRecord`, so now
+     * `favoriteRecord` = `mutateAsync`
+     */
     const { mutateAsync: favoriteRecord } = useFavoriteRecord({ queryClient });
     const { mutateAsync: unfavoriteRecord } = useRemoveFavorite({
         queryClient,
     });
 
+    /**
+     * Uses `useCallback`, which takes 2 parameters.
+     *
+     * 1) The callback function (basically an anonymous function, or lambda)
+     * 2) Dependency array, which ties into the details of `useCallback`.
+     *
+     * Details:
+     * `useCallback` is a way to "memoize" or "cache" a function, and only change (re-render) that function if ANY DEPENDENCY VALUE CHANGES
+     * So the term "re-render" the function, refers to `onFavorite` EQUALING that cached function, so you can call it, as if it was that callback.
+     *
+     * The reason we do this, is because React decides to re-render based on "shallow equality", aka it does not actually check the values of an object, it only checks
+     * the memory address it is stored at. So therefore, when a component re-renders, it creates a new function, therefore, even if they are EXACTLY the same function, it treats
+     * it as if the functions are different. This avoids that, saying that DO NOT recreate the function IF NOTHING HAS CHANGED.
+     */
     const onFavorite = React.useCallback(async () => {
         if (favoriteId) {
             const unfavoriteResult = await unfavoriteRecord({ id: favoriteId });
@@ -43,6 +62,9 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
         }
     }, [favoriteId, favoriteRecord, id, images, unfavoriteRecord]);
 
+    /**
+     * RUNS ON INITIAL RENDER
+     */
     React.useEffect(() => {
         setFavorited(undefined);
     }, [record]);
