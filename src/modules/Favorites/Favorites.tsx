@@ -13,7 +13,7 @@ export const Favorites = () => {
     }
 
     return (
-        <div className="flex flex-row gap-2 flex-wrap p-3 border border-accent border-dotted border-opacity-45 ">
+        <div className="flex flex-row gap-2 flex-wrap p-3 border border-accent border-dotted border-opacity-45">
             {favoritesData.map((eachFavorite) => (
                 <FavoriteRecord
                     key={eachFavorite.recordid}

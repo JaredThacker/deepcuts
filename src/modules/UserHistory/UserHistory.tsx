@@ -11,7 +11,7 @@ export const UserHistory = ({ history }: HistoryProperties): JSX.Element => (
     <div className="flex flex-row items-center justify-between w-full p-4 gap-5 border border-dotted border-accent border-opacity-45">
         <span className="text-lg font-bold">{`${dayjs(
             history.created_at,
-        ).format("YYYY-MM-DD hh:mm")}`}</span>
+        ).format("MM-DD-YYYY hh:mm")}`}</span>
         <div
             className="flex flex-row gap-2 flex-wrap"
             style={{ maxWidth: "70%" }}
