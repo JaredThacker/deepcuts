@@ -47,8 +47,8 @@ export const Home = () => {
     return (
         <div className="grow flex flex-row p-4 gap-4 animate-fadeIn overflow-hidden">
             <div className="h-full grow rounded flex flex-col justify-start gap-4 animate-fadeInLeft animate-duration-[2000ms]">
-                <div className="flex flex-col items-center gap-2 border border-dotted border-primary">
-                    <span className="flex flex-col items-center font-bold">
+                <div className="flex flex-col items-center gap-2 bg-base-300 rounded-lg shadow-xl">
+                    <span className="flex flex-col items-center font-bold underline">
                         {"Record of the Month"}
                     </span>
                     <div>
@@ -74,8 +74,8 @@ export const Home = () => {
                         </span>
                     </span>
                 </div>
-                <div className="border border-primary border-dotted rounded text-center">
-                    <div className="stats shadow">
+                <div className="bg-base-300 rounded text-center shadow-lg">
+                    <div className="stats shadow bg-inherit">
                         <div className="stat font-semibold">
                             <div className="stat-title">Total Randomizes</div>
                             <div className="stat-value flex flex-col items-center text-primary">
@@ -84,7 +84,7 @@ export const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col items-center grow">
+                <div className="flex flex-col items-center grow bg-base-300 shadow-xl">
                     <button
                         className="btn btn-primary btn-ghost btn-outline btn-block text-2xl hover:outline transition-all duration-500 h-full"
                         onClick={() => {
