@@ -1,6 +1,6 @@
 type QueryStringFormValues = { [key: string]: unknown };
 
-export const formValuesToQueryString = (
+export const generateQueryString = (
     formValues: QueryStringFormValues,
 ): string => {
     const queries = [];

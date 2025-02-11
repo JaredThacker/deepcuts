@@ -9,7 +9,7 @@ import { RandomFilter } from "@/types/api/RandomFilter";
 import { FaTrashCan } from "react-icons/fa6";
 import dayjs from "dayjs";
 import { parseNumber } from "@/helpers/parseNumber";
-import { formValuesToQueryString } from "@/helpers/api/formValuesToQueryString";
+import { generateQueryString } from "@/helpers/api/generateQueryString";
 import { toast } from "react-toastify";
 
 const DEFAULT_FORM_VALUES: RandomFilter = {
@@ -83,7 +83,7 @@ export const Random = () => {
     const getRecord = async () => {
         console.log(getValues());
 
-        const queryString = formValuesToQueryString(getValues());
+        const queryString = generateQueryString(getValues());
 
         const response = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}/record${queryString}`,

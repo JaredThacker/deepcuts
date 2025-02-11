@@ -1,4 +1,6 @@
+import { ServerEndpoints } from "@/common/constants/ServerEndpoints";
 import { creationTimestamps } from "@/common/constants/timestamps";
+import { generateQueryString } from "@/helpers/api/generateQueryString";
 import { applyRecordFilter } from "@/helpers/api/record/applyRecordFilter";
 import { getSession } from "@/helpers/api/session/getSession";
 import { parseNumber } from "@/helpers/parseNumber";
@@ -21,6 +23,8 @@ const getRecord = async (request: NextRequest) => {
     const yearStart = parseNumber(queryString.get("yearStart"));
     const yearEnd = parseNumber(queryString.get("yearEnd"));
     const genre = queryString.get("genre") ?? undefined;
+    const apiToken =
+        queryString.get("token") ?? process.env.DISCOGS_API_TOKEN ?? "";
     let recordsSearched = 0;
 
     console.log(genre, yearStart, yearEnd);
@@ -38,11 +42,9 @@ const getRecord = async (request: NextRequest) => {
 
             const id = Math.floor(Math.random() * 31105274);
 
-            console.log("id = ", id);
+            const queryString = generateQueryString({ token: apiToken });
             const response = await fetch(
-                "https://api.discogs.com/releases/" +
-                    id +
-                    "?token=pnVhiBkGbDrHnRDrPMCKfDBXwHhvRdfLBvRgvzKb",
+                `${ServerEndpoints.DISCOGS.BASE}${ServerEndpoints.DISCOGS.RELEASES.BASE}${id}${queryString}`,
             );
             const jsonResponse = await response.json();
             parsedRecord = jsonResponse as DiscogsRecord;
@@ -51,8 +53,6 @@ const getRecord = async (request: NextRequest) => {
                 { genre, yearEnd, yearStart },
                 parsedRecord,
             );
-
-            console.log("matched = ", doesRecordMatch);
 
             if (!doesRecordMatch) {
                 continue;
