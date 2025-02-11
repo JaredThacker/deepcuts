@@ -5,4 +5,5 @@ export type UserInfo = {
     password: string;
     created_at: Date;
     updated_at: Date;
+    apiToken?: string;
 };

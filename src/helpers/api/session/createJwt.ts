@@ -1,4 +1,4 @@
-import { Session } from "@/types/api/Session";
+import { Session, SessionUserInfo } from "@/types/api/Session";
 import { UserInfo } from "@/types/api/UserInfo";
 import { sign } from "jsonwebtoken";
 import ms from "ms";
@@ -9,7 +9,7 @@ type TokenReturn = {
 };
 
 export const createJwt = (
-    userInfo: Pick<UserInfo, "id">,
+    userInfo: SessionUserInfo,
     historyId: number,
 ): TokenReturn => {
     const jwtKey = process.env.JWT_KEY ?? "";

@@ -52,13 +52,15 @@ const signUp = async (
 
         const encryptedPasswordInfo = encryptPassword(payload.password);
         const { hash, salt } = encryptedPasswordInfo;
+        const { apiToken, ...rest } = payload;
 
         /**
          * Creates the user, `data` represents the data we are giving the row, like `INSERT INTO blah VALUES (....data)`
          */
         const addedUser = await prisma.userinfo.create({
             data: {
-                ...payload,
+                ...rest,
+                api_token: apiToken,
                 password: hash,
                 password_salt: salt,
                 ...creationTimestamps(),

@@ -1,6 +1,10 @@
 import { UserInfo } from "./UserInfo";
 
-export type Session = {
-    data: Pick<UserInfo, "id">;
+type SessionUserInfo = Pick<UserInfo, "apiToken" | "id">;
+
+type Session = {
+    data: SessionUserInfo;
     historyId: number;
 };
+
+export type { Session, SessionUserInfo };

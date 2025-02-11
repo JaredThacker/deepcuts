@@ -24,10 +24,8 @@ const getRecord = async (request: NextRequest) => {
     const yearEnd = parseNumber(queryString.get("yearEnd"));
     const genre = queryString.get("genre") ?? undefined;
     const apiToken =
-        queryString.get("token") ?? process.env.DISCOGS_API_TOKEN ?? "";
+        session.data.apiToken ?? process.env.DISCOGS_API_TOKEN ?? "";
     let recordsSearched = 0;
-
-    console.log(genre, yearStart, yearEnd);
 
     while (responseStatus === 404) {
         try {

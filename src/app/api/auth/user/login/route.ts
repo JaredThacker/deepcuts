@@ -64,6 +64,7 @@ const login = async (request: NextRequest): Promise<NextResponse<UserInfo>> => {
 
                 const { token, expiration } = createJwt(
                     {
+                        apiToken: foundUser.api_token ?? undefined,
                         id: foundUser.id,
                     },
                     history.id,

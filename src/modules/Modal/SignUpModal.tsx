@@ -7,6 +7,7 @@ import { FaKey, FaUser } from "react-icons/fa";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { Key } from "ts-key-enum";
 import { toast } from "react-toastify";
+import { PiCoinVerticalDuotone } from "react-icons/pi";
 
 type SignUpModalProperties = {
     onHide: Function;
@@ -18,6 +19,7 @@ export type SignUpFormValues = {
     email: string;
     password: string;
     username: string;
+    apiToken?: string;
 };
 
 const defaultSignUpFormValues: SignUpFormValues = {
@@ -212,6 +214,24 @@ export const SignUpModal = (props: SignUpModalProperties) => {
                                 },
                             })}
                         />
+                    </label>
+                    <label
+                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 ${
+                            errors.apiToken
+                                ? "input-error"
+                                : dirtyFields.apiToken
+                                ? "input-success"
+                                : ""
+                        }`}
+                    >
+                        <input
+                            autoComplete="off"
+                            className="grow"
+                            placeholder="API Token"
+                            type="text"
+                            {...register("apiToken")}
+                        />
+                        <PiCoinVerticalDuotone />
                     </label>
                 </div>
                 <div className="modal-action">
