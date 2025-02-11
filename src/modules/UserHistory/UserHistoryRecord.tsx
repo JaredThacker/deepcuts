@@ -13,7 +13,7 @@ export const UserHistoryRecord = ({
         alt=""
         height={150}
         width={150}
-        src={historyRecord.image_uri}
+        src={historyRecord.image_uri ?? "/placeholder.svg"}
         onClick={() => {}}
         onDoubleClick={() => {
             window.open(
