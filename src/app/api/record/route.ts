@@ -6,6 +6,12 @@ import prisma from "@/lib/prismaClient";
 import { DiscogsRecord } from "@/types/DiscogsRecord";
 import { NextRequest, NextResponse } from "next/server";
 
+const delay = (ms: number = 1000) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+
+const RECORD_LIMIT = 60;
+
+// For filters applied, maybe take a look at this: https://www.discogs.com/developers?srsltid=AfmBOooot3temCgy3IZkWQ-LZeYk-abmv7ON8JKNYOWG3Ipus4nP3GHF#page:database,header:database-search and https://www.discogs.com/developers?srsltid=AfmBOooot3temCgy3IZkWQ-LZeYk-abmv7ON8JKNYOWG3Ipus4nP3GHF#page:home,header:home-pagination
 const getRecord = async (request: NextRequest) => {
     const session = getSession();
     let responseStatus = 404;
@@ -15,10 +21,24 @@ const getRecord = async (request: NextRequest) => {
     const yearStart = parseNumber(queryString.get("yearStart"));
     const yearEnd = parseNumber(queryString.get("yearEnd"));
     const genre = queryString.get("genre") ?? undefined;
+    let recordsSearched = 0;
+
+    console.log(genre, yearStart, yearEnd);
 
     while (responseStatus === 404) {
         try {
+            if (recordsSearched === RECORD_LIMIT) {
+                break;
+            }
+            recordsSearched += 1;
+
+            if (recordsSearched > 5) {
+                await delay();
+            }
+
             const id = Math.floor(Math.random() * 31105274);
+
+            console.log("id = ", id);
             const response = await fetch(
                 "https://api.discogs.com/releases/" +
                     id +
@@ -32,12 +52,15 @@ const getRecord = async (request: NextRequest) => {
                 parsedRecord,
             );
 
+            console.log("matched = ", doesRecordMatch);
+
             if (!doesRecordMatch) {
                 continue;
             }
 
             responseStatus = response.status;
-        } catch {
+        } catch (error) {
+            console.log("in catch", error);
             continue;
         }
     }
@@ -54,6 +77,8 @@ const getRecord = async (request: NextRequest) => {
                 ...creationTimestamps(),
             },
         });
+    } else {
+        return NextResponse.json({ errorMessage: "Broaden your horizons..." });
     }
 
     return NextResponse.json(parsedRecord);

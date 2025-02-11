@@ -78,9 +78,9 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                 {
                     <a href={uri} target="_blank">
                         <RecordCover
-                            image={images.length > 0 ? images[0] : undefined}
+                            image={images?.length > 0 ? images[0] : undefined}
                             src={
-                                images.length > 0
+                                images?.length > 0
                                     ? undefined
                                     : placeholderImageSrc
                             }
