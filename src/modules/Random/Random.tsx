@@ -81,8 +81,6 @@ export const Random = () => {
     );
 
     const getRecord = async () => {
-        console.log(getValues());
-
         const queryString = generateQueryString(getValues());
 
         const response = await fetch(

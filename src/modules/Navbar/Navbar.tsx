@@ -1,6 +1,7 @@
 "use client";
 
 import { logout } from "@/helpers/api/logout/logout";
+import { oauth } from "@/helpers/api/oauth/oauth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,6 +15,10 @@ export const Navbar = () => {
         if (didLogoutSuccessfully) {
             router.push("/");
         }
+    };
+
+    const onAuthClick = async () => {
+        const authenticateResponse = await oauth();
     };
 
     return (
@@ -52,6 +57,11 @@ export const Navbar = () => {
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow"
                     >
+                        <li>
+                            <button onClick={onAuthClick} type="button">
+                                {"Authenticate"}
+                            </button>
+                        </li>
                         <li>
                             <Link className="justify-between" href="/dashboard">
                                 Dashboard

@@ -17,7 +17,7 @@ export const RecordCover = (props: RecordCoverProperties) => (
         width={400}
         src={
             props.src === undefined
-                ? props.image?.uri ?? placeholderImageSrc
+                ? props.image?.uri ?? "/placeholder.svg"
                 : props.src
         }
     />

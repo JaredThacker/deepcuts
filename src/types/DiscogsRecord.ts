@@ -14,6 +14,8 @@ export type DiscogsRecord = {
     status: string;
     year: number;
     resource_url: string;
+    main_release_url?: string;
+    most_recent_release_url?: string;
     uri: string;
     artists: Artist[];
     artists_sort: string;

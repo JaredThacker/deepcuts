@@ -38,14 +38,16 @@ model historyrecord {
 }
 
 model userinfo {
-  id            Int        @id @default(autoincrement())
-  name          String     @db.VarChar(100)
-  email         String     @unique @db.VarChar(250)
-  password      String     @db.VarChar(250)
-  password_salt String     @db.VarChar(16)
-  created_at    DateTime   @db.Timestamptz(6)
-  updated_at    DateTime   @db.Timestamptz(6)
-  api_token     String?
-  favorite      favorite[]
-  history       history[]
+  id                 Int        @id @default(autoincrement())
+  name               String     @db.VarChar(100)
+  email              String     @unique @db.VarChar(250)
+  password           String     @db.VarChar(250)
+  password_salt      String     @db.VarChar(16)
+  created_at         DateTime   @db.Timestamptz(6)
+  updated_at         DateTime   @db.Timestamptz(6)
+  api_token          String?
+  oauth_token        String?
+  oauth_token_secret String?
+  favorite           favorite[]
+  history            history[]
 }

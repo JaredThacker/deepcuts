@@ -97,9 +97,9 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                     <div>Release: {title}</div>
                 )}
 
-                {labels.length > 0 && <div>Label: {labels[0].name}</div>}
+                {labels?.length > 0 && <div>Label: {labels[0].name}</div>}
 
-                {artists.length > 1 ? (
+                {artists?.length > 1 ? (
                     <div>
                         Artists:{" "}
                         {artists
@@ -110,7 +110,7 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                     <div>Artist: {artists[0].name}</div>
                 )}
 
-                {genres.length > 1 ? (
+                {genres?.length > 1 ? (
                     <div>
                         Genre: {genres.map((eachGenre) => eachGenre).join(", ")}
                     </div>
@@ -120,7 +120,7 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                     <></>
                 )}
 
-                {styles.length > 1 ? (
+                {styles?.length > 1 ? (
                     <div>
                         Style: {styles.map((eachStyle) => eachStyle).join(", ")}
                     </div>

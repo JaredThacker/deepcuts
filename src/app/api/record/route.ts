@@ -8,7 +8,10 @@ import { parseNumber } from "@/helpers/parseNumber";
 import prisma from "@/lib/prismaClient";
 import { DiscogsDatabaseQuery } from "@/types/DiscogsDatabaseQuery";
 import { DiscogsRecord } from "@/types/DiscogsRecord";
+import { Label } from "@/types/Label";
+import dayjs from "dayjs";
 import { NextRequest, NextResponse } from "next/server";
+import { randomBytes } from "node:crypto";
 
 const delay = (ms: number = 1000) =>
     new Promise((resolve) => setTimeout(resolve, ms));
@@ -33,7 +36,35 @@ const getRecord = async (request: NextRequest) => {
         yearStart !== undefined || yearEnd !== undefined || genre !== undefined;
 
     if (isFilterApplied) {
-        console.log("in filter applied");
+        const foundUser = await prisma.userinfo.findFirst({
+            where: { id: session.data.id },
+        });
+
+        if (foundUser === null) {
+            throw new Error("Cannot find user who belongs to session");
+        }
+
+        const oauthToken = foundUser.oauth_token;
+        const oauthTokenSecret = foundUser.oauth_token_secret;
+        const timestamp = dayjs().unix();
+        const nonce = randomBytes(16).toString("hex");
+
+        const oauthHeaderValues = [
+            `oauth_consumer_key="${process.env.DISCOGS_CONSUMER_KEY}"`,
+            `oauth_token="${oauthToken}"`,
+            `oauth_signature_method="PLAINTEXT"`,
+            `oauth_timestamp="${timestamp}"`,
+            `oauth_nonce="${nonce}"`,
+            `oauth_version="1.0"`,
+            `oauth_signature="${process.env.DISCOGS_CONSUMER_SECRET}&${oauthTokenSecret}"`,
+        ];
+
+        const customHeaders: HeadersInit = {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: `OAuth ${oauthHeaderValues.join(", ")}`,
+            "User-Agent": request.headers.get("User-Agent") ?? "Firefox",
+        };
+
         if (apiToken === undefined) {
             return NextResponse.json({
                 errorMessage: "Filtering requires API token.",
@@ -70,11 +101,10 @@ const getRecord = async (request: NextRequest) => {
 
             const response = await fetch(
                 `${ServerEndpoints.DISCOGS.BASE}${ServerEndpoints.DISCOGS.DATABASE.BASE}${ServerEndpoints.DISCOGS.DATABASE.SEARCH}${queryString}`,
+                { headers: { ...customHeaders } },
             );
             const parsedResponse = await response.json();
             const castedResponse = parsedResponse as DiscogsDatabaseQuery;
-
-            console.log(parsedResponse);
 
             const {
                 pagination: { pages },
@@ -84,6 +114,8 @@ const getRecord = async (request: NextRequest) => {
                 return NextResponse.json({
                     errorMessage: "Broaden your horizon...",
                 });
+            } else if (pages === 0 && isYearFilterApplied) {
+                continue;
             }
 
             const randomPage = Math.floor(Math.random() * pages + 1);
@@ -96,7 +128,11 @@ const getRecord = async (request: NextRequest) => {
 
             const pageResponse = await fetch(
                 `${ServerEndpoints.DISCOGS.BASE}${ServerEndpoints.DISCOGS.DATABASE.BASE}${ServerEndpoints.DISCOGS.DATABASE.SEARCH}${pageQuery}`,
+                {
+                    headers: { ...customHeaders },
+                },
             );
+
             const parsedPageResponse = await pageResponse.json();
             const castedPageResponse =
                 parsedPageResponse as DiscogsDatabaseQuery;
@@ -107,7 +143,34 @@ const getRecord = async (request: NextRequest) => {
                 Math.random() * castedResultsLength,
             );
             const randomRecord = results[randomRecordIndex];
-            return NextResponse.json(randomRecord);
+
+            if (randomRecord.resource_url.includes("/masters")) {
+                console.log(randomRecord);
+                const mastersRecordResponse = await fetch(
+                    randomRecord.resource_url,
+                );
+                const castedMastersRecord =
+                    (await mastersRecordResponse.json()) as DiscogsRecord;
+                const foundMainRelease = await fetch(
+                    castedMastersRecord.most_recent_release_url ??
+                        castedMastersRecord.main_release_url ??
+                        castedMastersRecord.resource_url,
+                );
+                const castedFoundMainRelease =
+                    (await foundMainRelease.json()) as DiscogsRecord;
+                parsedRecord = castedFoundMainRelease;
+            } else {
+                const nonMastersRecordResponse = await fetch(
+                    randomRecord.most_recent_release_url ??
+                        randomRecord.main_release_url ??
+                        randomRecord.resource_url,
+                );
+                const castedNonMastersRecord =
+                    (await nonMastersRecordResponse.json()) as DiscogsRecord;
+                parsedRecord = castedNonMastersRecord;
+            }
+
+            break;
         }
     } else {
         while (responseStatus === 404) {
