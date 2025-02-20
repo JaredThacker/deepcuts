@@ -39,3 +39,17 @@
 .double-range-slider-tooltip::after {
     border-color: #7480ff transparent transparent transparent !important;
 }
+
+.double-range-slider-container {
+    height: 200px !important;
+    margin: 0 0 0 0 !important;
+    margin-top: 70px !important;
+}
+
+.double-range-slider-mid.double-range-slider-tooltip.double-range-slider-over {
+    position: absolute !important;
+}
+
+.double-range-slider-mid {
+    bottom: 225px !important;
+}

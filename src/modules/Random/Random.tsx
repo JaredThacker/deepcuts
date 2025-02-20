@@ -63,7 +63,8 @@ export const Random = () => {
 
     const onYearChange = React.useCallback(
         (output: RangeSliderOutput) => {
-            console.log(output);
+            setValue("yearStart", parseNumber(output.min));
+            setValue("yearEnd", parseNumber(output.max));
         },
         [setValue],
     );
@@ -127,8 +128,8 @@ export const Random = () => {
                     {"Randomize!"}
                 </button>
             </div>
-            <div className="flex flex-col gap-2">
-                <ul className="menu bg-base-200 rounded--box w-56">
+            <div className="flex flex-col">
+                <ul className="menu bg-base-200 rounded--box w-56 shadow-lg">
                     <li className="menu-title text-primary flex flex-row gap-5 items-center justify-between">
                         {"Genre"}{" "}
                         <button
