@@ -4,6 +4,7 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { QueryProvider } from "@/providers/QueryProvider";
+import "react-double-range-slider/dist/cjs/index.css";
 
 const quicksand = Quicksand({ subsets: ["latin"] });
 

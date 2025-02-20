@@ -6,3 +6,36 @@
     max-width: 300px !important;
     max-height: 300px !important;
 }
+
+/* TODO: Refactor this */
+.double-range-slider-max.double-range-slider-ball.double-range-slider-active {
+    background-color: #1d232a;
+    outline: #7480ff 5px solid;
+}
+
+.double-range-slider-max.double-range-slider-ball {
+    background-color: #1d232a;
+    outline: #7480ff 5px solid;
+}
+
+.double-range-slider-min.double-range-slider-ball.double-range-slider-active {
+    background-color: #1d232a;
+    outline: #7480ff 5px solid;
+}
+
+.double-range-slider-min.double-range-slider-ball {
+    background-color: #1d232a;
+    outline: #7480ff 5px solid;
+}
+
+.double-range-slider-track {
+    background-color: #7480ff !important;
+}
+
+.double-range-slider-tooltip {
+    background-color: #7480ff !important;
+}
+
+.double-range-slider-tooltip::after {
+    border-color: #7480ff transparent transparent transparent !important;
+}

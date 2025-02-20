@@ -11,6 +11,8 @@ import dayjs from "dayjs";
 import { parseNumber } from "@/helpers/parseNumber";
 import { generateQueryString } from "@/helpers/api/generateQueryString";
 import { toast } from "react-toastify";
+import { RangeSlider } from "react-double-range-slider";
+import { RangeSliderOutput } from "@/types/components/RangeSlider/RangeSliderOutput";
 
 const DEFAULT_FORM_VALUES: RandomFilter = {
     genre: "",
@@ -59,12 +61,20 @@ export const Random = () => {
 
     const [record, setRecord] = React.useState<DiscogsRecord>();
 
+    const onYearChange = React.useCallback(
+        (output: RangeSliderOutput) => {
+            console.log(output);
+        },
+        [setValue],
+    );
+
     const selectGenre = React.useCallback(
-        (event: React.MouseEvent<HTMLButtonElement>) => {
+        (event: React.MouseEvent<HTMLElement>) => {
+            event.stopPropagation();
             const { target } = event;
             if (target !== undefined) {
                 console.log("in onclick", target);
-                const button = target as HTMLButtonElement;
+                const button = target as HTMLElement;
                 const { id } = button;
 
                 if (id === CLEAR_GENRE_ID) {
@@ -102,121 +112,60 @@ export const Random = () => {
             name: ["yearStart", "yearEnd", "genre"],
         });
 
+    const parsedYearStart = parseNumber(currentYearStart) ?? MIN_YEAR;
+    const parsedYearEnd = parseNumber(currentYearEnd) ?? currentYear;
+
     return (
-        <div className="h-full flex flex-col justify-center items-center animate-fadeIn animate-duration-[3000ms] gap-10">
-            {record !== undefined && <RecordDisplay record={record} />}
-            <button
-                className="btn btn-active btn-neutral w-[390px] mt-2 focus:animate-headShake hover:outline transition-all shadow-lg"
-                disabled={!isValid}
-                onClick={getRecord}
-            >
-                {"Randomize!"}
-            </button>
-            <div className="flex flex-row gap-3">
-                <div className="dropdown">
-                    <div tabIndex={0} role="button" className="btn m-1">
-                        {"Genre"}
-                    </div>
-                    <div
-                        tabIndex={0}
-                        className="dropdown-content card card-compact border-none bg-transparent text-primary-content z-[1] w-[30rem] p-2"
-                    >
-                        <div className="card-body flex-row flex-wrap">
-                            {genreOptions.map((eachGenre) => (
-                                <button
-                                    className="btn btn-sm btn-ghost btn-outline text-primary hover:text-black hover:border-black hover:outline-black hover:bg-primary"
-                                    data-genre={eachGenre}
-                                    disabled={selectedGenre === eachGenre}
-                                    id={`genre_${eachGenre}`}
-                                    key={eachGenre}
-                                    onClick={selectGenre}
-                                >
-                                    {eachGenre}
-                                </button>
-                            ))}
-                            <button
-                                className="btn btn-sm btn-ghost btn-outline text-primary hover:text-black hover:border-black hover:outline-black hover:bg-primary"
-                                id={CLEAR_GENRE_ID}
+        <div className="h-full flex flex-row-reverse justify-around items-center animate-fadeIn animate-duration-[3000ms] gap-10">
+            <div className="flex flex-col">
+                {record !== undefined && <RecordDisplay record={record} />}
+                <button
+                    className="btn btn-active btn-neutral w-[390px] mt-2 focus:animate-headShake hover:outline transition-all shadow-lg"
+                    disabled={!isValid}
+                    onClick={getRecord}
+                >
+                    {"Randomize!"}
+                </button>
+            </div>
+            <div className="flex flex-col gap-2">
+                <ul className="menu bg-base-200 rounded--box w-56">
+                    <li className="menu-title text-primary flex flex-row gap-5 items-center justify-between">
+                        {"Genre"}{" "}
+                        <button
+                            className="btn btn-xs btn-ghost btn-outline text-primary hover:text-black hover:border-black hover:outline-black hover:bg-primary"
+                            id={CLEAR_GENRE_ID}
+                            onClick={selectGenre}
+                            title="Clear Genres"
+                        >
+                            <FaTrashCan
+                                className="pointer-events-none"
+                                size={11}
+                            />
+                        </button>
+                    </li>
+                    {genreOptions.map((eachGenre) => (
+                        <li key={eachGenre}>
+                            <a
+                                className={
+                                    selectedGenre === eachGenre
+                                        ? "pointer-events-none text-opacity-20 text-white bg-gray-500 bg-opacity-50"
+                                        : ""
+                                }
+                                data-genre={eachGenre}
+                                id={eachGenre}
                                 onClick={selectGenre}
+                                title={eachGenre}
                             >
-                                <FaTrashCan className="pointer-events-none" />
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div className="flex flex-col">
-                    <div className="text-sm text-primary text-center">
-                        {"Year"}
-                    </div>
-                    <input
-                        className={`${
-                            errors?.yearStart === undefined
-                                ? "border-transparent"
-                                : "border-red-500"
-                        } rounded-sm shadow border-opacity-50 transition-colors border focus:outline-none`}
-                        type="number"
-                        min={MIN_YEAR}
-                        max={currentYear}
-                        {...register("yearStart", {
-                            validate: {
-                                beforeYearEnd: (currentStart) => {
-                                    if (
-                                        currentStart === undefined ||
-                                        Number.isNaN(currentStart)
-                                    ) {
-                                        return true;
-                                    }
-
-                                    const isBefore =
-                                        currentStart <=
-                                        (parseNumber(currentYearEnd) ??
-                                            currentYear);
-
-                                    return isBefore;
-                                },
-                            },
-                            valueAsNumber: true,
-                        })}
-                    />
-                </div>
-                <div className="h-full flex flex-col justify-center text-xl text-primary">
-                    {"—"}
-                </div>
-                <div className="flex flex-col">
-                    <div className="text-sm text-primary text-center">
-                        {"Year"}
-                    </div>
-                    <input
-                        className={`${
-                            errors?.yearEnd === undefined
-                                ? "border-transparent"
-                                : "border-red-500"
-                        } rounded-sm shadow border-opacity-50 transition-colors border focus:outline-none`}
-                        type="number"
-                        min={MIN_YEAR}
-                        max={currentYear}
-                        {...register("yearEnd", {
-                            validate: {
-                                afterYearStart: (currentEnd) => {
-                                    if (
-                                        currentEnd === undefined ||
-                                        Number.isNaN(currentEnd)
-                                    ) {
-                                        return true;
-                                    }
-
-                                    const isAfter =
-                                        currentEnd >=
-                                        (parseNumber(currentYearStart) ??
-                                            MIN_YEAR);
-
-                                    return isAfter;
-                                },
-                            },
-                            valueAsNumber: true,
-                        })}
-                    />
-                </div>
+                                {eachGenre}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+                <RangeSlider
+                    onChange={onYearChange}
+                    tooltipVisibility="hover"
+                    value={{ min: MIN_YEAR, max: currentYear }}
+                />
             </div>
         </div>
     );
