@@ -30,8 +30,6 @@ export const generateRandomYear = (
         return -1;
     }
 
-    // TODO: What happens if the year set contains all of the years in the range?
-    // 1990 - 1995
     do {
         randomYear = isOnlyYearEnd
             ? Math.floor(Math.random() * (yearEnd - MIN_YEAR + 1) + MIN_YEAR)

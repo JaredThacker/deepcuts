@@ -82,7 +82,7 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                             src={
                                 images?.length > 0
                                     ? undefined
-                                    : placeholderImageSrc
+                                    : "/placeholder.svg"
                             }
                         />
                     </a>

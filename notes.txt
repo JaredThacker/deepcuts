@@ -3,14 +3,18 @@ Edit User
 forgot password
 change email/username/api-token
 
-1)
+1) DONE
 OATH FLOW
 ------
 https://www.discogs.com/developers?srsltid=AfmBOooot3temCgy3IZkWQ-LZeYk-abmv7ON8JKNYOWG3Ipus4nP3GHF#page:authentication,header:authentication-oauth-flow
 
 got consumer secret and key
 
-1.5)
+1.5) DONE 
 Take the repeated logic of src\app\api\auth\user\request_token\route.ts line 20, and make it into a reusable function/class/whatever
 
 2) Remove fetch calls and replace with useQuery hooks
+
+3) Move filter stuff to the side not below
+
+4) NEST DASHBOARD/RANDOM INTO ONE DIR TO CONSOLIDATE LAYOUT

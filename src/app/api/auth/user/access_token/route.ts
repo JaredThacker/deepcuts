@@ -18,8 +18,7 @@ const getAccessToken = async (request: NextRequest): Promise<NextResponse> => {
         oauthVerifier === null ||
         oauthTokenSecret === undefined
     ) {
-        // TODO: Instead of error throwing, try redirecting to the "Authentication Successful" page, but instead of the page default displaying "Authentication Successful", the page takes a query parameter, denoting success or not
-        throw new Error("Access Token request failed");
+        return NextResponse.redirect("/authenticate?success=false");
     }
 
     const session = getSession();
@@ -73,8 +72,7 @@ const getAccessToken = async (request: NextRequest): Promise<NextResponse> => {
         where: { id: session.data.id },
     });
 
-    // TODO: make a little friendly "Authentication successful page"
-    return NextResponse.json({});
+    return NextResponse.redirect("/authenticate?success=true");
 };
 
 export { getAccessToken as GET };

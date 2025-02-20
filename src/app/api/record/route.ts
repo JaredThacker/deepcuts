@@ -112,7 +112,7 @@ const getRecord = async (request: NextRequest) => {
 
             if (pages === 0 && !isYearFilterApplied) {
                 return NextResponse.json({
-                    errorMessage: "Broaden your horizon...",
+                    errorMessage: "Broaden your horizons...",
                 });
             } else if (pages === 0 && isYearFilterApplied) {
                 continue;
@@ -145,7 +145,6 @@ const getRecord = async (request: NextRequest) => {
             const randomRecord = results[randomRecordIndex];
 
             if (randomRecord.resource_url.includes("/masters")) {
-                console.log(randomRecord);
                 const mastersRecordResponse = await fetch(
                     randomRecord.resource_url,
                 );
