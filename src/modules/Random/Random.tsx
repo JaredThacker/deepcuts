@@ -4,18 +4,21 @@ import React from "react";
 import { DiscogsRecord } from "@/types/DiscogsRecord";
 import { RecordDisplay } from "../RecordDisplay/RecordDisplay";
 import { useForm, useWatch } from "react-hook-form";
-import { RandomFilterFormValues } from "@/types/form/RandomFilterFormValues";
 import { RandomFilter } from "@/types/api/RandomFilter";
-import { FaTrashCan } from "react-icons/fa6";
 import dayjs from "dayjs";
 import { parseNumber } from "@/helpers/parseNumber";
 import { generateQueryString } from "@/helpers/api/generateQueryString";
 import { toast } from "react-toastify";
 import { RangeSlider } from "react-double-range-slider";
 import { RangeSliderOutput } from "@/types/components/RangeSlider/RangeSliderOutput";
+import recordStyles from "@/common/constants/recordStyles";
+import { RandomFilterList } from "./RandomFilterList/RandomFilterList";
+import recordCountries from "@/common/constants/recordCountries";
 
 const DEFAULT_FORM_VALUES: RandomFilter = {
     genre: "",
+    style: "",
+    country: "",
 };
 
 const genreOptions = [
@@ -37,6 +40,8 @@ const genreOptions = [
 ];
 
 const CLEAR_GENRE_ID = "clearGenre";
+const CLEAR_STYLE_ID = "clearStyle";
+const CLEAR_COUNTRY_ID = "clearCountry";
 const MIN_YEAR = 1936;
 const currentYear = dayjs().year();
 
@@ -47,7 +52,6 @@ const currentYear = dayjs().year();
 // since it's a rolling window, we can use `setTimeout` when the user clicks the Randomize button, and set the delay to 60 seconds, and
 // update the count from there.
 
-// TODO: Redesign Random page potentially, because genre dropdown causes overflow.
 export const Random = () => {
     const { control, formState, getValues, register, setValue, watch } =
         useForm<RandomFilter>({
@@ -57,7 +61,7 @@ export const Random = () => {
             reValidateMode: "onChange",
         });
 
-    const { errors, isValid } = formState;
+    const { isValid } = formState;
 
     const [record, setRecord] = React.useState<DiscogsRecord>();
 
@@ -69,25 +73,32 @@ export const Random = () => {
         [setValue],
     );
 
-    const selectGenre = React.useCallback(
-        (event: React.MouseEvent<HTMLElement>) => {
-            event.stopPropagation();
-            const { target } = event;
-            if (target !== undefined) {
-                console.log("in onclick", target);
-                const button = target as HTMLElement;
-                const { id } = button;
+    const selectValue = React.useCallback(
+        (valueKey: keyof RandomFilter) =>
+            (event: React.MouseEvent<HTMLElement>) => {
+                event.stopPropagation();
+                const { target } = event;
 
-                if (id === CLEAR_GENRE_ID) {
-                    setValue("genre", undefined);
-                } else {
-                    const { genre } = button.dataset;
-                    if (genre !== undefined) {
-                        setValue("genre", genre);
+                if (target !== undefined) {
+                    const button = target as HTMLElement;
+
+                    console.log(button);
+                    const { id } = button;
+
+                    console.log(button.dataset);
+                    const { cancelid } = button.dataset;
+
+                    console.log(id, valueKey);
+
+                    if (id === cancelid) {
+                        setValue(valueKey, undefined);
+                    } else {
+                        if (id !== undefined) {
+                            setValue(valueKey, id);
+                        }
                     }
                 }
-            }
-        },
+            },
         [setValue],
     );
 
@@ -107,18 +118,16 @@ export const Random = () => {
         }
     };
 
-    const [currentYearStart, currentYearEnd, selectedGenre] =
+    const [selectedCountry, selectedGenre, selectedStyle] =
         useWatch<RandomFilter>({
             control,
-            name: ["yearStart", "yearEnd", "genre"],
+            name: ["country", "genre", "style"],
         });
-
-    const parsedYearStart = parseNumber(currentYearStart) ?? MIN_YEAR;
-    const parsedYearEnd = parseNumber(currentYearEnd) ?? currentYear;
 
     return (
         <div className="h-full flex flex-row-reverse justify-around items-center animate-fadeIn animate-duration-[3000ms] gap-10">
-            <div className="flex flex-col">
+            <div className="flex flex-row max-h-[600px] overflow-y-auto"></div>
+            <div className="flex flex-col mr-96 mb-40">
                 {record !== undefined && <RecordDisplay record={record} />}
                 <button
                     className="btn btn-active btn-neutral w-[390px] mt-2 focus:animate-headShake hover:outline transition-all shadow-lg"
@@ -128,40 +137,35 @@ export const Random = () => {
                     {"Randomize!"}
                 </button>
             </div>
-            <div className="flex flex-col">
-                <ul className="menu bg-base-200 rounded--box w-56 shadow-lg">
-                    <li className="menu-title text-primary flex flex-row gap-5 items-center justify-between">
-                        {"Genre"}{" "}
-                        <button
-                            className="btn btn-xs btn-ghost btn-outline text-primary hover:text-black hover:border-black hover:outline-black hover:bg-primary"
-                            id={CLEAR_GENRE_ID}
-                            onClick={selectGenre}
-                            title="Clear Genres"
-                        >
-                            <FaTrashCan
-                                className="pointer-events-none"
-                                size={11}
-                            />
-                        </button>
-                    </li>
-                    {genreOptions.map((eachGenre) => (
-                        <li key={eachGenre}>
-                            <a
-                                className={
-                                    selectedGenre === eachGenre
-                                        ? "pointer-events-none text-opacity-20 text-white bg-gray-500 bg-opacity-50"
-                                        : ""
-                                }
-                                data-genre={eachGenre}
-                                id={eachGenre}
-                                onClick={selectGenre}
-                                title={eachGenre}
-                            >
-                                {eachGenre}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
+
+            <div className="flex flex-col h-fit">
+                <div className="flex flex-row gap-6 h-[37rem]">
+                    <RandomFilterList
+                        buttonId={CLEAR_GENRE_ID}
+                        callback={selectValue("genre")}
+                        className="flex-nowrap"
+                        items={genreOptions}
+                        selectedItem={selectedGenre}
+                        title="Genre"
+                    />
+                    <RandomFilterList
+                        buttonId={CLEAR_STYLE_ID}
+                        callback={selectValue("style")}
+                        className="overflow-y-auto h-full flex-nowrap"
+                        items={recordStyles}
+                        selectedItem={selectedStyle}
+                        title="Style"
+                    />
+                    <RandomFilterList
+                        buttonId={CLEAR_COUNTRY_ID}
+                        callback={selectValue("country")}
+                        className="flex-nowrap overflow-y-auto h-full"
+                        items={recordCountries}
+                        selectedItem={selectedCountry}
+                        title="Country"
+                    />
+                </div>
+
                 <RangeSlider
                     onChange={onYearChange}
                     tooltipVisibility="hover"

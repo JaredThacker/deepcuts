@@ -661,3 +661,5 @@ const recordStyles = [
     "Shoegazer",
     "Gogo",
 ];
+
+export default recordStyles;

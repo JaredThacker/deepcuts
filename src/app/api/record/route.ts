@@ -19,6 +19,7 @@ const delay = (ms: number = 1000) =>
 const RECORD_LIMIT = 60;
 const MAX_RECORD_ID = 31105274;
 
+// TODO: Add a try/catch incase the search results in no records found and crashes searching, possibly have a template record we can return denoting nothing was found, or just re-roll.
 // For filters applied, maybe take a look at this: https://www.discogs.com/developers?srsltid=AfmBOooot3temCgy3IZkWQ-LZeYk-abmv7ON8JKNYOWG3Ipus4nP3GHF#page:database,header:database-search and https://www.discogs.com/developers?srsltid=AfmBOooot3temCgy3IZkWQ-LZeYk-abmv7ON8JKNYOWG3Ipus4nP3GHF#page:home,header:home-pagination
 const getRecord = async (request: NextRequest) => {
     const session = getSession();
@@ -29,11 +30,23 @@ const getRecord = async (request: NextRequest) => {
     const yearStart = parseNumber(queryString.get("yearStart"));
     const yearEnd = parseNumber(queryString.get("yearEnd"));
     const genre = queryString.get("genre") ?? undefined;
+    const style = queryString.get("style") ?? undefined;
+    const country = queryString.get("country") ?? undefined;
     const apiToken = session.data.apiToken ?? process.env.DISCOGS_API_TOKEN;
+    const queryPayload = {
+        country: country?.toLowerCase(),
+        genre: genre?.toLowerCase(),
+        style: style?.toLowerCase(),
+    };
+
     let recordsSearched = 0;
 
     const isFilterApplied =
-        yearStart !== undefined || yearEnd !== undefined || genre !== undefined;
+        yearStart !== undefined ||
+        yearEnd !== undefined ||
+        genre !== undefined ||
+        style !== undefined ||
+        country !== undefined;
 
     if (isFilterApplied) {
         const foundUser = await prisma.userinfo.findFirst({
@@ -95,8 +108,8 @@ const getRecord = async (request: NextRequest) => {
 
             const queryString = generateQueryString({
                 per_page: 100,
-                genre: genre?.toLowerCase(),
                 year: randomYear,
+                ...queryPayload,
             });
 
             const response = await fetch(
@@ -121,9 +134,9 @@ const getRecord = async (request: NextRequest) => {
             const randomPage = Math.floor(Math.random() * pages + 1);
             const pageQuery = generateQueryString({
                 per_page: 100,
-                genre: genre?.toLowerCase(),
                 year: randomYear,
                 page: randomPage,
+                ...queryPayload,
             });
 
             const pageResponse = await fetch(
@@ -144,7 +157,7 @@ const getRecord = async (request: NextRequest) => {
             );
             const randomRecord = results[randomRecordIndex];
 
-            if (randomRecord.resource_url.includes("/masters")) {
+            if (randomRecord.resource_url?.includes("/masters")) {
                 const mastersRecordResponse = await fetch(
                     randomRecord.resource_url,
                 );
@@ -153,7 +166,8 @@ const getRecord = async (request: NextRequest) => {
                 const foundMainRelease = await fetch(
                     castedMastersRecord.most_recent_release_url ??
                         castedMastersRecord.main_release_url ??
-                        castedMastersRecord.resource_url,
+                        castedMastersRecord.resource_url ??
+                        "",
                 );
                 const castedFoundMainRelease =
                     (await foundMainRelease.json()) as DiscogsRecord;
@@ -162,7 +176,8 @@ const getRecord = async (request: NextRequest) => {
                 const nonMastersRecordResponse = await fetch(
                     randomRecord.most_recent_release_url ??
                         randomRecord.main_release_url ??
-                        randomRecord.resource_url,
+                        randomRecord.resource_url ??
+                        "",
                 );
                 const castedNonMastersRecord =
                     (await nonMastersRecordResponse.json()) as DiscogsRecord;
@@ -193,7 +208,7 @@ const getRecord = async (request: NextRequest) => {
                 parsedRecord = jsonResponse as DiscogsRecord;
 
                 const doesRecordMatch = applyRecordFilter(
-                    { genre, yearEnd, yearStart },
+                    { yearEnd, yearStart, ...queryPayload },
                     parsedRecord,
                 );
 
