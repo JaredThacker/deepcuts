@@ -8,6 +8,7 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { Key } from "ts-key-enum";
 import { toast } from "react-toastify";
 import { PiCoinVerticalDuotone } from "react-icons/pi";
+import Link from "next/link";
 
 type SignUpModalProperties = {
     onHide: Function;
@@ -233,6 +234,14 @@ export const SignUpModal = (props: SignUpModalProperties) => {
                         />
                         <PiCoinVerticalDuotone />
                     </label>
+                    <Link
+                        target="_blank"
+                        rel="noreferrer"
+                        href="https://www.discogs.com/settings/developers"
+                        className="w-fit hover:text-cyan-300 text-sm"
+                    >
+                        {"Generate personal access token here!"}
+                    </Link>
                 </div>
                 <div className="modal-action">
                     <form

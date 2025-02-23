@@ -1,4 +1,3 @@
-import { placeholderImageSrc } from "@/common/constants/placeholderImageSrc";
 import { Favorite } from "@/types/api/Favorite";
 import Image from "next/image";
 
@@ -14,7 +13,7 @@ export const FavoriteRecord = ({
         alt=""
         height={150}
         width={150}
-        src={favoriteRecord.image_uri ?? placeholderImageSrc}
+        src={favoriteRecord.image_uri ?? "/placeholder.svg"}
         onClick={() => {}}
         onDoubleClick={() => {
             window.open(

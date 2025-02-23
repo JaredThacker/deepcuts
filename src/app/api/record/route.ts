@@ -4,6 +4,7 @@ import { generateQueryString } from "@/helpers/api/generateQueryString";
 import { applyRecordFilter } from "@/helpers/api/record/applyRecordFilter";
 import { generateRandomYear } from "@/helpers/api/record/generateRandomYear";
 import { getSession } from "@/helpers/api/session/getSession";
+import { parseJson } from "@/helpers/parseJson";
 import { parseNumber } from "@/helpers/parseNumber";
 import prisma from "@/lib/prismaClient";
 import { DiscogsDatabaseQuery } from "@/types/DiscogsDatabaseQuery";
@@ -12,6 +13,7 @@ import { Label } from "@/types/Label";
 import dayjs from "dayjs";
 import { NextRequest, NextResponse } from "next/server";
 import { randomBytes } from "node:crypto";
+import utf8 from "utf8";
 
 const delay = (ms: number = 1000) =>
     new Promise((resolve) => setTimeout(resolve, ms));
@@ -90,101 +92,121 @@ const getRecord = async (request: NextRequest) => {
         const searchedYears = new Set<number>();
 
         while (recordsSearched !== RECORD_LIMIT) {
-            recordsSearched += 1;
+            try {
+                recordsSearched += 1;
 
-            if (recordsSearched > 5) {
-                await delay();
-            }
+                if (recordsSearched > 5) {
+                    await delay();
+                }
 
-            const randomYear = isYearFilterApplied
-                ? generateRandomYear(searchedYears, yearStart, yearEnd)
-                : undefined;
+                const randomYear = isYearFilterApplied
+                    ? generateRandomYear(searchedYears, yearStart, yearEnd)
+                    : undefined;
 
-            if (isYearFilterApplied && randomYear === -1) {
-                return NextResponse.json({
-                    errorMessage: "Could not find record within year range.",
+                if (isYearFilterApplied && randomYear === -1) {
+                    return NextResponse.json({
+                        errorMessage:
+                            "Could not find record within year range.",
+                    });
+                }
+
+                const queryString = generateQueryString({
+                    per_page: 100,
+                    year: randomYear,
+                    ...queryPayload,
                 });
-            }
 
-            const queryString = generateQueryString({
-                per_page: 100,
-                year: randomYear,
-                ...queryPayload,
-            });
+                const response = await fetch(
+                    `${ServerEndpoints.DISCOGS.BASE}${ServerEndpoints.DISCOGS.DATABASE.BASE}${ServerEndpoints.DISCOGS.DATABASE.SEARCH}${queryString}`,
+                    { headers: { ...customHeaders } },
+                );
 
-            const response = await fetch(
-                `${ServerEndpoints.DISCOGS.BASE}${ServerEndpoints.DISCOGS.DATABASE.BASE}${ServerEndpoints.DISCOGS.DATABASE.SEARCH}${queryString}`,
-                { headers: { ...customHeaders } },
-            );
-            const parsedResponse = await response.json();
-            const castedResponse = parsedResponse as DiscogsDatabaseQuery;
+                const parsedResponse = await response.json();
+                const castedResponse = parsedResponse as DiscogsDatabaseQuery;
 
-            const {
-                pagination: { pages },
-            } = castedResponse;
+                const {
+                    pagination: { pages },
+                } = castedResponse;
 
-            if (pages === 0 && !isYearFilterApplied) {
-                return NextResponse.json({
-                    errorMessage: "Broaden your horizons...",
+                if (pages === 0 && !isYearFilterApplied) {
+                    return NextResponse.json({
+                        errorMessage: "Broaden your horizons...",
+                    });
+                } else if (pages === 0 && isYearFilterApplied) {
+                    continue;
+                }
+
+                const randomPage = Math.floor(Math.random() * pages + 1);
+                const pageQuery = generateQueryString({
+                    per_page: 100,
+                    year: randomYear,
+                    page: randomPage,
+                    ...queryPayload,
                 });
-            } else if (pages === 0 && isYearFilterApplied) {
+
+                const pageResponse = await fetch(
+                    `${ServerEndpoints.DISCOGS.BASE}${ServerEndpoints.DISCOGS.DATABASE.BASE}${ServerEndpoints.DISCOGS.DATABASE.SEARCH}${pageQuery}`,
+                    {
+                        headers: { ...customHeaders },
+                    },
+                );
+
+                const parsedPageResponse = await pageResponse.text();
+
+                const sanitizedResponse = parsedPageResponse.replace(
+                    /[\x00-\x08\x0B\x0C\x0E-\x1F\x7F\x80-\x9F]/g,
+                    "",
+                );
+                const decoded = Buffer.from(
+                    sanitizedResponse,
+                    "utf-8",
+                ).toString("utf-8");
+
+                const extraParse = parseJson<DiscogsDatabaseQuery>(decoded);
+
+                if (extraParse === undefined) {
+                    continue;
+                }
+
+                const { results } = extraParse;
+
+                const castedResultsLength = results.length;
+                const randomRecordIndex = Math.floor(
+                    Math.random() * castedResultsLength,
+                );
+                const randomRecord = results[randomRecordIndex];
+
+                if (randomRecord.resource_url?.includes("/masters")) {
+                    const mastersRecordResponse = await fetch(
+                        randomRecord.resource_url,
+                    );
+                    const castedMastersRecord =
+                        (await mastersRecordResponse.json()) as DiscogsRecord;
+                    const foundMainRelease = await fetch(
+                        castedMastersRecord.most_recent_release_url ??
+                            castedMastersRecord.main_release_url ??
+                            castedMastersRecord.resource_url ??
+                            "",
+                    );
+                    const castedFoundMainRelease =
+                        (await foundMainRelease.json()) as DiscogsRecord;
+                    parsedRecord = castedFoundMainRelease;
+                } else {
+                    const nonMastersRecordResponse = await fetch(
+                        randomRecord.most_recent_release_url ??
+                            randomRecord.main_release_url ??
+                            randomRecord.resource_url ??
+                            "",
+                    );
+                    const castedNonMastersRecord =
+                        (await nonMastersRecordResponse.json()) as DiscogsRecord;
+                    parsedRecord = castedNonMastersRecord;
+                }
+
+                break;
+            } catch {
                 continue;
             }
-
-            const randomPage = Math.floor(Math.random() * pages + 1);
-            const pageQuery = generateQueryString({
-                per_page: 100,
-                year: randomYear,
-                page: randomPage,
-                ...queryPayload,
-            });
-
-            const pageResponse = await fetch(
-                `${ServerEndpoints.DISCOGS.BASE}${ServerEndpoints.DISCOGS.DATABASE.BASE}${ServerEndpoints.DISCOGS.DATABASE.SEARCH}${pageQuery}`,
-                {
-                    headers: { ...customHeaders },
-                },
-            );
-
-            const parsedPageResponse = await pageResponse.json();
-            const castedPageResponse =
-                parsedPageResponse as DiscogsDatabaseQuery;
-            const { results } = castedPageResponse;
-
-            const castedResultsLength = results.length;
-            const randomRecordIndex = Math.floor(
-                Math.random() * castedResultsLength,
-            );
-            const randomRecord = results[randomRecordIndex];
-
-            if (randomRecord.resource_url?.includes("/masters")) {
-                const mastersRecordResponse = await fetch(
-                    randomRecord.resource_url,
-                );
-                const castedMastersRecord =
-                    (await mastersRecordResponse.json()) as DiscogsRecord;
-                const foundMainRelease = await fetch(
-                    castedMastersRecord.most_recent_release_url ??
-                        castedMastersRecord.main_release_url ??
-                        castedMastersRecord.resource_url ??
-                        "",
-                );
-                const castedFoundMainRelease =
-                    (await foundMainRelease.json()) as DiscogsRecord;
-                parsedRecord = castedFoundMainRelease;
-            } else {
-                const nonMastersRecordResponse = await fetch(
-                    randomRecord.most_recent_release_url ??
-                        randomRecord.main_release_url ??
-                        randomRecord.resource_url ??
-                        "",
-                );
-                const castedNonMastersRecord =
-                    (await nonMastersRecordResponse.json()) as DiscogsRecord;
-                parsedRecord = castedNonMastersRecord;
-            }
-
-            break;
         }
     } else {
         while (responseStatus === 404) {

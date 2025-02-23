@@ -19,7 +19,7 @@ export const Landing = () => {
                         <h1 className="text-5xl font-bold">Welcome</h1>
                         <p className="py-6 text-lg">
                             {
-                                "This website will add functionality I feel was always missing from discogs...... a randomizer of sorts! Looking for the next obscure album or gem to uncover? Or maybe just trying to find that next record to play? Don't even know where to start? Introducing deepcuts."
+                                "This website will add functionality I feel was always missing from discogs...... a randomizer of sorts! Looking for the next obscure album or gem to uncover? Or maybe just trying to find that next record to play? Don't even know where to start? Introducing deepcuts.\n"
                             }
                         </p>
                         <div className="flex flex-row justify-center gap-4">

@@ -47,7 +47,6 @@ const RandomFilterList = ({
             {title}{" "}
             <button
                 className="btn btn-xs btn-ghost btn-outline text-primary hover:text-black hover:border-black hover:outline-black hover:bg-primary"
-                id={buttonId}
                 onClick={callback}
                 title={`Clear ${title}s`}
             >

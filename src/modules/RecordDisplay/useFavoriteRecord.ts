@@ -1,6 +1,5 @@
 import { Favorite } from "@/types/api/Favorite";
 import { QueryClient, useMutation } from "@tanstack/react-query";
-import React from "react";
 
 /**
  * The parameters of the hook when you call it, e.g. useFavoriteRecord({ queryClient: <the query client instance> })
@@ -24,7 +23,7 @@ type UseFavoriteRecordFunctionParameters = {
     /**
      * The id of the image of the record we are favoriting
      */
-    image_uri: string;
+    image_uri?: string;
 };
 
 /**

@@ -42,8 +42,17 @@
 
 .double-range-slider-container {
     height: 200px !important;
+    width: 100% !important;
     margin: 0 0 0 0 !important;
     margin-top: 70px !important;
+}
+
+.double-range-slider-track {
+    width: full !important;
+}
+
+.double-range-slider-rail {
+    width: 100% !important;
 }
 
 .double-range-slider-mid.double-range-slider-tooltip.double-range-slider-over {

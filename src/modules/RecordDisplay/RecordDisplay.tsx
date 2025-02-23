@@ -1,7 +1,6 @@
 import React from "react";
 import { DiscogsRecord } from "../../types/DiscogsRecord";
 import { RecordCover } from "./RecordCover/RecordCover";
-import { placeholderImageSrc } from "@/common/constants/placeholderImageSrc";
 import { FaHeart } from "react-icons/fa6";
 import { useQueryClient } from "@tanstack/react-query";
 import { useFavoriteRecord } from "./useFavoriteRecord";
@@ -53,7 +52,7 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
         } else {
             const addedRecord = await favoriteRecord({
                 recordId: id,
-                image_uri: images[0].uri,
+                image_uri: images?.length > 0 ? images[0].uri : undefined,
             });
 
             if (addedRecord !== null) {

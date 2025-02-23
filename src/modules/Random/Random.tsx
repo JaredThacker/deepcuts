@@ -82,13 +82,9 @@ export const Random = () => {
                 if (target !== undefined) {
                     const button = target as HTMLElement;
 
-                    console.log(button);
                     const { id } = button;
 
-                    console.log(button.dataset);
                     const { cancelid } = button.dataset;
-
-                    console.log(id, valueKey);
 
                     if (id === cancelid) {
                         setValue(valueKey, undefined);
@@ -125,7 +121,7 @@ export const Random = () => {
         });
 
     return (
-        <div className="h-full flex flex-row-reverse justify-around items-center animate-fadeIn animate-duration-[3000ms] gap-10">
+        <div className="h-full flex flex-row-reverse justify-middle items-center animate-fadeIn animate-duration-[3000ms] gap-10">
             <div className="flex flex-row max-h-[600px] overflow-y-auto"></div>
             <div className="flex flex-col mr-96 mb-40">
                 {record !== undefined && <RecordDisplay record={record} />}
