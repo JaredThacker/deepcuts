@@ -177,6 +177,10 @@ const getRecord = async (request: NextRequest) => {
                 );
                 const randomRecord = results[randomRecordIndex];
 
+                if (results.length === 0) {
+                    continue;
+                }
+
                 if (randomRecord.resource_url?.includes("/masters")) {
                     const mastersRecordResponse = await fetch(
                         randomRecord.resource_url,
@@ -189,9 +193,18 @@ const getRecord = async (request: NextRequest) => {
                             castedMastersRecord.resource_url ??
                             "",
                     );
-                    const randomizesRemaining = foundMainRelease.headers.get(
-                        headers.DISCOGS.RATELIMIT_REMAINING,
+                    const randomizesRemaining = parseNumber(
+                        foundMainRelease.headers.get(
+                            headers.DISCOGS.RATELIMIT_REMAINING,
+                        ),
                     );
+
+                    if (randomizesRemaining === 0) {
+                        return NextResponse.json({
+                            errorMessage:
+                                "Ran out of attempts.. try again in a minute",
+                        });
+                    }
 
                     const castedFoundMainRelease =
                         (await foundMainRelease.json()) as DiscogsRecord;
@@ -207,10 +220,19 @@ const getRecord = async (request: NextRequest) => {
                             "",
                     );
 
-                    const randomizesRemaining =
+                    const randomizesRemaining = parseNumber(
                         nonMastersRecordResponse.headers.get(
                             headers.DISCOGS.RATELIMIT_REMAINING,
-                        );
+                        ),
+                    );
+
+                    if (randomizesRemaining === 0) {
+                        return NextResponse.json({
+                            errorMessage:
+                                "Ran out of attempts.. try again in a minute",
+                        });
+                    }
+
                     const castedNonMastersRecord =
                         (await nonMastersRecordResponse.json()) as DiscogsRecord;
                     parsedRecord = {
@@ -221,7 +243,6 @@ const getRecord = async (request: NextRequest) => {
 
                 break;
             } catch {
-                console.log("in catch");
                 continue;
             }
         }
@@ -244,14 +265,21 @@ const getRecord = async (request: NextRequest) => {
                     `${ServerEndpoints.DISCOGS.BASE}${ServerEndpoints.DISCOGS.RELEASES.BASE}${id}${queryString}`,
                 );
 
-                const randomizesRemaining = response.headers.get(
-                    headers.DISCOGS.RATELIMIT_REMAINING,
+                const randomizesRemaining = parseNumber(
+                    response.headers.get(headers.DISCOGS.RATELIMIT_REMAINING),
                 );
+
+                if (randomizesRemaining === 0) {
+                    return NextResponse.json({
+                        errorMessage:
+                            "Ran out of attempts.. try again in a minute",
+                    });
+                }
 
                 const jsonResponse = await response.json();
                 parsedRecord = {
                     ...jsonResponse,
-                    randomizesRemaining: parseNumber(randomizesRemaining),
+                    randomizesRemaining: randomizesRemaining,
                 } as DiscogsRecord;
 
                 const doesRecordMatch = applyRecordFilter(
