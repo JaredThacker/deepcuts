@@ -100,8 +100,6 @@ export const LoginModal = (props: LoginModalProperties) => {
         }
     }, [props.show]);
 
-    console.log(errors);
-
     return (
         <dialog
             id={Ids.MODAL.LOGIN}
@@ -168,11 +166,11 @@ export const LoginModal = (props: LoginModalProperties) => {
                         method="dialog"
                     >
                         <button
-                            className="btn btn-secondary"
+                            className="btn btn-primary enabled:btn-outline"
                             disabled={disableButton}
                             onClick={onClick}
                         >
-                            {"Login"}
+                            {"Log In"}
                         </button>
                         <button className="btn" onClick={onHide} type="submit">
                             {"Close"}

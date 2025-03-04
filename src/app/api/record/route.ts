@@ -205,6 +205,7 @@ const getRecord = async (request: NextRequest) => {
 
                 break;
             } catch {
+                console.log("in catch");
                 continue;
             }
         }
@@ -258,7 +259,7 @@ const getRecord = async (request: NextRequest) => {
             },
         });
     } else {
-        return NextResponse.json({ errorMessage: "Broaden your horizons..." });
+        return NextResponse.json({ errorMessage: "..." });
     }
 
     return NextResponse.json(parsedRecord);

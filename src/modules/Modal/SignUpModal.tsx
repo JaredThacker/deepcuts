@@ -110,9 +110,7 @@ export const SignUpModal = (props: SignUpModalProperties) => {
         if (!passwordIsDirty) {
             resetField("confirmPassword");
         }
-    }, [passwordIsDirty]);
-
-    console.log(errors);
+    }, [passwordIsDirty, resetField]);
 
     return (
         <dialog
@@ -250,7 +248,7 @@ export const SignUpModal = (props: SignUpModalProperties) => {
                         method="dialog"
                     >
                         <button
-                            className="btn btn-secondary"
+                            className="btn btn-secondary enabled:btn-outline"
                             disabled={disableButton}
                             onClick={onClick}
                         >

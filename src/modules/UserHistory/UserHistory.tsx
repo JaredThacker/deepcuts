@@ -1,6 +1,8 @@
 import { History } from "@/types/api/History";
 import { HistoryRecord } from "@/types/api/HistoryRecord";
 import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+dayjs.extend(advancedFormat);
 import { UserHistoryRecord } from "./UserHistoryRecord";
 
 type HistoryProperties = {
@@ -11,7 +13,7 @@ export const UserHistory = ({ history }: HistoryProperties): JSX.Element => (
     <div className="flex flex-row items-center justify-between w-full p-4 gap-5 rounded-lg bg-base-200 shadow-lg">
         <span className="text-lg font-bold">{`${dayjs(
             history.created_at,
-        ).format("MM-DD-YYYY hh:mm")}`}</span>
+        ).format("MMM Do, YYYY @ hh:mm A")}`}</span>
         <div
             className="flex flex-row gap-2 flex-wrap"
             style={{ maxWidth: "70%" }}

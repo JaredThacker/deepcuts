@@ -68,6 +68,12 @@ export const Navbar = () => {
                             </Link>
                         </li>
                         <li>
+                            <Link href={"/profile"}>Edit Profile</Link>
+                        </li>
+                        <li>
+                            <Link href={"/support"}>Support</Link>
+                        </li>
+                        <li>
                             <button onClick={onLogoutClick} type="button">
                                 Logout
                             </button>
