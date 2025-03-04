@@ -5,4 +5,7 @@ export type HistoryRecord = {
     recordid: number;
     created_at: Date;
     updated_at: Date;
+    artist?: string;
+    title?: string;
+    year?: number;
 };

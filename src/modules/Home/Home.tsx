@@ -125,9 +125,9 @@ export const Home = () => {
                         {"Favorites"}
                     </a>
                 </div>
-                <div className="font-semibold max-h-[51rem] overflow-y-auto overflow-x-auto">
+                <div className="font-semibold max-h-[51rem] overflow-y-auto overflow-x-auto p-4">
                     {tabActive === Tabs.History &&
-                        history.map((eachHistory) => (
+                        history.map((eachHistory, eachHistoryIndex) => (
                             <UserHistory
                                 key={eachHistory.id}
                                 history={eachHistory}

@@ -13,7 +13,14 @@ const getHistory = async (
     const foundHistory = await prisma.history.findMany({
         include: {
             historyrecord: {
-                select: { id: true, image_uri: true, recordid: true },
+                select: {
+                    id: true,
+                    image_uri: true,
+                    recordid: true,
+                    title: true,
+                    artist: true,
+                    year: true,
+                },
             },
         },
         where: { userid: id },

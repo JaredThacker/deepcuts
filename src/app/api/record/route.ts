@@ -337,6 +337,11 @@ const getRecord = async (request: NextRequest) => {
                     parsedRecord?.images.length > 0
                         ? parsedRecord.images[0].uri
                         : undefined,
+                title: parsedRecord.title,
+                artist: parsedRecord.artists
+                    .map((eachArtist) => eachArtist.name)
+                    .join(", "),
+                year: parsedRecord.year,
                 ...creationTimestamps(),
             },
         });

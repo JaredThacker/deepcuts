@@ -34,7 +34,12 @@ model historyrecord {
   created_at DateTime @db.Timestamptz(6)
   updated_at DateTime @db.Timestamptz(6)
   image_uri  String?
+  title      String?
+  artist     String?
+  year       Int?
   history    history  @relation(fields: [historyid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([recordid], map: "history_record_id_idx")
 }
 
 model userinfo {
