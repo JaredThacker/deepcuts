@@ -112,7 +112,7 @@ export const LoginModal = (props: LoginModalProperties) => {
                 </h1>
                 <div className="py-4 flex flex-col gap-4">
                     <label
-                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 ${
+                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 w-full ${
                             errors.email
                                 ? "input-error"
                                 : dirtyFields.email
@@ -141,7 +141,7 @@ export const LoginModal = (props: LoginModalProperties) => {
                         <FaUser />
                     </label>
                     <label
-                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 ${
+                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 w-full ${
                             errors.password
                                 ? "input-error"
                                 : dirtyFields.password

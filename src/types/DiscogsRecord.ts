@@ -48,4 +48,5 @@ export type DiscogsRecord = {
     estimated_weight: number;
     blocked_from_sale: boolean;
     errorMessage?: string;
+    randomizesRemaining?: number;
 };

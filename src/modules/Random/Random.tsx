@@ -124,7 +124,16 @@ export const Random = () => {
         <div className="h-full flex flex-row-reverse justify-middle items-center animate-fadeIn animate-duration-[3000ms] gap-10">
             <div className="flex flex-row max-h-[600px] overflow-y-auto"></div>
             <div className="flex flex-col mr-96 mb-40">
-                {record !== undefined && <RecordDisplay record={record} />}
+                {record === undefined ? (
+                    <div className="flex flex-col gap-4 w-[400px] h-[523px]">
+                        <div className="skeleton h-[400px] w-[400px]" />
+                        <div className="skeleton h-2 w-full" />
+                        <div className="skeleton h-2 w-full" />
+                        <div className="skeleton h-2 w-full" />
+                    </div>
+                ) : (
+                    <RecordDisplay record={record} />
+                )}
                 <button
                     className="btn btn-active btn-neutral w-[390px] mt-2 focus:animate-headShake hover:outline transition-all shadow-lg"
                     disabled={!isValid}
@@ -132,6 +141,9 @@ export const Random = () => {
                 >
                     {"Randomize!"}
                 </button>
+                {record?.randomizesRemaining !== undefined && (
+                    <div className="text-sm text-center pt-2 text-accent text-opacity-75">{`${record.randomizesRemaining} randomizes left`}</div>
+                )}
             </div>
 
             <div className="flex flex-col h-fit">

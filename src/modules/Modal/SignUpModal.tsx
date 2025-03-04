@@ -122,7 +122,7 @@ export const SignUpModal = (props: SignUpModalProperties) => {
                 <h1 className="font-bold text-2xl">{"Register"}</h1>
                 <div className="py-4 flex flex-col gap-4">
                     <label
-                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 ${
+                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 w-full ${
                             errors.username
                                 ? "input-error"
                                 : dirtyFields.username
@@ -145,7 +145,7 @@ export const SignUpModal = (props: SignUpModalProperties) => {
                         <FaUser />
                     </label>
                     <label
-                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 ${
+                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 w-full ${
                             errors.email
                                 ? "input-error"
                                 : dirtyFields.email
@@ -170,7 +170,7 @@ export const SignUpModal = (props: SignUpModalProperties) => {
                         <MdOutlineAlternateEmail />
                     </label>
                     <label
-                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 ${
+                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 w-full ${
                             errors.password
                                 ? "input-error"
                                 : dirtyFields.password
@@ -188,7 +188,7 @@ export const SignUpModal = (props: SignUpModalProperties) => {
                         <FaKey />
                     </label>
                     <label
-                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 ${
+                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 w-full ${
                             errors.confirmPassword
                                 ? "input-error"
                                 : dirtyFields.confirmPassword
@@ -215,7 +215,7 @@ export const SignUpModal = (props: SignUpModalProperties) => {
                         />
                     </label>
                     <label
-                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 ${
+                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 w-full ${
                             errors.apiToken
                                 ? "input-error"
                                 : dirtyFields.apiToken

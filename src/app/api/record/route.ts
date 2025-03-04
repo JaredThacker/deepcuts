@@ -1,3 +1,4 @@
+import { headers } from "@/common/constants/headers";
 import { ServerEndpoints } from "@/common/constants/ServerEndpoints";
 import { creationTimestamps } from "@/common/constants/timestamps";
 import { generateQueryString } from "@/helpers/api/generateQueryString";
@@ -188,9 +189,16 @@ const getRecord = async (request: NextRequest) => {
                             castedMastersRecord.resource_url ??
                             "",
                     );
+                    const randomizesRemaining = foundMainRelease.headers.get(
+                        headers.DISCOGS.RATELIMIT_REMAINING,
+                    );
+
                     const castedFoundMainRelease =
                         (await foundMainRelease.json()) as DiscogsRecord;
-                    parsedRecord = castedFoundMainRelease;
+                    parsedRecord = {
+                        ...castedFoundMainRelease,
+                        randomizesRemaining: parseNumber(randomizesRemaining),
+                    };
                 } else {
                     const nonMastersRecordResponse = await fetch(
                         randomRecord.most_recent_release_url ??
@@ -198,9 +206,17 @@ const getRecord = async (request: NextRequest) => {
                             randomRecord.resource_url ??
                             "",
                     );
+
+                    const randomizesRemaining =
+                        nonMastersRecordResponse.headers.get(
+                            headers.DISCOGS.RATELIMIT_REMAINING,
+                        );
                     const castedNonMastersRecord =
                         (await nonMastersRecordResponse.json()) as DiscogsRecord;
-                    parsedRecord = castedNonMastersRecord;
+                    parsedRecord = {
+                        ...castedNonMastersRecord,
+                        randomizesRemaining: parseNumber(randomizesRemaining),
+                    };
                 }
 
                 break;
@@ -227,8 +243,16 @@ const getRecord = async (request: NextRequest) => {
                 const response = await fetch(
                     `${ServerEndpoints.DISCOGS.BASE}${ServerEndpoints.DISCOGS.RELEASES.BASE}${id}${queryString}`,
                 );
+
+                const randomizesRemaining = response.headers.get(
+                    headers.DISCOGS.RATELIMIT_REMAINING,
+                );
+
                 const jsonResponse = await response.json();
-                parsedRecord = jsonResponse as DiscogsRecord;
+                parsedRecord = {
+                    ...jsonResponse,
+                    randomizesRemaining: parseNumber(randomizesRemaining),
+                } as DiscogsRecord;
 
                 const doesRecordMatch = applyRecordFilter(
                     { yearEnd, yearStart, ...queryPayload },

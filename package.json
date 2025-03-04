@@ -33,7 +33,7 @@
         "@types/react-dom": "^18",
         "@types/utf8": "^3.0.3",
         "animated-tailwindcss": "^4.0.0",
-        "daisyui": "^4.12.10",
+        "daisyui": "^5.0.0",
         "eslint": "^8",
         "eslint-config-next": "14.2.5",
         "postcss": "^8",
