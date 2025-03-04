@@ -213,6 +213,15 @@ const getRecord = async (request: NextRequest) => {
                         ...castedFoundMainRelease,
                         randomizesRemaining: parseNumber(randomizesRemaining),
                     };
+
+                    const doesRecordExist =
+                        await prisma.historyrecord.findFirst({
+                            where: { recordid: parsedRecord.id },
+                        });
+
+                    if (doesRecordExist !== null) {
+                        continue;
+                    }
                 } else {
                     const nonMastersRecordResponse = await fetch(
                         randomRecord.most_recent_release_url ??
@@ -241,6 +250,15 @@ const getRecord = async (request: NextRequest) => {
                         ...castedNonMastersRecord,
                         randomizesRemaining: parseNumber(randomizesRemaining),
                     };
+
+                    const doesRecordExist =
+                        await prisma.historyrecord.findFirst({
+                            where: { recordid: parsedRecord.id },
+                        });
+
+                    if (doesRecordExist !== null) {
+                        continue;
+                    }
                 }
 
                 break;
@@ -280,10 +298,19 @@ const getRecord = async (request: NextRequest) => {
                 }
 
                 const jsonResponse = await response.json();
+
                 parsedRecord = {
                     ...jsonResponse,
                     randomizesRemaining: randomizesRemaining,
                 } as DiscogsRecord;
+
+                const doesRecordExist = await prisma.historyrecord.findFirst({
+                    where: { recordid: parsedRecord.id },
+                });
+
+                if (doesRecordExist !== null) {
+                    continue;
+                }
 
                 const doesRecordMatch = applyRecordFilter(
                     { yearEnd, yearStart, ...queryPayload },
