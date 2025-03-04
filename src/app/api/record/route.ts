@@ -203,6 +203,7 @@ const getRecord = async (request: NextRequest) => {
                         return NextResponse.json({
                             errorMessage:
                                 "Ran out of attempts.. try again in a minute",
+                            randomizesRemaining: 0,
                         });
                     }
 
@@ -230,6 +231,7 @@ const getRecord = async (request: NextRequest) => {
                         return NextResponse.json({
                             errorMessage:
                                 "Ran out of attempts.. try again in a minute",
+                            randomizesRemaining: 0,
                         });
                     }
 
@@ -273,6 +275,7 @@ const getRecord = async (request: NextRequest) => {
                     return NextResponse.json({
                         errorMessage:
                             "Ran out of attempts.. try again in a minute",
+                        randomizesRemaining: 0,
                     });
                 }
 

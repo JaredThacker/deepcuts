@@ -14,6 +14,7 @@ import { RangeSliderOutput } from "@/types/components/RangeSlider/RangeSliderOut
 import recordStyles from "@/common/constants/recordStyles";
 import { RandomFilterList } from "./RandomFilterList/RandomFilterList";
 import recordCountries from "@/common/constants/recordCountries";
+import { Ids } from "@/common/constants/Ids";
 
 const DEFAULT_FORM_VALUES: RandomFilter = {
     genre: "",
@@ -109,6 +110,18 @@ export const Random = () => {
 
         if (parsedRecord.errorMessage !== undefined) {
             toast.error(parsedRecord.errorMessage, { pauseOnHover: false });
+
+            const { randomizesRemaining } = parsedRecord;
+            const attemptsRemaining = document.querySelector(
+                `#${Ids.RANDOM.randomizesRemaining}`,
+            );
+
+            if (
+                attemptsRemaining !== null &&
+                randomizesRemaining !== undefined
+            ) {
+                attemptsRemaining.innerHTML = `${randomizesRemaining}`;
+            }
         } else {
             setRecord(parsedRecord);
         }
@@ -142,7 +155,12 @@ export const Random = () => {
                     {"Randomize!"}
                 </button>
                 {record?.randomizesRemaining !== undefined && (
-                    <div className="text-sm text-center pt-2 text-accent text-opacity-75">{`${record.randomizesRemaining} randomizes left`}</div>
+                    <div className="text-sm text-center pt-2 text-accent text-opacity-75">
+                        <span id={Ids.RANDOM.randomizesRemaining}>
+                            {record.randomizesRemaining}
+                        </span>
+                        {" randomizes left"}
+                    </div>
                 )}
             </div>
 

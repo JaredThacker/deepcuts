@@ -5,4 +5,7 @@ export const Ids = {
         SIGN_UP: "signUpModal",
         SIGN_UP_FORM: "signUpModalForm",
     },
+    RANDOM: {
+        randomizesRemaining: "recordRandomAttemptsRemaining",
+    },
 };
