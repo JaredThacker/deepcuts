@@ -9,6 +9,6 @@ export const generateHistoryRecordTooltip = (
     const hasMetadata = hasArtist && hasYear && hasTitle;
 
     return hasMetadata
-        ? `${historyRecord.record?.title}-${historyRecord.record?.artist} (${historyRecord.record?.year})`
+        ? `${historyRecord.record?.artist} - ${historyRecord.record?.title} (${historyRecord.record?.year})`
         : "N/A";
 };

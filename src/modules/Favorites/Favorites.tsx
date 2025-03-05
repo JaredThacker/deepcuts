@@ -13,13 +13,18 @@ export const Favorites = () => {
     }
 
     return (
-        <div className="flex flex-row gap-2 flex-wrap p-3 rounded bg-base-200 shadow-md">
-            {favoritesData.map((eachFavorite) => (
-                <FavoriteRecord
-                    key={eachFavorite.recordid}
-                    favoriteRecord={eachFavorite}
-                />
-            ))}
+        <div className="flex flex-row justify-end gap-2 p-3 rounded bg-base-200 shadow-md">
+            <div
+                className="flex flex-row gap-2 flex-wrap"
+                style={{ maxWidth: "70%" }}
+            >
+                {favoritesData.map((eachFavorite) => (
+                    <FavoriteRecord
+                        key={eachFavorite.recordid}
+                        favoriteRecord={eachFavorite}
+                    />
+                ))}
+            </div>
         </div>
     );
 };

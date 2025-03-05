@@ -97,7 +97,7 @@ export const Home = () => {
             </div>
             <div className="h-full rounded w-2/3 flex flex-col animate-fadeInRight animate-duration-[2000ms]">
                 <div
-                    className="flex flex-row tabs tabs-boxed w-full"
+                    className="flex flex-row tabs tabs-box w-full"
                     role="tablist"
                 >
                     <a
