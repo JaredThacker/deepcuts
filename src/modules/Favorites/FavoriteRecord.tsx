@@ -13,7 +13,7 @@ export const FavoriteRecord = ({
         alt=""
         height={150}
         width={150}
-        src={favoriteRecord.image_uri ?? "/placeholder.svg"}
+        src={favoriteRecord.record?.image_uri ?? "/placeholder.svg"}
         onClick={() => {}}
         onDoubleClick={() => {
             window.open(

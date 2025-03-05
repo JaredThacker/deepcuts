@@ -19,30 +19,23 @@ type UseFavoriteRecordFunctionParameters = {
      * The id of the record we are favoriting
      */
     recordId: number;
-
-    /**
-     * The id of the image of the record we are favoriting
-     */
-    image_uri?: string;
 };
 
 /**
  * Favorites a record given the id and the image uri
  *
  * @param recordId - The id of the record we are favoriting
- * @param image_uri - The URI of the image of the record we are favoriting
  * @returns The API response from the server, when we favorite the record
  */
 const favoriteRecord = async ({
     recordId,
-    image_uri,
 }: UseFavoriteRecordFunctionParameters) => {
     /**
      * Sends a POST request to the NextJS API '/favorites' url, with a JSON body of { recordId, imageUri }
      */
     const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/favorites`,
-        { body: JSON.stringify({ recordId, image_uri }), method: "POST" },
+        { body: JSON.stringify({ recordId }), method: "POST" },
     );
 
     /**

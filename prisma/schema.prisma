@@ -11,11 +11,10 @@ model favorite {
   id         Int      @id @default(autoincrement())
   userid     Int      @default(autoincrement())
   recordid   Int?
-  notes      String?  @db.VarChar(250)
   created_at DateTime @db.Timestamptz(6)
   updated_at DateTime @db.Timestamptz(6)
-  image_uri  String?
   userinfo   userinfo @relation(fields: [userid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  record     record?  @relation(fields: [recordid], references: [recordid], onDelete: NoAction, onUpdate: NoAction, map: "recordid_fk")
 }
 
 model history {
@@ -33,13 +32,26 @@ model historyrecord {
   recordid   Int?
   created_at DateTime @db.Timestamptz(6)
   updated_at DateTime @db.Timestamptz(6)
-  image_uri  String?
-  title      String?
-  artist     String?
-  year       Int?
   history    history  @relation(fields: [historyid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  record     record?  @relation(fields: [recordid], references: [recordid], onDelete: NoAction, onUpdate: NoAction, map: "recorid_fk")
 
   @@index([recordid], map: "history_record_id_idx")
+}
+
+model record {
+  id            Int             @id @default(autoincrement())
+  recordid      Int?            @unique
+  created_at    DateTime        @db.Timestamptz(6)
+  updated_at    DateTime        @db.Timestamptz(6)
+  title         String?
+  artist        String?
+  year          Int?
+  image_uri     String?
+  genre         String?
+  style         String?
+  country       String?
+  favorite      favorite[]
+  historyrecord historyrecord[]
 }
 
 model userinfo {

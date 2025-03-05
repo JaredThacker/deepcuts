@@ -5,13 +5,23 @@ import { Favorite } from "@/types/api/Favorite";
 import { NextRequest, NextResponse } from "next/server";
 
 const getFavorites = async (
-    request: NextRequest,
+    _request: NextRequest,
 ): Promise<NextResponse<Favorite[]>> => {
     const {
         data: { id },
     } = getSession();
 
     const favoriteRecords = await prisma.favorite.findMany({
+        include: {
+            record: {
+                select: {
+                    artist: true,
+                    image_uri: true,
+                    title: true,
+                    year: true,
+                },
+            },
+        },
         where: { userid: id },
         orderBy: { created_at: "desc" },
     });
@@ -27,16 +37,14 @@ const addFavorite = async (
     } = getSession();
 
     const body = await request.json();
-    const { recordId, image_uri } = body as {
+    const { recordId } = body as {
         recordId: number;
-        image_uri: string;
     };
 
     const addedRecord = await prisma.favorite.create({
         data: {
             userid: id,
             recordid: recordId,
-            image_uri: image_uri,
             ...creationTimestamps(),
         },
     });

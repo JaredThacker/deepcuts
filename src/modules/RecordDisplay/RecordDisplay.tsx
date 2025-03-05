@@ -52,7 +52,6 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
         } else {
             const addedRecord = await favoriteRecord({
                 recordId: id,
-                image_uri: images?.length > 0 ? images[0].uri : undefined,
             });
 
             if (addedRecord !== null) {

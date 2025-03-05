@@ -329,19 +329,28 @@ const getRecord = async (request: NextRequest) => {
     }
 
     if (parsedRecord !== undefined) {
+        try {
+            await prisma.record.create({
+                data: {
+                    recordid: parsedRecord.id,
+                    image_uri:
+                        parsedRecord?.images.length > 0
+                            ? parsedRecord.images[0].uri
+                            : undefined,
+                    title: parsedRecord.title,
+                    artist: parsedRecord.artists
+                        .map((eachArtist) => eachArtist.name)
+                        .join(", "),
+                    year: parsedRecord.year,
+                    ...creationTimestamps(),
+                },
+            });
+        } catch {}
+
         await prisma.historyrecord.create({
             data: {
                 historyid: session.historyId,
                 recordid: parsedRecord?.id,
-                image_uri:
-                    parsedRecord?.images.length > 0
-                        ? parsedRecord.images[0].uri
-                        : undefined,
-                title: parsedRecord.title,
-                artist: parsedRecord.artists
-                    .map((eachArtist) => eachArtist.name)
-                    .join(", "),
-                year: parsedRecord.year,
                 ...creationTimestamps(),
             },
         });
