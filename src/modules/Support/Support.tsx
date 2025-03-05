@@ -13,6 +13,7 @@ export const Support = () => {
                     "All support inquiries or questions you may have please contact me at \n"
                 }
                 <Link
+                    target="_blank"
                     href={`mailto:${supportEmail}`}
                     className="w-64 btn btn-ghost hover:text-cyan-300"
                 >
