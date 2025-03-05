@@ -14,7 +14,7 @@ export const Support = () => {
                 }
                 <Link
                     href={`mailto:${supportEmail}`}
-                    className=" flex flex-row justify-center w-auto btn btn-ghost hover:text-cyan-300"
+                    className="w-64 btn btn-ghost hover:text-cyan-300"
                 >
                     <span className="">{supportEmail}</span>
                 </Link>
@@ -29,14 +29,15 @@ export const Support = () => {
                     />
                 </a>
             </div>
-            {/* <div className="w-[500px] h-[300px]">
+            <div className="w-[500px] h-[300px]">
                 <Image
                     src={"/smiling-memoji.png"}
                     alt="smiling memoji giving you thumbs up for support"
                     width={500}
                     height={300}
+                    className="animate-bounceInLeft"
                 />
-            </div> */}
+            </div>
         </div>
     );
 };
