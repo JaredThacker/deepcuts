@@ -32,11 +32,12 @@ export const InfoModal = (props: InfoModalProperties) => {
                 <h1 className="text-5xl font-bold flex flex-row justify-center">
                     {"Welcome!"}
                 </h1>
-                <p className="py-6 text-lg w-full">
+                <p className="py-6 w-full">
                     {
-                        "This website will add functionality I feel was always missing from discogs...... a randomizer of sorts! Looking for the next obscure album or gem to uncover? Or maybe just trying to find that next record to play? Don't even know where to start? Introducing deepcuts.\n"
+                        "This website will add functionality I feel was always missing from Discogs...... a randomizer of sorts! Looking for the next obscure album or gem to uncover? Or maybe just trying to find that next record to play? Don't even know where to start? Introducing deepcuts.\n"
                     }
                 </p>
+
                 <span className="font-bold flex flex-row justify-center">
                     {"** IMPORTANT **"}
                 </span>
@@ -48,6 +49,20 @@ export const InfoModal = (props: InfoModalProperties) => {
                     {
                         "authenticate your account!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! To authenticate, you must have a Discogs account and locate your personal access API token. It is found in the developers settings. I have also put a direct link to where you can find it in the sign up form. Provide the token during sign up then make sure you authenticate through the profile dropdown and you should be good to go! Happy Digging!"
                     }
+                </p>
+                <p>
+                    {" "}
+                    <span className="font-bold flex flex-row justify-center">
+                        {"** DISCLAIMER **"}
+                    </span>
+                    {
+                        "This website by no means should replace you going to your local record shop and supporting them. There will always be music not catalogued on Discogs. I highly encourage you to go dig when possible because nothing will ever truly replace it."
+                    }
+                    <span className="flex flex-row justify-center font-bold">
+                        {
+                            "Keep tradition alive. Support your local small businesses!"
+                        }
+                    </span>
                 </p>
                 <div className="modal-action flex flex-row justify-center">
                     <form method="dialog">

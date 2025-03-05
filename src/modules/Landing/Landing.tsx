@@ -13,9 +13,11 @@ export const Landing = () => {
 
     const [showInfoModal, setShowInfoModal] = React.useState<boolean>(false);
 
+    const emoticon = "ദ്ദി ( ᵔ ᗜ ᵔ ";
+
     return (
         <>
-            <div className="hero bg-base-200 min-h-screen animate-fadeIn animate-duration-[3000ms] bg-landing_bg">
+            <div className="hero bg-base-200 min-h-screen animate-fadeIn animate-duration-[3000ms] bg-landing_bg flex flex-col justify-center">
                 <div className="hero-content text-center rounded-3xl w-1/3">
                     <div className="max-w-md">
                         <button
@@ -48,7 +50,18 @@ export const Landing = () => {
                         </div>
                     </div>
                 </div>
+                <div className="w-52">
+                    <a
+                        href="https://www.buymeacoffee.com/deepcutsofficial"
+                        target="_blank"
+                    >
+                        <img
+                            src={`https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=deepcutsofficial&button_colour=6360fa&font_colour=ffffff&font_family=Comic&outline_colour=ffffff&coffee_colour=724e2c`}
+                        />
+                    </a>
+                </div>
             </div>
+
             <InfoModal onHide={setShowInfoModal} show={showInfoModal} />
             <SignUpModal onHide={setShowSignUpModal} show={showSignUpModal} />
             <LoginModal onHide={setShowLoginModal} show={showLoginModal} />
