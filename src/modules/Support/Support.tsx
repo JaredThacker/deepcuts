@@ -35,7 +35,7 @@ export const Support = () => {
                     alt="smiling memoji giving you thumbs up for support"
                     width={500}
                     height={300}
-                    className="animate-bounceInLeft"
+                    className="animate-bounceInLeft animate-duration-[2000ms]"
                 />
             </div>
         </div>
