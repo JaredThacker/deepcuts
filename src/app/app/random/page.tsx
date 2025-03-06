@@ -1,17 +1,9 @@
-import { headers } from "@/common/constants/headers";
+import { getSession } from "@/helpers/api/session/getSession";
 import { Random } from "@/modules/Random/Random";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 const RandomPage = () => {
-    const session = cookies().get(headers.SESSION);
-
-    if (session === undefined) {
-        redirect("/");
-        return <span />;
-    }
-
-    return <Random />;
+    const session = getSession();
+    return <Random session={session} />;
 };
 
 export default RandomPage;

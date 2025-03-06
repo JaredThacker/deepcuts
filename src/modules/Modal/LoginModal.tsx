@@ -7,6 +7,7 @@ import { Key } from "ts-key-enum";
 import { useRouter } from "next/navigation";
 import { emailChecker } from "@/common/regex/emailChecker";
 import { toast } from "react-toastify";
+import { Routes } from "@/common/routes/Routes";
 
 type LoginModalProperties = {
     onHide: Function;
@@ -56,7 +57,7 @@ export const LoginModal = (props: LoginModalProperties) => {
                 render: "Logged in successfully!",
                 type: "success",
             });
-            router.push("/app/dashboard");
+            router.push(Routes.DASHBOARD);
         } else {
             toast.update(loadingToast, {
                 autoClose: 2000,

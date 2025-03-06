@@ -9,6 +9,7 @@ import { HistoryRecordCount } from "@/types/api/dto/HistoryRecordCount";
 import ms from "ms";
 import Image from "next/image";
 import { Favorites } from "../Favorites/Favorites";
+import { Routes } from "@/common/routes/Routes";
 
 enum Tabs {
     History,
@@ -88,7 +89,7 @@ export const Home = () => {
                     <button
                         className="btn btn-primary btn-ghost btn-outline btn-block text-2xl hover:outline transition-all duration-500 h-full"
                         onClick={() => {
-                            router.push("/app/random");
+                            router.push(Routes.RANDOM);
                         }}
                     >
                         {"Discover Some New Gems"}

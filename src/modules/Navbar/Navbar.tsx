@@ -1,5 +1,6 @@
 "use client";
 
+import { Routes } from "@/common/routes/Routes";
 import { logout } from "@/helpers/api/logout/logout";
 import { oauth } from "@/helpers/api/oauth/oauth";
 import { Session } from "@/types/api/Session";
@@ -14,8 +15,6 @@ type NavbarServerSideProperties = {
 
 export const Navbar = ({ session }: NavbarServerSideProperties) => {
     const router = useRouter();
-
-    console.log(session);
 
     const onLogoutClick = async () => {
         const didLogoutSuccessfully = await logout();
@@ -41,7 +40,7 @@ export const Navbar = ({ session }: NavbarServerSideProperties) => {
             <div className="flex-1 ml-2">
                 <Link
                     className="btn btn-ghost text-xl hover:cursor-pointer hover:outline outline-primary hover:text-primary transition-all"
-                    href="/app/dashboard"
+                    href={Routes.DASHBOARD}
                 >
                     {"deepcuts."}
                 </Link>
@@ -65,23 +64,38 @@ export const Navbar = ({ session }: NavbarServerSideProperties) => {
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow"
                     >
                         <li>
-                            <button onClick={onAuthClick} type="button">
-                                {"Authenticate"}
+                            <button
+                                className={`${
+                                    session?.data.oauthToken === undefined
+                                        ? ""
+                                        : "btn-disabled pointer-events-none text-gray-500 text-opacity-50"
+                                }`}
+                                disabled={
+                                    session?.data.oauthToken !== undefined
+                                }
+                                onClick={onAuthClick}
+                                type="button"
+                            >
+                                {`Authenticate${
+                                    session?.data.oauthToken === undefined
+                                        ? ""
+                                        : "d"
+                                }`}
                             </button>
                         </li>
                         <li>
                             <Link
                                 className="justify-between"
-                                href="/app/dashboard"
+                                href={Routes.DASHBOARD}
                             >
                                 Dashboard
                             </Link>
                         </li>
                         <li>
-                            <Link href={"/app/profile"}>Edit Profile</Link>
+                            <Link href={Routes.PROFILE}>Edit Profile</Link>
                         </li>
                         <li>
-                            <Link href={"/app/support"}>Support</Link>
+                            <Link href={Routes.SUPPORT}>Support</Link>
                         </li>
                         <li>
                             <button onClick={onLogoutClick} type="button">

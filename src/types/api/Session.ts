@@ -1,6 +1,6 @@
 import { UserInfo } from "./UserInfo";
 
-type SessionUserInfo = Pick<UserInfo, "apiToken" | "id">;
+type SessionUserInfo = Pick<UserInfo, "apiToken" | "id" | "oauthToken">;
 
 type Session = {
     data: SessionUserInfo;

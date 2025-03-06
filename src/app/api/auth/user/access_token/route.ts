@@ -5,6 +5,9 @@ import { ServerEndpoints } from "@/common/constants/ServerEndpoints";
 import { cookies } from "next/headers";
 import { getSession } from "@/helpers/api/session/getSession";
 import prisma from "@/lib/prismaClient";
+import { updateSessionUserData } from "@/helpers/api/session/updateSessionUserData";
+import { Routes } from "@/common/routes/Routes";
+import { redirect } from "next/navigation";
 
 const getAccessToken = async (request: NextRequest): Promise<NextResponse> => {
     const queryParams = request.nextUrl.searchParams;
@@ -72,7 +75,7 @@ const getAccessToken = async (request: NextRequest): Promise<NextResponse> => {
         where: { id: session.data.id },
     });
 
-    return NextResponse.redirect("/authenticate?success=true");
+    redirect(`${Routes.AUTHENTICATE}?success=true`);
 };
 
 export { getAccessToken as GET };

@@ -15,6 +15,11 @@ import recordStyles from "@/common/constants/recordStyles";
 import { RandomFilterList } from "./RandomFilterList/RandomFilterList";
 import recordCountries from "@/common/constants/recordCountries";
 import { Ids } from "@/common/constants/Ids";
+import { Session } from "@/types/api/Session";
+
+type RandomProperties = {
+    readonly session?: Session;
+};
 
 const DEFAULT_FORM_VALUES: RandomFilter = {
     genre: "",
@@ -53,7 +58,7 @@ const currentYear = dayjs().year();
 // since it's a rolling window, we can use `setTimeout` when the user clicks the Randomize button, and set the delay to 60 seconds, and
 // update the count from there.
 
-export const Random = () => {
+export const Random = ({ session }: RandomProperties) => {
     const { control, formState, getValues, register, setValue, watch } =
         useForm<RandomFilter>({
             defaultValues: DEFAULT_FORM_VALUES,
@@ -164,40 +169,42 @@ export const Random = () => {
                 )}
             </div>
 
-            <div className="flex flex-col h-fit">
-                <div className="flex flex-row gap-6 h-[37rem]">
-                    <RandomFilterList
-                        buttonId={CLEAR_GENRE_ID}
-                        callback={selectValue("genre")}
-                        className="flex-nowrap"
-                        items={genreOptions}
-                        selectedItem={selectedGenre}
-                        title="Genre"
-                    />
-                    <RandomFilterList
-                        buttonId={CLEAR_STYLE_ID}
-                        callback={selectValue("style")}
-                        className="overflow-y-auto h-full flex-nowrap"
-                        items={recordStyles}
-                        selectedItem={selectedStyle}
-                        title="Style"
-                    />
-                    <RandomFilterList
-                        buttonId={CLEAR_COUNTRY_ID}
-                        callback={selectValue("country")}
-                        className="flex-nowrap overflow-y-auto h-full"
-                        items={recordCountries}
-                        selectedItem={selectedCountry}
-                        title="Country"
+            {session?.data.oauthToken !== undefined && (
+                <div className="flex flex-col h-fit">
+                    <div className="flex flex-row gap-6 h-[37rem]">
+                        <RandomFilterList
+                            buttonId={CLEAR_GENRE_ID}
+                            callback={selectValue("genre")}
+                            className="flex-nowrap"
+                            items={genreOptions}
+                            selectedItem={selectedGenre}
+                            title="Genre"
+                        />
+                        <RandomFilterList
+                            buttonId={CLEAR_STYLE_ID}
+                            callback={selectValue("style")}
+                            className="overflow-y-auto h-full flex-nowrap"
+                            items={recordStyles}
+                            selectedItem={selectedStyle}
+                            title="Style"
+                        />
+                        <RandomFilterList
+                            buttonId={CLEAR_COUNTRY_ID}
+                            callback={selectValue("country")}
+                            className="flex-nowrap overflow-y-auto h-full"
+                            items={recordCountries}
+                            selectedItem={selectedCountry}
+                            title="Country"
+                        />
+                    </div>
+
+                    <RangeSlider
+                        onChange={onYearChange}
+                        tooltipVisibility="hover"
+                        value={{ min: MIN_YEAR, max: currentYear }}
                     />
                 </div>
-
-                <RangeSlider
-                    onChange={onYearChange}
-                    tooltipVisibility="hover"
-                    value={{ min: MIN_YEAR, max: currentYear }}
-                />
-            </div>
+            )}
         </div>
     );
 };

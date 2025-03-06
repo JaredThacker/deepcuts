@@ -6,4 +6,6 @@ export type UserInfo = {
     created_at: Date;
     updated_at: Date;
     apiToken?: string;
+    oauthToken?: string;
+    oauthTokenSecret?: string;
 };
