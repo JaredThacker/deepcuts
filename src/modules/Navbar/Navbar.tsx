@@ -46,7 +46,7 @@ export const Navbar = ({ session }: NavbarServerSideProperties) => {
                 </Link>
             </div>
             <div className="flex-none gap-2">
-                <div className="dropdown dropdown-end">
+                <div className="dropdown dropdown-end text-2xl">
                     <div
                         tabIndex={0}
                         role="button"
