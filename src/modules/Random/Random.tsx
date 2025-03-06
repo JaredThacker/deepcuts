@@ -16,6 +16,7 @@ import { RandomFilterList } from "./RandomFilterList/RandomFilterList";
 import recordCountries from "@/common/constants/recordCountries";
 import { Ids } from "@/common/constants/Ids";
 import { Session } from "@/types/api/Session";
+import Link from "next/link";
 
 type RandomProperties = {
     readonly session?: Session;
@@ -169,7 +170,7 @@ export const Random = ({ session }: RandomProperties) => {
                 )}
             </div>
 
-            {session?.data.oauthToken !== undefined && (
+            {session?.data.oauthToken !== undefined ? (
                 <div className="flex flex-col h-fit">
                     <div className="flex flex-row gap-6 h-[37rem]">
                         <RandomFilterList
@@ -203,6 +204,25 @@ export const Random = ({ session }: RandomProperties) => {
                         tooltipVisibility="hover"
                         value={{ min: MIN_YEAR, max: currentYear }}
                     />
+                </div>
+            ) : (
+                <div className="flex flex-col justify-center items-center h-[37rem] bg-base-300">
+                    <p className="p-5 text-info">
+                        {
+                            "YOU MUST AUTHENTICATE WITH YOUR DISCOGS API TOKEN TO USE FILTERS!!!!!"
+                        }
+                    </p>
+
+                    <div className="">
+                        <Link
+                            target="_blank"
+                            rel="noreferrer"
+                            href="https://www.discogs.com/settings/developers"
+                            className="hover:text-cyan-300 text-lg"
+                        >
+                            {"Generate personal access token here!"}
+                        </Link>
+                    </div>
                 </div>
             )}
         </div>
