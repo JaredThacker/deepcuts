@@ -41,7 +41,7 @@ export const Navbar = ({ session }: NavbarServerSideProperties) => {
             <div className="flex-1 ml-2">
                 <Link
                     className="btn btn-ghost text-xl hover:cursor-pointer hover:outline outline-primary hover:text-primary transition-all"
-                    href="/dashboard"
+                    href="/app/dashboard"
                 >
                     {"deepcuts."}
                 </Link>
@@ -70,15 +70,18 @@ export const Navbar = ({ session }: NavbarServerSideProperties) => {
                             </button>
                         </li>
                         <li>
-                            <Link className="justify-between" href="/dashboard">
+                            <Link
+                                className="justify-between"
+                                href="/app/dashboard"
+                            >
                                 Dashboard
                             </Link>
                         </li>
                         <li>
-                            <Link href={"/profile"}>Edit Profile</Link>
+                            <Link href={"/app/profile"}>Edit Profile</Link>
                         </li>
                         <li>
-                            <Link href={"/support"}>Support</Link>
+                            <Link href={"/app/support"}>Support</Link>
                         </li>
                         <li>
                             <button onClick={onLogoutClick} type="button">

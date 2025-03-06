@@ -88,7 +88,7 @@ export const Home = () => {
                     <button
                         className="btn btn-primary btn-ghost btn-outline btn-block text-2xl hover:outline transition-all duration-500 h-full"
                         onClick={() => {
-                            router.push("/random");
+                            router.push("/app/random");
                         }}
                     >
                         {"Discover Some New Gems"}

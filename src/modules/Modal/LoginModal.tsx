@@ -56,7 +56,7 @@ export const LoginModal = (props: LoginModalProperties) => {
                 render: "Logged in successfully!",
                 type: "success",
             });
-            router.push("/dashboard");
+            router.push("/app/dashboard");
         } else {
             toast.update(loadingToast, {
                 autoClose: 2000,
