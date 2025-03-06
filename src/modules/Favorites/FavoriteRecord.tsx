@@ -1,4 +1,5 @@
-import { generateFavoriteRecordTooltip } from "@/helpers/api/record/generateFavoriteRecordTooltip";
+import { Ids } from "@/common/constants/Ids";
+import { generateRecordTooltip } from "@/helpers/api/record/generateRecordTooltip";
 import { Favorite } from "@/types/api/Favorite";
 import Image from "next/image";
 
@@ -11,11 +12,12 @@ export const FavoriteRecord = ({
 }: UserFavoriteProperties): JSX.Element => (
     <div
         className="tooltip tooltip-left"
-        data-tip={generateFavoriteRecordTooltip(favoriteRecord)}
+        data-tip={generateRecordTooltip(favoriteRecord)}
     >
         <Image
-            className="hover:outline outline-gray-400 rounded-full h-32 w-32 hover:cursor-pointer transition-all hover:animate-twSpin hover:animate-infinite hover:animate-duration-[1760ms]"
+            className="hover:outline outline-gray-400 rounded-full h-32 w-32 hover:cursor-pointer"
             alt=""
+            id={Ids.RECORD.recordImage}
             height={400}
             width={400}
             src={favoriteRecord.record?.image_uri ?? "/placeholder.svg"}

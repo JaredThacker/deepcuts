@@ -8,4 +8,7 @@ export const Ids = {
     RANDOM: {
         randomizesRemaining: "recordRandomAttemptsRemaining",
     },
+    RECORD: {
+        recordImage: "record_image",
+    },
 };

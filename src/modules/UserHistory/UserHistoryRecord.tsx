@@ -1,4 +1,5 @@
-import { generateHistoryRecordTooltip } from "@/helpers/api/record/generateHistoryRecordTooltip";
+import { Ids } from "@/common/constants/Ids";
+import { generateRecordTooltip } from "@/helpers/api/record/generateRecordTooltip";
 import { HistoryRecord } from "@/types/api/HistoryRecord";
 import Image from "next/image";
 
@@ -11,11 +12,12 @@ export const UserHistoryRecord = ({
 }: UserHistoryRecordProperties): JSX.Element => (
     <div
         className="tooltip tooltip-left"
-        data-tip={generateHistoryRecordTooltip(historyRecord)}
+        data-tip={generateRecordTooltip(historyRecord)}
     >
         <Image
-            className="hover:outline outline-gray-400 rounded-full h-14 w-14 hover:cursor-pointer transition-all hover:animate-twSpin hover:animate-infinite hover:animate-duration-[1760ms]"
+            className="hover:outline outline-gray-400 rounded-full h-14 w-14 hover:cursor-pointer"
             alt=""
+            id={Ids.RECORD.recordImage}
             height={150}
             width={150}
             src={historyRecord?.record?.image_uri ?? "/placeholder.svg"}

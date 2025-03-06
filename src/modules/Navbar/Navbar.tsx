@@ -2,13 +2,20 @@
 
 import { logout } from "@/helpers/api/logout/logout";
 import { oauth } from "@/helpers/api/oauth/oauth";
+import { Session } from "@/types/api/Session";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-export const Navbar = () => {
+type NavbarServerSideProperties = {
+    readonly session?: Session;
+};
+
+export const Navbar = ({ session }: NavbarServerSideProperties) => {
     const router = useRouter();
+
+    console.log(session);
 
     const onLogoutClick = async () => {
         const didLogoutSuccessfully = await logout();
