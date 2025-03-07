@@ -52,7 +52,6 @@ const getAccessToken = async (request: NextRequest): Promise<NextResponse> => {
         headers: { ...customHeaders },
     });
     const body = await response.text();
-    console.log("body = ", body);
 
     const queriedResponse = new URLSearchParams(body);
     const accessToken = queriedResponse.get("oauth_token");

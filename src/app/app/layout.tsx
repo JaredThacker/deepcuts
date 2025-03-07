@@ -1,4 +1,5 @@
 import { getSession } from "@/helpers/api/session/getSession";
+import { updateSessionUserData } from "@/helpers/api/session/updateSessionUserData";
 import prisma from "@/lib/prismaClient";
 import { Navbar } from "@/modules/Navbar/Navbar";
 import { Session } from "@/types/api/Session";

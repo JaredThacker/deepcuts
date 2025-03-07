@@ -15,7 +15,6 @@ export const oauth = async () => {
     });
 
     if (window !== undefined) {
-        console.log("opening window");
         window
             .open(
                 `${ClientEndpoints.DISCOGS.BASE}${ClientEndpoints.DISCOGS.OAUTH.BASE}${ClientEndpoints.DISCOGS.OAUTH.AUTHORIZE}${redirectQueryString}`,

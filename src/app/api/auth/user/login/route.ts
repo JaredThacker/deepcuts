@@ -66,6 +66,7 @@ const login = async (request: NextRequest): Promise<NextResponse<UserInfo>> => {
                     {
                         apiToken: foundUser.api_token ?? undefined,
                         id: foundUser.id,
+                        oauthToken: foundUser.oauth_token ?? undefined,
                     },
                     history.id,
                 );
