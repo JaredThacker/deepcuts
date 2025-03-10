@@ -8,7 +8,7 @@ export const Support = () => {
 
     return (
         <div className="flex flex-col h-full w-full items-center justify-center gap-7">
-            <div className="flex flex-col justify-center text-wrap h-64 w-2/3 animate-fadeIn animate-duration-[2000ms]">
+            <div className="flex flex-col justify-center text-wrap h-64 w-2/3 animate-fadeIn animate-duration-[2000ms] text-center">
                 <h1 className="text-3xl">{"FAQ:"}</h1>
                 <p className="text-info whitespace-pre-line">
                     {
@@ -30,14 +30,14 @@ export const Support = () => {
                 </p>
             </div>
 
-            <p className="whitespace-pre-line animate-fadeIn animate-duration-[2000ms]">
+            <p className="whitespace-pre-line animate-fadeIn animate-duration-[2000ms] text-accent">
                 {
                     "\nAll support inquiries, questions, or feature requests you may have please contact me at"
                 }
                 <Link
                     target="_blank"
                     href={`mailto:${supportEmail}`}
-                    className="w-64 btn btn-ghost hover:text-cyan-300"
+                    className="w-64 btn btn-ghost ml-3 hover:text-cyan-300"
                 >
                     <span className="">{supportEmail}</span>
                 </Link>

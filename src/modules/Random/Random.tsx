@@ -49,15 +49,8 @@ const genreOptions = [
 const CLEAR_GENRE_ID = "clearGenre";
 const CLEAR_STYLE_ID = "clearStyle";
 const CLEAR_COUNTRY_ID = "clearCountry";
-const MIN_YEAR = 1936;
+const MIN_YEAR = 1950;
 const currentYear = dayjs().year();
-
-// TODO: Remove hard-coded token, add option to add token to your account. Generally though, add a display in the Randomize page
-// that shows how many "randomizations" the user has for a given minute, updates dynamically. Grab the remaining
-// randomizations from the api response header, or just reset each minute to authenticated/unauthenticated amount
-// https://www.discogs.com/developers?srsltid=AfmBOooot3temCgy3IZkWQ-LZeYk-abmv7ON8JKNYOWG3Ipus4nP3GHF#page:home,header:home-rate-limiting
-// since it's a rolling window, we can use `setTimeout` when the user clicks the Randomize button, and set the delay to 60 seconds, and
-// update the count from there.
 
 export const Random = ({ session }: RandomProperties) => {
     const { control, formState, getValues, register, setValue, watch } =

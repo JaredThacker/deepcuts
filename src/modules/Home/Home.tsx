@@ -92,7 +92,7 @@ export const Home = () => {
                             router.push(Routes.RANDOM);
                         }}
                     >
-                        {"Discover Some New Gems"}
+                        {"Discover"}
                     </button>
                 </div>
             </div>
