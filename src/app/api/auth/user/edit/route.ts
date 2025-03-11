@@ -1,4 +1,5 @@
 import { headers } from "@/common/constants/headers";
+import { encryptPassword } from "@/helpers/api/encryptPassword";
 import { createJwt } from "@/helpers/api/session/createJwt";
 import { getSession } from "@/helpers/api/session/getSession";
 import { validatePassword } from "@/helpers/api/validatePassword";
@@ -54,8 +55,16 @@ const editUser = async (request: NextRequest): Promise<NextResponse> => {
 
     const updatePayload = {
         ...payload,
-        password: payload.newPassword,
     } as Partial<UserInfo>;
+
+    if (payload?.newPassword !== undefined) {
+        const encryptedPassword = encryptPassword(
+            payload.newPassword as string,
+        );
+        const { hash, salt } = encryptedPassword;
+        updatePayload.password = hash;
+        updatePayload.password_salt = salt;
+    }
 
     const updatedUser = await prisma.userinfo.update({
         where: { id: session.data.id },
