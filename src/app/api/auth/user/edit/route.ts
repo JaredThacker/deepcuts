@@ -8,6 +8,7 @@ import { ProfileEditFormValues } from "@/modules/Profile/Profile";
 import { UserInfo } from "@/types/api/UserInfo";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
+import sgMail from "@sendgrid/mail";
 
 const editUser = async (request: NextRequest): Promise<NextResponse> => {
     const session = await getSession();
@@ -24,7 +25,7 @@ const editUser = async (request: NextRequest): Promise<NextResponse> => {
 
     const payload: Partial<ProfileEditFormValues> = await request.json();
 
-    const { apiToken, oldPassword } = payload;
+    const { apiToken, email, oldPassword, newPassword, ...rest } = payload;
 
     if (oldPassword !== undefined) {
         const doPasswordsMatch = validatePassword(
@@ -54,16 +55,37 @@ const editUser = async (request: NextRequest): Promise<NextResponse> => {
     }
 
     const updatePayload = {
-        ...payload,
+        ...rest,
     } as Partial<UserInfo>;
 
-    if (payload?.newPassword !== undefined) {
-        const encryptedPassword = encryptPassword(
-            payload.newPassword as string,
-        );
+    if (newPassword !== undefined) {
+        const encryptedPassword = encryptPassword(newPassword as string);
         const { hash, salt } = encryptedPassword;
         updatePayload.password = hash;
         updatePayload.password_salt = salt;
+    }
+
+    if (email !== undefined && process.env.SENDGRID_API_KEY !== undefined) {
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+        if (process.env.SENDGRID_FROM_EMAIL !== undefined) {
+            sgMail.send({
+                to: email,
+                from: process.env.SENDGRID_FROM_EMAIL,
+                personalizations: [
+                    {
+                        dynamicTemplateData: {
+                            content: "",
+                            callbackButtonText: "",
+                            callbackUrl: "",
+                            username: rest.name,
+                        },
+                        to: [{ email }],
+                    },
+                ],
+                templateId: "d-103c24054e1949daa092f3ab9e930742",
+            });
+        }
     }
 
     const updatedUser = await prisma.userinfo.update({

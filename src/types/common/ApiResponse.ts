@@ -1,5 +1,10 @@
+type ApiMessage = {
+    message: string;
+    success: boolean;
+};
+
 export type ApiResponse<Data = unknown> = {
     data?: Data;
-    errorMessage?: string;
     successMessage?: string;
+    errorMessage?: string;
 };
