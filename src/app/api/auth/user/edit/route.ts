@@ -9,23 +9,38 @@ import { UserInfo } from "@/types/api/UserInfo";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import sgMail from "@sendgrid/mail";
+import { ApiResponse } from "@/types/common/ApiResponse";
+import { ApiMessage } from "@/types/common/ApiMessage";
+import { ClientEndpoints } from "@/common/constants/ClientEndpoints";
+import { randomBytes } from "node:crypto";
 
-const editUser = async (request: NextRequest): Promise<NextResponse> => {
-    const session = await getSession();
+const editUser = async (
+    request: NextRequest,
+): Promise<NextResponse<ApiResponse>> => {
+    const session = getSession();
 
     const foundUser = await prisma.userinfo.findFirst({
         where: { id: session.data.id },
     });
 
     if (foundUser === null) {
-        return NextResponse.json({
-            errorMessage: "Could not find user, please re-login.",
-        });
+        return NextResponse.json(
+            {
+                messages: [
+                    {
+                        message: "Could not find user, please re-login.",
+                        type: "error",
+                    },
+                ],
+            },
+            { status: 400 },
+        );
     }
 
     const payload: Partial<ProfileEditFormValues> = await request.json();
 
     const { apiToken, email, oldPassword, newPassword, ...rest } = payload;
+    const messages: ApiMessage[] = [];
 
     if (oldPassword !== undefined) {
         const doPasswordsMatch = validatePassword(
@@ -35,9 +50,18 @@ const editUser = async (request: NextRequest): Promise<NextResponse> => {
         );
 
         if (!doPasswordsMatch) {
-            return NextResponse.json({
-                errorMessage: "Old Password is invalid, try again.",
-            });
+            return NextResponse.json(
+                {
+                    messages: [
+                        {
+                            message:
+                                "Old Password is invalid, please try again.",
+                            type: "error",
+                        },
+                    ],
+                },
+                { status: 400 },
+            );
         }
     }
 
@@ -69,35 +93,45 @@ const editUser = async (request: NextRequest): Promise<NextResponse> => {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
         if (process.env.SENDGRID_FROM_EMAIL !== undefined) {
-            sgMail.send({
+            const emailConfirmationToken = randomBytes(48).toString("base64");
+            await sgMail.send({
                 to: email,
                 from: process.env.SENDGRID_FROM_EMAIL,
                 personalizations: [
                     {
                         dynamicTemplateData: {
                             content: "",
-                            callbackButtonText: "",
-                            callbackUrl: "",
-                            username: rest.name,
+                            callbackButtonText: "Confirm Email",
+                            callbackUrl: `${process.env.NEXT_PUBLIC_API_URL}/${ClientEndpoints.AUTH.BASE}${ClientEndpoints.AUTH.USER.BASE}${ClientEndpoints.AUTH.USER.EMAIL.BASE}${ClientEndpoints.AUTH.USER.EMAIL.CONFIRM}?token=${emailConfirmationToken}&email=${email}`,
+                            username: rest.name ?? foundUser.name,
                         },
                         to: [{ email }],
                     },
                 ],
                 templateId: "d-103c24054e1949daa092f3ab9e930742",
             });
+
+            messages.push({
+                message: "Sent verification email.",
+                type: "info",
+            });
+            updatePayload.emailToken = emailConfirmationToken;
         }
     }
 
-    const updatedUser = await prisma.userinfo.update({
+    const { emailToken, ...updatePayloadRest } = updatePayload;
+
+    await prisma.userinfo.update({
         where: { id: session.data.id },
-        data: { ...updatePayload },
+        data: { ...updatePayloadRest, email_token: emailToken },
     });
 
-    const didUpdateWork = updatedUser !== null;
+    messages.push({
+        message: "Profile Information updated successfully!",
+        type: "success",
+    });
 
-    return didUpdateWork
-        ? NextResponse.json({ successMessage: "Updated profile successfully!" })
-        : NextResponse.json({ errorMessage: "Failed to update user" });
+    return NextResponse.json({ messages });
 };
 
 export { editUser as POST };

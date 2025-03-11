@@ -11,6 +11,7 @@ import { PiCoinVerticalDuotone } from "react-icons/pi";
 import { editProfile } from "@/helpers/api/profile/edit/editProfile";
 import { toast } from "react-toastify";
 import { getDirtyValues } from "@/helpers/hook-form/getDirtyValues";
+import { parseApiResponseMessages } from "@/helpers/api/parseApiResponseMessages";
 
 type ProfileComponentProperties = {
     readonly userData?: Partial<UserInfo>;
@@ -57,16 +58,9 @@ const Profile = ({ userData }: ProfileComponentProperties) => {
 
         if (isValid) {
             const response = await editProfile(dirtyValues);
-
-            const { errorMessage, successMessage } = response;
-
-            if (errorMessage !== undefined) {
-                toast.error(errorMessage, { pauseOnHover: false });
-            } else if (successMessage !== undefined) {
-                toast.success(successMessage, { pauseOnHover: true });
-            }
+            parseApiResponseMessages(response);
         }
-    }, [dirtyFields, getValues]);
+    }, [isValid, getValues]);
 
     return (
         <div className="h-full w-full flex flex-col justify-center items-center">

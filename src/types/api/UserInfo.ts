@@ -9,4 +9,6 @@ export type UserInfo = {
     apiToken?: string;
     oauthToken?: string;
     oauthTokenSecret?: string;
+    emailToken?: string;
+    passwordToken?: string;
 };

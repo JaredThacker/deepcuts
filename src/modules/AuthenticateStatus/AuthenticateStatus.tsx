@@ -6,6 +6,7 @@ type AuthenticateStatusProperties = {
     readonly success?: boolean;
 };
 
+// TODO: Make page re-usable
 export const AuthenticateStatus = ({
     success,
 }: AuthenticateStatusProperties): React.JSX.Element => {

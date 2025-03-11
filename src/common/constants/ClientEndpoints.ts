@@ -3,6 +3,10 @@ export const ClientEndpoints = {
         BASE: "auth/",
         USER: {
             BASE: "user/",
+            EMAIL: {
+                BASE: "email/",
+                CONFIRM: "confirm",
+            },
             REQUEST_TOKEN: "request_token",
         },
     },

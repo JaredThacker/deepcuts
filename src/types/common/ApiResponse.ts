@@ -1,10 +1,8 @@
-type ApiMessage = {
-    message: string;
-    success: boolean;
+import type { ApiMessage } from "./ApiMessage";
+
+type ApiResponse<Data = unknown> = {
+    data?: Data;
+    messages?: ApiMessage[];
 };
 
-export type ApiResponse<Data = unknown> = {
-    data?: Data;
-    successMessage?: string;
-    errorMessage?: string;
-};
+export { type ApiResponse };

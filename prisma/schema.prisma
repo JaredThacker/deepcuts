@@ -65,6 +65,8 @@ model userinfo {
   api_token          String?
   oauth_token        String?
   oauth_token_secret String?
+  email_token        String?
+  password_token     String?
   favorite           favorite[]
   history            history[]
 }
