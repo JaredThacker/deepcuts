@@ -7,6 +7,10 @@ export const ClientEndpoints = {
                 BASE: "email/",
                 CONFIRM: "confirm",
             },
+            PASSWORD: {
+                BASE: "password/",
+                FORGOT: "forgot",
+            },
             REQUEST_TOKEN: "request_token",
         },
     },
@@ -15,6 +19,13 @@ export const ClientEndpoints = {
         OAUTH: {
             AUTHORIZE: "authorize",
             BASE: "oauth/",
+        },
+    },
+    USER: {
+        BASE: "user/",
+        FORGOT: {
+            BASE: "forgot/",
+            PASSWORD: "password",
         },
     },
 };

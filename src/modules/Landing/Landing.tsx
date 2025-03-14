@@ -4,14 +4,15 @@ import React from "react";
 import { SignUpModal } from "../Modal/SignUpModal";
 import { LoginModal } from "../Modal/LoginModal";
 import { InfoModal } from "../Modal/InfoModal";
+import { ForgotPasswordModal } from "../Modal/ForgotPasswordModal";
 
 export const Landing = () => {
     const [showSignUpModal, setShowSignUpModal] =
         React.useState<boolean>(false);
-
     const [showLoginModal, setShowLoginModal] = React.useState<boolean>(false);
-
     const [showInfoModal, setShowInfoModal] = React.useState<boolean>(false);
+    const [showForgotPasswordModal, setShowForgotPasswordModal] =
+        React.useState<boolean>(false);
 
     const emoticon = "ദ്ദി ( ᵔ ᗜ ᵔ ";
 
@@ -64,7 +65,15 @@ export const Landing = () => {
 
             <InfoModal onHide={setShowInfoModal} show={showInfoModal} />
             <SignUpModal onHide={setShowSignUpModal} show={showSignUpModal} />
-            <LoginModal onHide={setShowLoginModal} show={showLoginModal} />
+            <LoginModal
+                onShowForgotPassword={setShowForgotPasswordModal}
+                onHide={setShowLoginModal}
+                show={showLoginModal}
+            />
+            <ForgotPasswordModal
+                onHide={setShowForgotPasswordModal}
+                show={showForgotPasswordModal}
+            />
         </>
     );
 };

@@ -22,3 +22,6 @@ Take the repeated logic of src\app\api\auth\user\request_token\route.ts line 20,
 
 5) Standardize the ApiResponse, so instead of "successMessage" and "errorMessage", it's just an array of "messages", and each is a json object with "success" field as boolean, and content as message. Parse and display as toasts
 - add a helper that takes in an ApiResponse, and detects whether there is a "messages" or not in it, then displays the toasts
+
+6) TODO: Make confirm password turn green if you change confirm password to something new, and then update the original password to match confirm.
+- go both ways

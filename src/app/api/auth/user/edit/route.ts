@@ -28,7 +28,7 @@ const editUser = async (
             {
                 messages: [
                     {
-                        message: "Could not find user, please re-login.",
+                        message: "Could not find user, please login again.",
                         type: "error",
                     },
                 ],

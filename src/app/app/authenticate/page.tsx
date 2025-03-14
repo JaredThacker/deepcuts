@@ -1,7 +1,7 @@
 import { AuthenticateStatus } from "@/modules/AuthenticateStatus/AuthenticateStatus";
-import { PageProperties } from "@/types/common/PageProperties";
+import { PagePropertiesAsync } from "@/types/common/PagePropertiesAsync";
 
-const AuthenticatePage = async ({ searchParams }: PageProperties) => {
+const AuthenticatePage = async ({ searchParams }: PagePropertiesAsync) => {
     const params = await searchParams;
 
     const { success } = params;

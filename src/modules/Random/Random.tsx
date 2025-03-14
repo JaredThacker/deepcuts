@@ -137,7 +137,7 @@ export const Random = ({ session }: RandomProperties) => {
             <div className="flex flex-row max-h-[600px] overflow-y-auto"></div>
             <div className="flex flex-col mr-96 mb-40">
                 {record === undefined ? (
-                    <div className="flex flex-col gap-4 w-[400px] h-[523px]">
+                    <div className="flex flex-col gap-4 w-[400px] h-[523px] shadow-lg">
                         <div className="skeleton h-[400px] w-[400px]" />
                         <div className="skeleton h-2 w-full" />
                         <div className="skeleton h-2 w-full" />
@@ -147,7 +147,7 @@ export const Random = ({ session }: RandomProperties) => {
                     <RecordDisplay record={record} />
                 )}
                 <button
-                    className="btn btn-active btn-neutral w-[390px] mt-2 focus:animate-headShake hover:outline transition-all shadow-lg"
+                    className="btn btn-active w-[390px] mt-2 focus:animate-headShake hover:btn-neutral transition-all btn-soft shadow-xl"
                     disabled={!isValid}
                     onClick={getRecord}
                 >

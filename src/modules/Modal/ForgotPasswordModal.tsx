@@ -1,41 +1,33 @@
 import React from "react";
 import { Ids } from "@/common/constants/Ids";
 import { useForm } from "react-hook-form";
-import { FaKey, FaUser } from "react-icons/fa";
-import { login } from "@/helpers/api/login/login";
+import { FaUser } from "react-icons/fa";
 import { Key } from "ts-key-enum";
-import { useRouter } from "next/navigation";
 import { emailChecker } from "@/common/regex/emailChecker";
 import { toast } from "react-toastify";
-import { Routes } from "@/common/routes/Routes";
-import Link from "next/link";
+import { forgotPassword } from "@/helpers/api/password/forgotPassword";
 
-type LoginModalProperties = {
-    readonly onHide: (_value: boolean) => void;
-    readonly onShowForgotPassword: (_value: boolean) => void;
-    readonly show: boolean;
+type ForgotPasswordModalProperties = {
+    onHide: Function;
+    show: boolean;
 };
 
-export type LoginFormValues = {
+export type ForgotPasswordModalFormValues = {
     email: string;
-    password: string;
 };
 
-const defaultLoginFormValues: LoginFormValues = {
+const defaultForgotPasswordFormValues: ForgotPasswordModalFormValues = {
     email: "",
-    password: "",
 };
 
-export const LoginModal = (props: LoginModalProperties) => {
+export const ForgotPasswordModal = (props: ForgotPasswordModalProperties) => {
     const { formState, getValues, register, reset, resetField, watch } =
-        useForm<LoginFormValues>({
+        useForm<ForgotPasswordModalFormValues>({
             criteriaMode: "all",
-            defaultValues: defaultLoginFormValues,
+            defaultValues: defaultForgotPasswordFormValues,
             mode: "all",
             reValidateMode: "onChange",
         });
-
-    const router = useRouter();
 
     const { dirtyFields, errors, isValid } = formState;
 
@@ -46,34 +38,24 @@ export const LoginModal = (props: LoginModalProperties) => {
         }
     }, [props.onHide, reset]);
 
-    const closeModal = React.useCallback(() => {
-        const foundForm = document.getElementById(Ids.MODAL.LOGIN_FORM);
-        if (foundForm !== null) {
-            (foundForm as HTMLFormElement).submit();
-            onHide();
-            props.onShowForgotPassword(true);
-        }
-    }, [onHide]);
-
-    const onLogin = async () => {
+    const onForgotPassword = async () => {
         const values = getValues();
-        const loadingToast = toast.loading("Logging in...");
+        const loadingToast = toast.loading("Sending email...");
 
-        const didLogin = await login(values);
+        const didSendEmail = await forgotPassword(values);
 
-        if (didLogin) {
+        if (didSendEmail) {
             toast.update(loadingToast, {
                 autoClose: 2000,
                 isLoading: false,
-                render: "Logged in successfully!",
+                render: "Successfully sent email!",
                 type: "success",
             });
-            router.push(Routes.DASHBOARD);
         } else {
             toast.update(loadingToast, {
                 autoClose: 2000,
                 isLoading: false,
-                render: "Failed to login.",
+                render: "Failed to send email, double check email entered.",
                 type: "error",
             });
         }
@@ -82,7 +64,7 @@ export const LoginModal = (props: LoginModalProperties) => {
 
     const onClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
         if (isValid) {
-            await onLogin();
+            await onForgotPassword();
         } else {
             event.preventDefault();
         }
@@ -91,10 +73,12 @@ export const LoginModal = (props: LoginModalProperties) => {
     const onKeyDown = async (event: React.KeyboardEvent<HTMLDialogElement>) => {
         const { key } = event;
         if (key === Key.Enter && isValid) {
-            await onLogin();
-            const loginForm = document.getElementById(Ids.MODAL.LOGIN_FORM);
-            if (loginForm !== null) {
-                (loginForm as HTMLFormElement).submit();
+            await onForgotPassword();
+            const forgotPasswordForm = document.getElementById(
+                Ids.MODAL.FORGOT_PASSWORD_FORM,
+            );
+            if (forgotPasswordForm !== null) {
+                (forgotPasswordForm as HTMLFormElement).submit();
             }
         } else if (key === Key.Escape) {
             event.preventDefault();
@@ -105,7 +89,7 @@ export const LoginModal = (props: LoginModalProperties) => {
 
     React.useEffect(() => {
         if (props.show) {
-            const modal = document.getElementById(Ids.MODAL.LOGIN);
+            const modal = document.getElementById(Ids.MODAL.FORGOT_PASSWORD);
             if (modal !== null) {
                 (modal as HTMLDialogElement).showModal();
             }
@@ -114,7 +98,7 @@ export const LoginModal = (props: LoginModalProperties) => {
 
     return (
         <dialog
-            id={Ids.MODAL.LOGIN}
+            id={Ids.MODAL.FORGOT_PASSWORD}
             className="modal modal-bottom sm:modal-middle"
             onKeyDown={onKeyDown}
         >
@@ -152,35 +136,11 @@ export const LoginModal = (props: LoginModalProperties) => {
                         />
                         <FaUser />
                     </label>
-                    <label
-                        className={`input input-bordered placeholder-gray-500/75 flex items-center gap-2 w-full ${
-                            errors.password
-                                ? "input-error"
-                                : dirtyFields.password
-                                ? "input-success"
-                                : ""
-                        }`}
-                    >
-                        <input
-                            autoComplete="off"
-                            className="grow"
-                            placeholder="Password"
-                            type="password"
-                            {...register("password", { required: true })}
-                        />
-                        <FaKey />
-                    </label>
-                    <div
-                        className="text-opacity-75 text-sm text-gray-500 hover:text-cyan-300 w-fit"
-                        onClick={closeModal}
-                    >
-                        {"Forgot password?"}
-                    </div>
                 </div>
                 <div className="modal-action">
                     <form
                         className="flex flex-row gap-3"
-                        id={Ids.MODAL.LOGIN_FORM}
+                        id={Ids.MODAL.FORGOT_PASSWORD_FORM}
                         method="dialog"
                     >
                         <button
@@ -188,7 +148,7 @@ export const LoginModal = (props: LoginModalProperties) => {
                             disabled={disableButton}
                             onClick={onClick}
                         >
-                            {"Log In"}
+                            {"Forgot Password"}
                         </button>
                         <button className="btn" onClick={onHide} type="submit">
                             {"Close"}

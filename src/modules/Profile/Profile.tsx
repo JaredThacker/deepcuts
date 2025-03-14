@@ -64,7 +64,7 @@ const Profile = ({ userData }: ProfileComponentProperties) => {
 
     return (
         <div className="h-full w-full flex flex-col justify-center items-center">
-            <div className="card card-lg shadow-sm">
+            <div className="card card-lg shadow-sm w-3/5 h-3/5">
                 <div className="card-body">
                     <div className="text-lg font-bold">{"User Details"}</div>
                     <label

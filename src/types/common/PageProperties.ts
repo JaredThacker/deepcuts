@@ -1,4 +1,4 @@
-export type PageProperties = {
-    params: Promise<{ slug: string }>;
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+export type PageProperties<T> = {
+    params: { slug: string };
+    searchParams: T;
 };
