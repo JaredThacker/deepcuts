@@ -58,7 +58,7 @@ export const ForgotPassword = ({
                 );
             }
         }
-    }, [getValues, disableButton, email, token]);
+    }, [getValues, disableButton, email, token, router]);
 
     const onKeyDown = React.useCallback(
         async (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -70,7 +70,7 @@ export const ForgotPassword = ({
                 reset();
             }
         },
-        [onChangePassword, reset],
+        [onChangePassword, reset, isValid],
     );
 
     return (

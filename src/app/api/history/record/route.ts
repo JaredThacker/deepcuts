@@ -14,7 +14,9 @@ const addHistoryRecord = async (
 
     const parsedBody = bodyJson as HistoryRecord;
 
-    const addedRecord = await prisma.historyrecord.create({ data: parsedBody });
+    const addedRecord = await prisma.historyrecord.create({
+        data: { ...(parsedBody as Omit<HistoryRecord, "record">) },
+    });
 
     return NextResponse.json(addedRecord as HistoryRecord);
 };

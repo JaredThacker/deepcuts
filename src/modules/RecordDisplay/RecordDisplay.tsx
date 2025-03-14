@@ -58,7 +58,7 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
                 setFavorited(addedRecord.id);
             }
         }
-    }, [favoriteId, favoriteRecord, id, images, unfavoriteRecord]);
+    }, [favoriteId, favoriteRecord, id, unfavoriteRecord]);
 
     /**
      * RUNS ON INITIAL RENDER

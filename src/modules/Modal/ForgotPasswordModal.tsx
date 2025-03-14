@@ -36,7 +36,7 @@ export const ForgotPasswordModal = (props: ForgotPasswordModalProperties) => {
             props.onHide(false);
             reset();
         }
-    }, [props.onHide, reset]);
+    }, [props, reset]);
 
     const onForgotPassword = async () => {
         const values = getValues();

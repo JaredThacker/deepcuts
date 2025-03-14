@@ -44,7 +44,7 @@ export const LoginModal = (props: LoginModalProperties) => {
             props.onHide(false);
             reset();
         }
-    }, [props.onHide, reset]);
+    }, [props, reset]);
 
     const closeModal = React.useCallback(() => {
         const foundForm = document.getElementById(Ids.MODAL.LOGIN_FORM);
@@ -53,7 +53,7 @@ export const LoginModal = (props: LoginModalProperties) => {
             onHide();
             props.onShowForgotPassword(true);
         }
-    }, [onHide]);
+    }, [onHide, props]);
 
     const onLogin = async () => {
         const values = getValues();

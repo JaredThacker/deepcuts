@@ -47,7 +47,8 @@ export const Support = () => {
                     href="https://www.buymeacoffee.com/deepcutsofficial"
                     target="_blank"
                 >
-                    <img
+                    <Image
+                        alt="Buy me coffee"
                         src={`https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=deepcutsofficial&button_colour=6360fa&font_colour=ffffff&font_family=Comic&outline_colour=ffffff&coffee_colour=724e2c`}
                     />
                 </a>

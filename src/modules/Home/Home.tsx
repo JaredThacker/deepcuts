@@ -23,6 +23,7 @@ export const Home = () => {
         queryKey: ["history"],
     });
 
+    // TODO: Fix count not updating correctly
     const { data: historyRecordCount } = useQuery<HistoryRecordCount>({
         queryKey: ["history/record/count"],
         refetchInterval: ms("1m"),

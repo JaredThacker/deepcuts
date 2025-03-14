@@ -30,18 +30,13 @@ type ProfileEditFormValues = Pick<UserInfo, "apiToken" | "email" | "name"> & {
  * @returns The component that allows the user to edit their profile
  */
 const Profile = ({ userData }: ProfileComponentProperties) => {
-    if (userData === undefined) {
-        return <span className="invisible" />;
-    }
-
-    const { apiToken, email, name } = userData;
     const { control, formState, getValues, register } =
         useForm<ProfileEditFormValues>({
             criteriaMode: "all",
             defaultValues: {
-                apiToken,
-                email,
-                name,
+                apiToken: userData?.apiToken,
+                email: userData?.email,
+                name: userData?.name,
                 newPassword: "",
                 oldPassword: "",
             },
@@ -60,7 +55,11 @@ const Profile = ({ userData }: ProfileComponentProperties) => {
             const response = await editProfile(dirtyValues);
             parseApiResponseMessages(response);
         }
-    }, [isValid, getValues]);
+    }, [dirtyFields, isValid, getValues]);
+
+    if (userData === undefined) {
+        return <span className="invisible" />;
+    }
 
     return (
         <div className="h-full w-full flex flex-col justify-center items-center">
