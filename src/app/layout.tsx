@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { QueryProvider } from "@/providers/QueryProvider";
 import "react-double-range-slider/dist/cjs/index.css";
+import { Analytics } from "@vercel/analytics/next";
 
 const quicksand = Quicksand({ subsets: ["latin"] });
 
@@ -39,6 +40,7 @@ export default function RootLayout({
                     pauseOnHover
                     theme="dark"
                 />
+                <Analytics />
             </body>
         </html>
     );
