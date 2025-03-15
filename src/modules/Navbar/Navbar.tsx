@@ -27,6 +27,10 @@ export const Navbar = ({ session }: NavbarServerSideProperties) => {
         const authenticateResponse = await oauth();
     };
 
+    const isAuthenticated = Boolean(session?.data.oauthToken);
+
+    console.log(isAuthenticated);
+
     return (
         <div className="navbar p-3 w-screen">
             <Image
@@ -66,21 +70,15 @@ export const Navbar = ({ session }: NavbarServerSideProperties) => {
                         <li>
                             <button
                                 className={`${
-                                    session?.data.oauthToken === undefined
-                                        ? ""
-                                        : "btn-disabled pointer-events-none text-gray-500 text-opacity-50"
+                                    isAuthenticated
+                                        ? "btn-disabled pointer-events-none text-gray-500 text-opacity-50"
+                                        : ""
                                 }`}
-                                disabled={
-                                    session?.data.oauthToken !== undefined
-                                }
+                                disabled={!isAuthenticated}
                                 onClick={onAuthClick}
                                 type="button"
                             >
-                                {`Authenticate${
-                                    session?.data.oauthToken === undefined
-                                        ? ""
-                                        : "d"
-                                }`}
+                                {`Authenticate${isAuthenticated ? "d" : ""}`}
                             </button>
                         </li>
                         <li>

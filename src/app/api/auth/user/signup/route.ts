@@ -60,7 +60,7 @@ const signUp = async (
         const addedUser = await prisma.userinfo.create({
             data: {
                 ...rest,
-                api_token: apiToken,
+                api_token: apiToken ?? null,
                 password: hash,
                 password_salt: salt,
                 ...creationTimestamps(),
