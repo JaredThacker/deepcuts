@@ -72,7 +72,7 @@ export const Navbar = ({ session }: NavbarServerSideProperties) => {
                                         ? "btn-disabled pointer-events-none text-gray-500 text-opacity-50"
                                         : ""
                                 }`}
-                                disabled={!isAuthenticated}
+                                disabled={isAuthenticated}
                                 onClick={onAuthClick}
                                 type="button"
                             >
