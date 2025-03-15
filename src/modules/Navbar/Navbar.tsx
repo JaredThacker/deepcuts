@@ -29,8 +29,6 @@ export const Navbar = ({ session }: NavbarServerSideProperties) => {
 
     const isAuthenticated = Boolean(session?.data.oauthToken);
 
-    console.log(isAuthenticated);
-
     return (
         <div className="navbar p-3 w-screen">
             <Image
