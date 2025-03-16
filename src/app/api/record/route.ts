@@ -340,6 +340,13 @@ const getRecord = async (request: NextRequest) => {
                         .join(", "),
                     year: parsedRecord.year,
                     ...creationTimestamps(),
+                    genre: parsedRecord.genres
+                        .map((eachGenre) => eachGenre)
+                        .join(", "),
+                    style: parsedRecord.styles
+                        .map((eachStyle) => eachStyle)
+                        .join(", "),
+                    country: parsedRecord.country,
                 },
             });
         } catch {}

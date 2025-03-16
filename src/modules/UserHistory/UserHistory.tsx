@@ -15,7 +15,7 @@ export const UserHistory = ({ history }: HistoryProperties): JSX.Element => (
             history.created_at,
         ).format("MMM Do, YYYY @ hh:mm A")}`}</span>
         <div
-            className="flex flex-row gap-2 flex-wrap"
+            className="flex flex-row-reverse gap-2 flex-wrap-reverse"
             style={{ maxWidth: "70%" }}
         >
             {history.historyrecord.map((eachHistoryRecord) => (
