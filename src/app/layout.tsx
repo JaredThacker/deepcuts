@@ -11,7 +11,21 @@ const quicksand = Quicksand({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "deepcuts.",
-    description: "a discogs random release generator",
+    description: "a random record generator powered by Discogs.",
+    applicationName: "deepcuts.",
+    keywords: [
+        "deepcuts",
+        "deepcuts.fyi",
+        "discogs",
+        "random",
+        "music discovery",
+        "find random",
+        "random button discogs",
+        "discogs randomizer",
+        "release",
+        "record",
+        "deepcuts.",
+    ],
 };
 
 export default function RootLayout({
