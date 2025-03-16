@@ -7,9 +7,11 @@ export const generateRecordTooltip = (
     const hasArtist = Boolean(databaseEntry.record?.artist);
     const hasYear = Boolean(databaseEntry.record?.year);
     const hasTitle = Boolean(databaseEntry.record?.title);
-    const hasMetadata = hasArtist && hasYear && hasTitle;
+    const hasMetadata = hasArtist && hasTitle;
 
     return hasMetadata
-        ? `${databaseEntry.record?.artist} - ${databaseEntry.record?.title} (${databaseEntry.record?.year})`
+        ? `${databaseEntry.record?.artist} - ${databaseEntry.record?.title} (${
+              hasYear ? databaseEntry.record?.year : "N/A"
+          })`
         : "N/A";
 };
