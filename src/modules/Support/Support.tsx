@@ -6,6 +6,8 @@ import Link from "next/link";
 export const Support = () => {
     const supportEmail = "theofficialdeepcuts@gmail.com";
 
+    const emoticon = "ツ ";
+
     return (
         <div className="flex flex-col h-full w-full items-center justify-center gap-7">
             <div className="flex flex-col justify-center text-wrap h-64 w-2/3 animate-fadeIn animate-duration-[2000ms] text-center">
@@ -42,15 +44,18 @@ export const Support = () => {
                     <span className="">{supportEmail}</span>
                 </Link>
             </p>
-            <div className="w-52 animate-fadeIn animate-duration-[2000ms]">
+            <div className="w-52 animate-fadeIn animate-duration-[2000ms] mr-11">
                 <a
                     href="https://www.buymeacoffee.com/deepcutsofficial"
                     target="_blank"
                 >
-                    <Image
-                        alt="Buy me coffee"
-                        src={`https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=deepcutsofficial&button_colour=6360fa&font_colour=ffffff&font_family=Comic&outline_colour=ffffff&coffee_colour=724e2c`}
-                    />
+                    <div className="relative w-[300px] h-[50px]">
+                        <Image
+                            alt="Support me directly here"
+                            fill
+                            src={`https://img.buymeacoffee.com/button-api/?text=Support me directly here ${emoticon}&emoji=&slug=deepcutsofficial&button_colour=6360fa&font_colour=ffffff&font_family=Comic&outline_colour=ffffff&coffee_colour=724e2c`}
+                        />
+                    </div>
                 </a>
             </div>
             <div className="w-[500px] h-[300px]">

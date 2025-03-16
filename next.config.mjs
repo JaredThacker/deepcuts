@@ -10,7 +10,12 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "wingandaprayer.live",
             },
+            {
+                protocol: "https",
+                hostname: "img.buymeacoffee.com",
+            },
         ],
+        dangerouslyAllowSVG: true,
     },
 };
 
