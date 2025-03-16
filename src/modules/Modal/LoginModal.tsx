@@ -171,7 +171,7 @@ export const LoginModal = (props: LoginModalProperties) => {
                         <FaKey />
                     </label>
                     <div
-                        className="text-opacity-75 text-sm text-gray-500 hover:text-cyan-300 w-fit"
+                        className="text-opacity-75 text-sm text-gray-500 hover:text-cyan-300 w-fit cursor-pointer"
                         onClick={closeModal}
                     >
                         {"Forgot password?"}
