@@ -27,7 +27,7 @@ export const Support = () => {
                 </p>
                 <p className="whitespace-pre-line">
                     {
-                        "\nA: The rate limit is the amount of requests your IP address can make to the Discogs API per rolling minute. You will notice when you make a request without filters it will start around 60, and if you make one with filters it will start around 25. As far as I can tell, these limits are independent of each other and using one does not affect the other. Authenticated users should have 60 unfiltered requests and 25 filtered requests per rolling minute!"
+                        "\nA: The rate limit is the amount of requests your IP address can make to the Discogs API per rolling minute. You will notice when you make a request without filters it will start around 60, and if you make one with filters it will start around 25. As far as I can tell, these limits are independent of each other to the extent that you can still use non-filtered randomizes even when your filtered requests reach zero, BUT filtered requests are still subtracted from your non-filtered total. Authenticated users should have 60 unfiltered requests and 25 filtered requests per rolling minute!"
                     }
                 </p>
             </div>
