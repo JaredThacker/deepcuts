@@ -133,9 +133,9 @@ export const Random = ({ session }: RandomProperties) => {
         });
 
     return (
-        <div className="h-full flex flex-row-reverse justify-middle items-center animate-fadeIn animate-duration-[3000ms] gap-10">
+        <div className="h-full flex flex-row-reverse justify-middle items-center animate-fadeIn animate-duration-[3000ms] gap-10 overflow-auto">
             <div className="flex flex-row max-h-[600px] overflow-y-auto"></div>
-            <div className="flex flex-col mr-96 mb-40">
+            <div className="flex flex-col lg:mr-96 lg:mb-40 sm:mb-32">
                 {record === undefined ? (
                     <div className="flex flex-col gap-4 w-[400px] h-[523px] shadow-lg">
                         <div className="skeleton h-[400px] w-[400px]" />

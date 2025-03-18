@@ -14,11 +14,11 @@ export const Landing = () => {
     const [showForgotPasswordModal, setShowForgotPasswordModal] =
         React.useState<boolean>(false);
 
-    const emoticon = "ツ ";
+    const emoticon = "ツ";
 
     return (
         <>
-            <div className="hero bg-base-200 min-h-screen animate-fadeIn animate-duration-[3000ms] bg-landing_bg flex flex-col justify-center">
+            <div className="hero bg-base-200 min-h-screen animate-fadeIn animate-duration-[3000ms] bg-landing_bg flex flex-col justify-center overflow-hidden">
                 <div className="hero-content text-center rounded-3xl w-1/3">
                     <div className="max-w-md">
                         <button

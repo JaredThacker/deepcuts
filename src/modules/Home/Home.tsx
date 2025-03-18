@@ -47,9 +47,9 @@ export const Home = () => {
     const { count } = historyRecordCount;
 
     return (
-        <div className="grow flex flex-row p-4 gap-4 animate-fadeIn overflow-hidden">
+        <div className="grow flex flex-row p-4 gap-4 animate-fadeIn lg:overflow-hidden">
             <div className="h-full grow rounded flex flex-col justify-start gap-4 animate-fadeInLeft animate-duration-[2000ms]">
-                <div className="flex flex-col items-center gap-2 bg-base-300 rounded-lg shadow-xl">
+                <div className="flex flex-col items-center gap-2 bg-base-300 rounded-lg shadow-xl md:flex">
                     <span className="flex flex-col items-center font-bold underline">
                         {"Record of the Month"}
                     </span>
@@ -97,7 +97,7 @@ export const Home = () => {
                     </button>
                 </div>
             </div>
-            <div className="h-full rounded w-2/3 flex flex-col animate-fadeInRight animate-duration-[2000ms]">
+            <div className="hidden lg:flex h-full rounded w-2/3 flex-col animate-fadeInRight animate-duration-[2000ms]">
                 <div
                     className="flex flex-row tabs tabs-box w-full"
                     role="tablist"
