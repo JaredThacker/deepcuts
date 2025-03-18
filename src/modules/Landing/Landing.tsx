@@ -22,7 +22,7 @@ export const Landing = () => {
                 <div className="hero-content text-center rounded-3xl w-1/3">
                     <div className="max-w-md">
                         <button
-                            className="btn mb-7 w-2/3 hover:btn-outline hover:outline-primary"
+                            className="btn mb-7 md:w-2/3 hover:btn-outline hover:outline-primary"
                             onClick={() => {
                                 setShowInfoModal(true);
                             }}
@@ -31,9 +31,9 @@ export const Landing = () => {
                                 {"deepcuts."}
                             </span>
                         </button>
-                        <div className="flex flex-row justify-center gap-4 w-96">
+                        <div className="md:flex md:flex-row flex flex-col md:justify-center gap-4 md:w-96 w-72">
                             <button
-                                className="btn btn-primary w-1/2"
+                                className="btn btn-primary md:w-1/2"
                                 onClick={() => {
                                     setShowLoginModal(true);
                                 }}
@@ -41,7 +41,7 @@ export const Landing = () => {
                                 {"Log In"}
                             </button>
                             <button
-                                className="btn btn-secondary w-1/2"
+                                className="btn btn-secondary md:w-1/2"
                                 onClick={() => {
                                     setShowSignUpModal(true);
                                 }}
