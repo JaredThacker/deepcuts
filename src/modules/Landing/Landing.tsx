@@ -22,7 +22,7 @@ export const Landing = () => {
                 <div className="hero-content text-center rounded-3xl w-1/3">
                     <div className="max-w-md">
                         <button
-                            className="btn mb-7 md:w-2/3 hover:btn-outline hover:outline-primary"
+                            className="btn mb-7 md:w-2/3 w-72 hover:btn-outline hover:outline-primary"
                             onClick={() => {
                                 setShowInfoModal(true);
                             }}
