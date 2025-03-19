@@ -9,6 +9,7 @@ export const Ids = {
         SIGN_UP_FORM: "signUpModalForm",
     },
     RANDOM: {
+        filterDrawer: "randomizeMobileFilterDrawer",
         randomizesRemaining: "recordRandomAttemptsRemaining",
     },
     RECORD: {

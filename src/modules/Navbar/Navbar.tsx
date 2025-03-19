@@ -84,18 +84,32 @@ export const Navbar = ({ session }: NavbarServerSideProperties) => {
                                 className="justify-between"
                                 href={Routes.DASHBOARD}
                             >
-                                Dashboard
+                                {"Dashboard"}
                             </Link>
                         </li>
                         <li>
-                            <Link href={Routes.PROFILE}>Edit Profile</Link>
+                            <Link href={Routes.PROFILE} type="button">
+                                {"Edit Profile"}
+                            </Link>
+                        </li>
+                        <li className="md:hidden">
+                            <Link href={Routes.FAVORITES} type="button">
+                                {"Favorites"}
+                            </Link>
+                        </li>
+                        <li className="md:hidden">
+                            <Link href={Routes.HISTORY} type="button">
+                                {"History"}
+                            </Link>
                         </li>
                         <li>
-                            <Link href={Routes.SUPPORT}>Support</Link>
+                            <Link href={Routes.SUPPORT} type="button">
+                                {"Support"}
+                            </Link>
                         </li>
                         <li>
                             <button onClick={onLogoutClick} type="button">
-                                Logout
+                                {"Logout"}
                             </button>
                         </li>
                     </ul>
