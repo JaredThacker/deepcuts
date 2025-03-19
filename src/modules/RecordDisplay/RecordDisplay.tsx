@@ -69,7 +69,7 @@ export const RecordDisplay = (props: RecordDisplayProperties) => {
 
     return (
         <div
-            className="card shadow-xl animate-fadeIn animate-duration-[2000ms] w-[400px] h-[550px]"
+            className="card shadow-xl animate-fadeIn animate-duration-[2000ms] w-full md:w-[400px] h-full md:h-[550px]"
             key={record.id}
         >
             <figure>

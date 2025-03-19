@@ -133,12 +133,11 @@ export const Random = ({ session }: RandomProperties) => {
         });
 
     return (
-        <div className="h-full flex flex-row-reverse justify-middle items-center animate-fadeIn animate-duration-[3000ms] gap-10 overflow-auto">
-            <div className="flex flex-row max-h-[600px] overflow-y-auto"></div>
-            <div className="flex flex-col lg:mr-96 lg:mb-40 sm:mb-32">
+        <div className="h-full flex flex-row-reverse justify-center items-start pt-10 md:p-0 md:items-center animate-fadeIn animate-duration-[3000ms] gap-10 overflow-auto">
+            <div className="flex flex-col w-72 min-h-[90%] md:justify-normal justify-between">
                 {record === undefined ? (
-                    <div className="flex flex-col gap-4 w-[400px] h-[523px] shadow-lg">
-                        <div className="skeleton h-[400px] w-[400px]" />
+                    <div className="flex flex-col gap-4 w-full md:w-[400px] md:h-[523px] h-full shadow-lg">
+                        <div className="skeleton md:h-[400px] md:w-[400px] h-[70%] w-full" />
                         <div className="skeleton h-2 w-full" />
                         <div className="skeleton h-2 w-full" />
                         <div className="skeleton h-2 w-full" />
@@ -146,25 +145,27 @@ export const Random = ({ session }: RandomProperties) => {
                 ) : (
                     <RecordDisplay record={record} />
                 )}
-                <button
-                    className="btn btn-active w-[390px] mt-2 focus:animate-headShake hover:btn-neutral transition-all btn-soft shadow-xl"
-                    disabled={!isValid}
-                    onClick={getRecord}
-                >
-                    {"Randomize!"}
-                </button>
-                {record?.randomizesRemaining !== undefined && (
-                    <div className="text-sm text-center pt-2 text-accent text-opacity-75">
-                        <span id={Ids.RANDOM.randomizesRemaining}>
-                            {record.randomizesRemaining}
-                        </span>
-                        {" randomizes left"}
-                    </div>
-                )}
+                <div className="w-full md:w-fit">
+                    <button
+                        className="btn btn-active md:w-[390px] w-full mt-2 focus:animate-headShake hover:btn-neutral transition-all btn-soft shadow-xl"
+                        disabled={!isValid}
+                        onClick={getRecord}
+                    >
+                        {"Randomize!"}
+                    </button>
+                    {record?.randomizesRemaining !== undefined && (
+                        <div className="text-sm text-center pt-2 text-accent text-opacity-75">
+                            <span id={Ids.RANDOM.randomizesRemaining}>
+                                {record.randomizesRemaining}
+                            </span>
+                            {" randomizes left"}
+                        </div>
+                    )}
+                </div>
             </div>
 
             {session?.data.oauthToken !== undefined ? (
-                <div className="flex flex-col h-fit">
+                <div className="hidden flex-col h-fit md:flex">
                     <div className="flex flex-row gap-6 h-[37rem]">
                         <RandomFilterList
                             buttonId={CLEAR_GENRE_ID}
