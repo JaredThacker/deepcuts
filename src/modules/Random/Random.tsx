@@ -17,6 +17,7 @@ import recordCountries from "@/common/constants/recordCountries";
 import { Ids } from "@/common/constants/Ids";
 import { Session } from "@/types/api/Session";
 import Link from "next/link";
+import { FaFilter } from "react-icons/fa6";
 
 type RandomProperties = {
     readonly session?: Session;
@@ -147,12 +148,24 @@ export const Random = ({ session }: RandomProperties) => {
                 )}
                 <div className="w-full md:w-fit">
                     <button
-                        className="btn btn-active md:w-[390px] w-full mt-2 focus:animate-headShake hover:btn-neutral transition-all btn-soft shadow-xl"
+                        className="btn btn-active md:w-[390px] hidden md:block w-full mt-2 focus:animate-headShake hover:btn-neutral transition-all btn-soft shadow-xl"
                         disabled={!isValid}
                         onClick={getRecord}
                     >
                         {"Randomize!"}
                     </button>
+                    <div className="flex flex-row items-center gap-2">
+                        <button
+                            className="btn btn-active md:w-[390px] md:hidden grow focus:animate-headShake hover:btn-neutral transition-all btn-soft shadow-xl"
+                            disabled={!isValid}
+                            onClick={getRecord}
+                        >
+                            {"Randomize!"}
+                        </button>
+                        <button className="btn btn-active btn-sm btn-circle">
+                            {<FaFilter size={10} />}
+                        </button>
+                    </div>
                     {record?.randomizesRemaining !== undefined && (
                         <div className="text-sm text-center pt-2 text-accent text-opacity-75">
                             <span id={Ids.RANDOM.randomizesRemaining}>
