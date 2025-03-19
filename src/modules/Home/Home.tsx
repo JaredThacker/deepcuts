@@ -79,7 +79,9 @@ export const Home = () => {
                 <div className="bg-base-300 rounded text-center shadow-lg">
                     <div className="stats shadow bg-inherit">
                         <div className="stat font-semibold">
-                            <div className="stat-title">Total Randomizes</div>
+                            <div className="stat-title">
+                                Total Randomizes Sitewide
+                            </div>
                             <div className="stat-value flex flex-col items-center text-primary">
                                 {count}
                             </div>
