@@ -226,7 +226,7 @@ export const SignUpModal = (props: SignUpModalProperties) => {
                         <input
                             autoComplete="off"
                             className="grow"
-                            placeholder="API Token"
+                            placeholder="API Token (Optional)"
                             type="text"
                             {...register("apiToken")}
                         />
