@@ -154,9 +154,9 @@ export const Random = ({ session }: RandomProperties) => {
                     >
                         {"Randomize!"}
                     </button>
-                    <div className="flex flex-row items-center gap-2">
+                    <div className="flex flex-row items-center gap-2 md:hidden">
                         <button
-                            className="btn btn-active md:w-[390px] md:hidden grow focus:animate-headShake hover:btn-neutral transition-all btn-soft shadow-xl"
+                            className="btn btn-active md:w-[390px]  grow focus:animate-headShake hover:btn-neutral transition-all btn-soft shadow-xl"
                             disabled={!isValid}
                             onClick={getRecord}
                         >

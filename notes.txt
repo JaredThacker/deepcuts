@@ -14,3 +14,5 @@ add notes to each search session
 tooltips on sign up for api key
 more qol things and ui improvements
 add metadata for each page
+
+possibly add haptic feedback to buttons? https://github.com/ryotanakata/react-haptic
