@@ -134,7 +134,7 @@ export const Random = ({ session }: RandomProperties) => {
         });
 
     return (
-        <div className="h-full flex flex-row-reverse justify-center items-start pt-10 md:p-0 md:items-center animate-fadeIn animate-duration-[3000ms] gap-10 overflow-auto">
+        <div className="h-full flex flex-row-reverse justify-center items-start pt-10 md:p-0 md:pt-24 md:items-center animate-fadeIn animate-duration-[3000ms] gap-10 overflow-auto lg:overflow-hidden">
             <div className="flex flex-col w-72 min-h-[90%] h-[90%] md:justify-normal justify-between">
                 {record === undefined ? (
                     <div className="flex flex-col gap-4 w-full md:w-[400px] md:h-[523px] h-full shadow-lg">
@@ -148,13 +148,13 @@ export const Random = ({ session }: RandomProperties) => {
                 )}
                 <div className="w-full md:w-fit">
                     <button
-                        className="btn btn-active md:w-[390px] hidden md:block w-full mt-2 focus:animate-headShake hover:btn-neutral transition-all btn-soft shadow-xl"
+                        className="btn btn-active md:w-[390px] hidden lg:block w-full mt-2 focus:animate-headShake hover:btn-neutral transition-all btn-soft shadow-xl"
                         disabled={!isValid}
                         onClick={getRecord}
                     >
                         {"Randomize!"}
                     </button>
-                    <div className="flex flex-row items-center gap-2 md:hidden">
+                    <div className="flex flex-row items-center gap-2 lg:hidden">
                         <button
                             className="btn btn-active md:w-[390px]  grow focus:animate-headShake hover:btn-neutral transition-all btn-soft shadow-xl"
                             disabled={!isValid}
@@ -178,7 +178,7 @@ export const Random = ({ session }: RandomProperties) => {
             </div>
 
             {session?.data.oauthToken !== undefined ? (
-                <div className="hidden flex-col h-fit md:flex">
+                <div className="hidden flex-col h-fit lg:flex">
                     <div className="flex flex-row gap-6 h-[37rem]">
                         <RandomFilterList
                             buttonId={CLEAR_GENRE_ID}
