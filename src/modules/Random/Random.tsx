@@ -162,9 +162,9 @@ export const Random = ({ session }: RandomProperties) => {
                         >
                             {"Randomize!"}
                         </button>
-                        <button className="btn btn-active btn-sm btn-circle">
+                        {/* <button className="btn btn-active btn-sm btn-circle">
                             {<FaFilter size={10} />}
-                        </button>
+                        </button> */}
                     </div>
                     {record?.randomizesRemaining !== undefined && (
                         <div className="text-sm text-center pt-2 text-accent text-opacity-75">
