@@ -22,11 +22,15 @@ export const Landing = () => {
                 <div className="hero-content text-center rounded-3xl w-1/3">
                     <div className="max-w-md">
                         <button
-                            className="btn mb-7 md:w-2/3 w-72 hover:btn-outline hover:outline-primary"
+                            className="btn mb-7 md:w-2/3 w-72 hover:btn-outline hover:outline-primary group relative inline-block overflow-hidden rounded hover:text-primary"
                             onClick={() => {
                                 setShowInfoModal(true);
                             }}
                         >
+                            <span className="ease absolute left-0 top-0 h-0 w-0 border-t-2 border-primary transition-all duration-200 group-hover:w-full"></span>
+                            <span className="ease absolute right-0 top-0 h-0 w-0 border-r-2 border-primary transition-all duration-200 group-hover:h-full"></span>
+                            <span className="ease absolute bottom-0 right-0 h-0 w-0 border-b-2 border-primary transition-all duration-200 group-hover:w-full"></span>
+                            <span className="ease absolute bottom-0 left-0 h-0 w-0 border-l-2 border-primary transition-all duration-200 group-hover:h-full"></span>
                             <span className="text-2xl pointer-events-none">
                                 {"deepcuts."}
                             </span>
