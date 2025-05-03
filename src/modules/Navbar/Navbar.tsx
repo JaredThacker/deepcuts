@@ -93,13 +93,13 @@ export const Navbar = ({ session }: NavbarServerSideProperties) => {
                             </Link>
                         </li>
                         <li className="md:hidden">
-                            <Link href={Routes.FAVORITES} type="button">
-                                {"Favorites"}
+                            <Link href={Routes.HISTORY} type="button">
+                                {"History"}
                             </Link>
                         </li>
                         <li className="md:hidden">
-                            <Link href={Routes.HISTORY} type="button">
-                                {"History"}
+                            <Link href={Routes.FAVORITES} type="button">
+                                {"Favorites"}
                             </Link>
                         </li>
                         <li>
