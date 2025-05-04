@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { QueryProvider } from "@/providers/QueryProvider";
 import "react-double-range-slider/dist/cjs/index.css";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const quicksand = Quicksand({ subsets: ["latin"] });
 
@@ -55,6 +56,7 @@ export default function RootLayout({
                     theme="dark"
                 />
                 <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     );
