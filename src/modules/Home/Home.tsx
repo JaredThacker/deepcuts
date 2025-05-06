@@ -60,21 +60,30 @@ export const Home = () => {
                             target="_blank"
                         >
                             <Image
-                                src="https://i.discogs.com/mcIh1A6HEAVQ0pCwZ1mnLqxREjgwikqQijZafZMZ5uI/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQzMTIy/NzMtMTM2MTUyOTY1/OS0zMzUzLmpwZWc.jpeg"
+                                src="https://i.discogs.com/i3fkZ1Ok_Bgwd88wDt9T3TOkvmHb_UaqOFrjc20rfwE/rs:fit/g:sm/q:90/h:599/w:599/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTkxMDQ1/MS0xMTcyMDQyNDU3/LmpwZWc.jpeg"
                                 width={300}
                                 height={300}
-                                alt="Amok Album Cover"
+                                alt="Reflections Of A Golden Dream Album Cover"
                                 className="hover:outline outline-primary transition-all hover:cursor-pointer"
                             />
                         </a>
                     </div>
-                    <span className="flex flex-col items-center mt-1">
-                        Atoms For Peace - Amok (2013){" "}
-                        <span>Genre: Electronic, Rock</span>
-                        <span className="mb-1">
-                            Style: IDM, Indie Rock, Glitch, Experimental
+                    <div className="flex flex-col items-center mt-1">
+                        <span className="font-extrabold">
+                            {"Lonnie Liston Smith & The Cosmic Echoes"}
                         </span>
-                    </span>
+                        <span className="italic">
+                            {"\n Reflections Of A Golden Dream (1976)"}
+                        </span>
+                        <div>
+                            <span className="font-medium">Genre</span>: Jazz,
+                            Funk/Soul
+                        </div>
+                        <div className="mb-1">
+                            <span className="font-medium">Style</span>: Fusion,
+                            Jazz-Funk
+                        </div>
+                    </div>
                 </div>
                 <div className="bg-base-300 rounded text-center shadow-lg">
                     <div className="stats shadow bg-inherit">
