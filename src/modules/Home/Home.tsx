@@ -55,7 +55,7 @@ export const Home = () => {
                     </span>
                     <div>
                         <a
-                            href="https://www.discogs.com/release/4312273-Atoms-For-Peace-Amok"
+                            href="https://www.discogs.com/master/121949-Lonnie-Liston-Smith-And-The-Cosmic-Echoes-Reflections-Of-A-Golden-Dream"
                             rel="noreferrer"
                             target="_blank"
                         >
