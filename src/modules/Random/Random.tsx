@@ -100,8 +100,6 @@ export const Random = ({ session }: RandomProperties) => {
         [setValue],
     );
 
-    const onYearChangeMobile = React.useCallback;
-
     const selectValue = React.useCallback(
         (valueKey: keyof RandomFilter) =>
             (event: React.MouseEvent<HTMLElement>) => {

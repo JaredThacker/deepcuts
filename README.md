@@ -10,17 +10,16 @@ Introducing **_deepcuts._**
 > This randomizer works off all releases, not just the master release!  
 > So even if a release does not have a master release, it will still populate here!
 
-#### Future implentations include.......
+#### Future implementations include.......
 
-> -   filters ,
-> -   more randomizers based on MRIs/Artists/Labels/Genres/Styles,
+> -   more randomizers based on MRIs/Artists/Labels,
 > -   improved UI and optimized performance ,
-> -   maybe Discogs account integration to be able to add to wantlist directly from here ,
-> -   and hopefully many more before eventual deployment !
+> -   maybe Discogs account integration to be able to add to wantlist directly from here,
+> -   and hopefully many more!
 
-## How It Looks..... (so far)
+## How It Looks (so far)
 
-1. Landing page is a screen where you can either create an account, or login with an existing one.
+1. Landing page is a screen where you can either create an account, or login with an existing one. The deepcuts button opens a modal that explains the purpose of deepcuts, as well as, crucial info needed before signing up!
 
 > ![Landing Page](public/Landing.gif)
 
@@ -28,11 +27,11 @@ Introducing **_deepcuts._**
 
 > ![Dashboard](public/toDashboard.gif)
 
-3. Here on the left you will find my recommended Record of the Month, the total randomizes across all users, and the button to take you to the randomize page! On the right we have your personal History, Favorites, and Stats!
+3. Here on the left you will find my recommended Record of the Month, the total randomizes across all users, and the button to take you to the randomize page! On the right we have your personal History and Favorites!
 
 > ![Dashboard2](public/Dashboard.gif)
 
-4. Clicking on the Discover Some New Gems button takes you to the page where the magic happens!
+4. Clicking on the Discover button takes you to the page where the magic happens!
 
 > ![HistoryRecord](public/DiscoverSomeNewGems.gif)
 
@@ -44,6 +43,6 @@ Introducing **_deepcuts._**
 
 > ![Favorite](public/Favorite.gif)
 
-Built utilizing Next.js, Prisma ORM, and PostgreSQL!
+Built utilizing Next.js, Prisma ORM, Supabase for hosting the PostgreSQL database, and deployed on Vercel!
 
 Thank you for joining me on this journey (:
